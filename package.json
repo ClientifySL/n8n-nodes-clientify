@@ -1,0 +1,58 @@
+{
+  "name": "n8n-nodes-clientify",
+  "version": "0.2.2",
+  "description": "N8N node for Clientify CRM integration",
+  "keywords": [
+    "n8n-node",
+    "n8n-community-node-package",
+    "clientify",
+    "crm"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/contacteitor/clientify_n8n#readme",
+  "author": {
+    "name": "Clientify",
+    "email": "develop@clientify.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/contacteitor/clientify_n8n.git"
+  },
+  "engines": {
+    "node": ">=20.15"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc && cp package.json dist/ && cp README.md dist/ && cp TRIGGERS_REFERENCE.md dist/ && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyMcp/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyMcp/ 2>/dev/null || true",
+    "dev": "tsc --watch",
+    "lint": "eslint nodes credentials --ext .ts",
+    "lintfix": "eslint nodes credentials --ext .ts --fix",
+    "prepublishOnly": "npm run build && npm run lint"
+  },
+  "files": [
+    "dist"
+  ],
+  "n8n": {
+    "n8nNodesApiVersion": 1,
+    "credentials": [
+      "dist/credentials/ClientifyMcpApi.credentials.js"
+    ],
+    "nodes": [
+      "dist/nodes/ClientifyMcp/ClientifyMcpDynamic.node.js",
+      "dist/nodes/ClientifyMcp/ClientifyMcpTrigger.node.js"
+    ]
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.28.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-n8n-nodes-base": "^1.11.0",
+    "prettier": "^2.8.0",
+    "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "n8n-workflow": "*"
+  }
+}
