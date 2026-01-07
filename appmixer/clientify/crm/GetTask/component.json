@@ -1,0 +1,78 @@
+{
+  "name": "appmixer.clientify.crm.GetTask",
+  "author": "Clientify",
+  "label": "Get Task",
+  "description": "Get a task by id.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "number"
+          },
+          "fields": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "taskId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "taskId": {
+            "type": "number",
+            "label": "Task ID",
+            "tooltip": "Set Task ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "fields": {
+            "type": "text",
+            "label": "Fields",
+            "tooltip": "Set Fields (can be mapped from previous steps).",
+            "index": 2
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "due_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

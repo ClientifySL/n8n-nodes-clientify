@@ -1,0 +1,112 @@
+{
+  "name": "appmixer.clientify.crm.UpdateContactPhone",
+  "author": "Clientify",
+  "label": "Update Contact Phone",
+  "description": "Update a contact phone entry.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "phoneId": {
+            "type": "number"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "type": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "contactId",
+          "phoneId",
+          "phone",
+          "type"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "phoneId": {
+            "type": "number",
+            "label": "Phone ID",
+            "tooltip": "Set Phone ID (can be mapped from previous steps).",
+            "index": 2
+          },
+          "phone": {
+            "type": "text",
+            "label": "Phone",
+            "tooltip": "Set Phone (can be mapped from previous steps).",
+            "index": 3
+          },
+          "type": {
+            "type": "number",
+            "label": "Type",
+            "tooltip": "Set Type (can be mapped from previous steps).",
+            "index": 4
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "company_id": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

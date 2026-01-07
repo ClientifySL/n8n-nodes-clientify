@@ -1,0 +1,67 @@
+{
+  "name": "appmixer.clientify.crm.ListAllContactTags",
+  "author": "Clientify",
+  "label": "List All Contact Tags",
+  "description": "List all available contact tags (picklist helper; can be slow).",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "color": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

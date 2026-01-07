@@ -1,0 +1,62 @@
+{
+  "name": "appmixer.clientify.crm.DeleteContactOtherCompany",
+  "author": "Clientify",
+  "label": "Delete Contact Other Company",
+  "description": "Delete a contact other-company relationship.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "otherCompanyId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "contactId",
+          "otherCompanyId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "otherCompanyId": {
+            "type": "number",
+            "label": "Other Company ID",
+            "tooltip": "Set Other Company ID (can be mapped from previous steps).",
+            "index": 2
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ]
+}

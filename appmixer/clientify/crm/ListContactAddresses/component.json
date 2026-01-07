@@ -1,0 +1,79 @@
+{
+  "name": "appmixer.clientify.crm.ListContactAddresses",
+  "author": "Clientify",
+  "label": "List Contact Addresses",
+  "description": "List addresses for a contact.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "id": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "appmixer.clientify.crm.AddCompanyCall",
+  "author": "Clientify",
+  "label": "Add Company Call",
+  "description": "Log a call on a company.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "companyId": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "description": "Example: incoming"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "outcome": {
+            "type": "string",
+            "description": "Example: connected"
+          },
+          "call_date": {
+            "type": "string",
+            "description": "YYYY-MM-DD"
+          },
+          "call_time": {
+            "type": "string",
+            "description": "HH:MM:SS"
+          }
+        },
+        "required": [
+          "companyId",
+          "type",
+          "comment",
+          "outcome",
+          "call_date",
+          "call_time"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "companyId": {
+            "type": "number",
+            "label": "Company ID",
+            "tooltip": "Set Company ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "type": {
+            "type": "text",
+            "label": "Type",
+            "tooltip": "Set Type (can be mapped from previous steps).",
+            "index": 2
+          },
+          "comment": {
+            "type": "text",
+            "label": "Comment",
+            "tooltip": "Set Comment (can be mapped from previous steps).",
+            "index": 3
+          },
+          "outcome": {
+            "type": "text",
+            "label": "Outcome",
+            "tooltip": "Set Outcome (can be mapped from previous steps).",
+            "index": 4
+          },
+          "call_date": {
+            "type": "text",
+            "label": "Call Date",
+            "tooltip": "Set Call Date (can be mapped from previous steps).",
+            "index": 5
+          },
+          "call_time": {
+            "type": "text",
+            "label": "Call Time",
+            "tooltip": "Set Call Time (can be mapped from previous steps).",
+            "index": 6
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

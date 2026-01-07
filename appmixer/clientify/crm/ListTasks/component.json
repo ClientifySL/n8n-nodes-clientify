@@ -1,0 +1,102 @@
+{
+  "name": "appmixer.clientify.crm.ListTasks",
+  "author": "Clientify",
+  "label": "List Tasks",
+  "description": "List tasks from Clientify.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number"
+          },
+          "page_size": {
+            "type": "number"
+          },
+          "ordering": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "string"
+          }
+        }
+      },
+      "inspector": {
+        "inputs": {
+          "page": {
+            "type": "number",
+            "label": "Page",
+            "tooltip": "Set Page (can be mapped from previous steps).",
+            "index": 1
+          },
+          "page_size": {
+            "type": "number",
+            "label": "Page Size",
+            "tooltip": "Set Page Size (can be mapped from previous steps).",
+            "index": 2
+          },
+          "ordering": {
+            "type": "text",
+            "label": "Ordering",
+            "tooltip": "Set Ordering (can be mapped from previous steps).",
+            "index": 3
+          },
+          "fields": {
+            "type": "text",
+            "label": "Fields",
+            "tooltip": "Set Fields (can be mapped from previous steps).",
+            "index": 4
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "id": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

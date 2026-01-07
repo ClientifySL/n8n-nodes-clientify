@@ -1,0 +1,75 @@
+{
+  "name": "appmixer.clientify.crm.AddContactNote",
+  "author": "Clientify",
+  "label": "Add Contact Note",
+  "description": "Add a note to a contact.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "comment": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactId",
+          "name",
+          "comment"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "name": {
+            "type": "text",
+            "label": "Name",
+            "tooltip": "Set Name (can be mapped from previous steps).",
+            "index": 2
+          },
+          "comment": {
+            "type": "text",
+            "label": "Comment",
+            "tooltip": "Set Comment (can be mapped from previous steps).",
+            "index": 3
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

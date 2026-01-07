@@ -1,0 +1,111 @@
+{
+  "name": "appmixer.clientify.crm.SearchCompanies",
+  "author": "Clientify",
+  "label": "Search Companies",
+  "description": "Search companies (wrapper over list with query params).",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "page": {
+            "type": "number"
+          },
+          "page_size": {
+            "type": "number"
+          },
+          "fields": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "query"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "query": {
+            "type": "text",
+            "label": "Query",
+            "tooltip": "Set Query (can be mapped from previous steps).",
+            "index": 1
+          },
+          "page": {
+            "type": "number",
+            "label": "Page",
+            "tooltip": "Set Page (can be mapped from previous steps).",
+            "index": 2
+          },
+          "page_size": {
+            "type": "number",
+            "label": "Page Size",
+            "tooltip": "Set Page Size (can be mapped from previous steps).",
+            "index": 3
+          },
+          "fields": {
+            "type": "text",
+            "label": "Fields",
+            "tooltip": "Set Fields (can be mapped from previous steps).",
+            "index": 4
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

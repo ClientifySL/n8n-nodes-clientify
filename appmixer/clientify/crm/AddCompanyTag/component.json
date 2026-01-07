@@ -1,0 +1,71 @@
+{
+  "name": "appmixer.clientify.crm.AddCompanyTag",
+  "author": "Clientify",
+  "label": "Add Company Tag",
+  "description": "Add a tag to a company (creates the tag if needed).",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "companyId": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "companyId",
+          "name"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "companyId": {
+            "type": "number",
+            "label": "Company ID",
+            "tooltip": "Set Company ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "name": {
+            "type": "text",
+            "label": "Name",
+            "tooltip": "Set Name (can be mapped from previous steps).",
+            "index": 2
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

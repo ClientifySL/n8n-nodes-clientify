@@ -1,0 +1,88 @@
+{
+  "name": "appmixer.clientify.crm.CreateContact",
+  "author": "Clientify",
+  "label": "Create Contact",
+  "description": "Create a new contact.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "company": {
+            "type": "string"
+          }
+        }
+      },
+      "inspector": {
+        "inputs": {
+          "first_name": {
+            "type": "text",
+            "label": "First Name",
+            "tooltip": "Set First Name (can be mapped from previous steps).",
+            "index": 1
+          },
+          "last_name": {
+            "type": "text",
+            "label": "Last Name",
+            "tooltip": "Set Last Name (can be mapped from previous steps).",
+            "index": 2
+          },
+          "email": {
+            "type": "text",
+            "label": "Email",
+            "tooltip": "Set Email (can be mapped from previous steps).",
+            "index": 3
+          },
+          "company": {
+            "type": "text",
+            "label": "Company",
+            "tooltip": "Set Company (can be mapped from previous steps).",
+            "index": 4
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

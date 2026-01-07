@@ -1,0 +1,51 @@
+{
+  "name": "appmixer.clientify.crm.DeleteContact",
+  "author": "Clientify",
+  "label": "Delete Contact",
+  "description": "Delete a contact by id.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ]
+}

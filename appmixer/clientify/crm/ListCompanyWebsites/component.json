@@ -1,0 +1,79 @@
+{
+  "name": "appmixer.clientify.crm.ListCompanyWebsites",
+  "author": "Clientify",
+  "label": "List Company Websites",
+  "description": "List websites for a company.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "companyId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "companyId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "companyId": {
+            "type": "number",
+            "label": "Company ID",
+            "tooltip": "Set Company ID (can be mapped from previous steps).",
+            "index": 1
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "id": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

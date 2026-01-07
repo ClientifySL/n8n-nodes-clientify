@@ -1,0 +1,90 @@
+{
+  "name": "appmixer.clientify.crm.GetContact",
+  "author": "Clientify",
+  "label": "Get Contact",
+  "description": "Get a contact by id.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "fields": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "fields": {
+            "type": "text",
+            "label": "Fields",
+            "tooltip": "Set Fields (can be mapped from previous steps).",
+            "index": 2
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "company_id": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

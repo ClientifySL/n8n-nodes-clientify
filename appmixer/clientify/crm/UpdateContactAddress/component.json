@@ -1,0 +1,152 @@
+{
+  "name": "appmixer.clientify.crm.UpdateContactAddress",
+  "author": "Clientify",
+  "label": "Update Contact Address",
+  "description": "Update a contact address entry.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "addressId": {
+            "type": "number"
+          },
+          "type": {
+            "type": "number"
+          },
+          "street": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          },
+          "postal_code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactId",
+          "addressId",
+          "type",
+          "street",
+          "city",
+          "state",
+          "country",
+          "postal_code"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "addressId": {
+            "type": "number",
+            "label": "Address ID",
+            "tooltip": "Set Address ID (can be mapped from previous steps).",
+            "index": 2
+          },
+          "type": {
+            "type": "number",
+            "label": "Type",
+            "tooltip": "Set Type (can be mapped from previous steps).",
+            "index": 3
+          },
+          "street": {
+            "type": "text",
+            "label": "Street",
+            "tooltip": "Set Street (can be mapped from previous steps).",
+            "index": 4
+          },
+          "city": {
+            "type": "text",
+            "label": "City",
+            "tooltip": "Set City (can be mapped from previous steps).",
+            "index": 5
+          },
+          "state": {
+            "type": "text",
+            "label": "State",
+            "tooltip": "Set State (can be mapped from previous steps).",
+            "index": 6
+          },
+          "country": {
+            "type": "text",
+            "label": "Country",
+            "tooltip": "Set Country (can be mapped from previous steps).",
+            "index": 7
+          },
+          "postal_code": {
+            "type": "text",
+            "label": "Postal Code",
+            "tooltip": "Set Postal Code (can be mapped from previous steps).",
+            "index": 8
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "company_id": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

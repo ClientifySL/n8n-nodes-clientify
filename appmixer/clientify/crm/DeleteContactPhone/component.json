@@ -1,0 +1,62 @@
+{
+  "name": "appmixer.clientify.crm.DeleteContactPhone",
+  "author": "Clientify",
+  "label": "Delete Contact Phone",
+  "description": "Delete a contact phone entry.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "phoneId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "contactId",
+          "phoneId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "phoneId": {
+            "type": "number",
+            "label": "Phone ID",
+            "tooltip": "Set Phone ID (can be mapped from previous steps).",
+            "index": 2
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ]
+}

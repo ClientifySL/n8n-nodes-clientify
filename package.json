@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-clientify",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "N8N node for Clientify CRM integration",
   "keywords": [
     "n8n-node",
@@ -23,7 +23,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc && cp package.json dist/ && cp README.md dist/ && cp TRIGGERS_REFERENCE.md dist/ && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyMcp/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyMcp/ 2>/dev/null || true",
+    "build": "rm -rf dist && tsc && cp package.json dist/ && cp README.md dist/ && cp TRIGGERS_REFERENCE.md dist/ && mkdir -p dist/nodes/ClientifyApi dist/nodes/ClientifyTrigger && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyTrigger/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyTrigger/ 2>/dev/null || true && mkdir -p dist/appmixer/clientify && cp -R appmixer/clientify/crm dist/appmixer/clientify/",
     "dev": "tsc --watch",
     "lint": "eslint nodes credentials --ext .ts",
     "lintfix": "eslint nodes credentials --ext .ts --fix",
@@ -35,12 +35,18 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ClientifyMcpApi.credentials.js"
+      "dist/credentials/ClientifyApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ClientifyMcp/ClientifyMcpDynamic.node.js",
-      "dist/nodes/ClientifyMcp/ClientifyMcpTrigger.node.js"
+      "dist/nodes/ClientifyApi/ClientifyApi.node.js",
+      "dist/nodes/ClientifyTrigger/ClientifyTrigger.node.js"
     ]
+  },
+  "dependencies": {
+    "@clientify/api-client": "^0.1.1"
+  },
+  "overrides": {
+    "form-data": "^4.0.4"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
@@ -49,8 +55,9 @@
     "eslint": "^8.28.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-n8n-nodes-base": "^1.11.0",
+    "n8n-workflow": "^2.2.1",
     "prettier": "^2.8.0",
-    "typescript": "^4.9.3"
+    "typescript": "^5.6.3"
   },
   "peerDependencies": {
     "n8n-workflow": "*"

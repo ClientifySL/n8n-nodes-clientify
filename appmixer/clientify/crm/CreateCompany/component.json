@@ -1,0 +1,58 @@
+{
+  "name": "appmixer.clientify.crm.CreateCompany",
+  "author": "Clientify",
+  "label": "Create Company",
+  "description": "Create a new company.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "name": {
+            "type": "text",
+            "label": "Name",
+            "tooltip": "Set Name (can be mapped from previous steps).",
+            "index": 1
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

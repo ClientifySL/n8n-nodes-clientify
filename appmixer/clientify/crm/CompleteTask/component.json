@@ -1,0 +1,69 @@
+{
+  "name": "appmixer.clientify.crm.CompleteTask",
+  "author": "Clientify",
+  "label": "Complete Task",
+  "description": "Mark a task as completed.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "taskId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "taskId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "taskId": {
+            "type": "number",
+            "label": "Task ID",
+            "tooltip": "Set Task ID (can be mapped from previous steps).",
+            "index": 1
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "due_date": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

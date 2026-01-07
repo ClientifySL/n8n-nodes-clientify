@@ -1,0 +1,102 @@
+{
+  "name": "appmixer.clientify.crm.UpdateContactOtherCompany",
+  "author": "Clientify",
+  "label": "Update Contact Other Company",
+  "description": "Update a contact other-company relationship.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "otherCompanyId": {
+            "type": "number"
+          },
+          "title": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "contactId",
+          "otherCompanyId",
+          "title"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "otherCompanyId": {
+            "type": "number",
+            "label": "Other Company ID",
+            "tooltip": "Set Other Company ID (can be mapped from previous steps).",
+            "index": 2
+          },
+          "title": {
+            "type": "text",
+            "label": "Title",
+            "tooltip": "Set Title (can be mapped from previous steps).",
+            "index": 3
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "company_id": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "company_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

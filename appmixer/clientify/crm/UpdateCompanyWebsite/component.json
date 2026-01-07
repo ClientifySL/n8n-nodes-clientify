@@ -1,0 +1,81 @@
+{
+  "name": "appmixer.clientify.crm.UpdateCompanyWebsite",
+  "author": "Clientify",
+  "label": "Update Company Website",
+  "description": "Update a company website entry.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "companyId": {
+            "type": "number"
+          },
+          "websiteId": {
+            "type": "number"
+          },
+          "website": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "companyId",
+          "websiteId",
+          "website"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "companyId": {
+            "type": "number",
+            "label": "Company ID",
+            "tooltip": "Set Company ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "websiteId": {
+            "type": "number",
+            "label": "Website ID",
+            "tooltip": "Set Website ID (can be mapped from previous steps).",
+            "index": 2
+          },
+          "website": {
+            "type": "text",
+            "label": "Website",
+            "tooltip": "Set Website (can be mapped from previous steps).",
+            "index": 3
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

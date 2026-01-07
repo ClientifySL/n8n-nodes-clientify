@@ -2,17 +2,29 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 
-// MCP Configuration
-const MCP_URL = 'https://mcp.clientify.com/mcp';
-const AUTH_TOKEN = 'eyJhbGciOiJIUzI1NiIsImtpZCI6IkdES2VkVXo5czg2bGU4TW8iLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FmaHJzenRvZGZwY3FiZG1jamZnLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiJiODA2YTVkMC1mYzBjLTRiNTgtYWE0My0zMmRkMWI1OWI2MWUiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzU3NzE3NzIwLCJpYXQiOjE3NTcxMTI5MjAsImVtYWlsIjoic2ViYXN0aWFuQHNlYmFzdGlhbm1hY2lhcy5jb20iLCJwaG9uZSI6IiIsImFwcF9tZXRhZGF0YSI6eyJwcm92aWRlciI6ImVtYWlsIiwicHJvdmlkZXJzIjpbImVtYWlsIl19LCJ1c2VyX21ldGFkYXRhIjp7ImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJmdWxsX25hbWUiOiJTZWJhc3RpYW4gTWFjaWFzIiwibGFzdF9uYW1lIjoiTWFjaWFzIiwibmFtZSI6IlNlYmFzdGlhbiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6Im90cCIsInRpbWVzdGFtcCI6MTc1MjM2OTIzM31dLCJzZXNzaW9uX2lkIjoiNzZlYTEyNzItMzQ5Zi00ZjUwLThiNDgtYjc2MDZiMTQ0ZTQyIiwiaXNfYW5vbnltb3VzIjpmYWxzZX0.0rXl43au430UfL7Jp95lsIzePsaP0Sfg10nHSUW98t8';
+// MCP Configuration (used only for schema/field generation)
+// Never hardcode tokens in repo. Use env vars instead:
+//   MCP_URL=https://mcp.clientify.com/mcp MCP_AUTH_TOKEN=... node scripts/generateFieldDefinitions.js
+const MCP_URL = process.env.MCP_URL || 'https://mcp.clientify.com/mcp';
+const AUTH_TOKEN = process.env.MCP_AUTH_TOKEN;
+
+if (!AUTH_TOKEN) {
+  console.error('Missing MCP_AUTH_TOKEN env var (refusing to run without an explicit token).');
+  process.exit(1);
+}
 
 let sessionId = null;
 
 function makeRequest(body) {
   return new Promise((resolve, reject) => {
+    const url = new URL(MCP_URL);
+    if (url.protocol !== 'https:') {
+      reject(new Error(`Unsupported MCP_URL protocol: ${url.protocol} (expected https:)`));
+      return;
+    }
     const options = {
-      hostname: 'mcp.clientify.com',
-      path: '/mcp',
+      hostname: url.hostname,
+      path: url.pathname,
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

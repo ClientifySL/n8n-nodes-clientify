@@ -1,0 +1,77 @@
+{
+  "name": "appmixer.clientify.crm.ListCustomFields",
+  "author": "Clientify",
+  "label": "List Custom Fields",
+  "description": "List custom fields (use object_type to filter).",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "object_type": {
+            "type": "string",
+            "description": "Example: contacts or companies (depends on API)."
+          }
+        }
+      },
+      "inspector": {
+        "inputs": {
+          "object_type": {
+            "type": "text",
+            "label": "Object Type",
+            "tooltip": "Set Object Type (can be mapped from previous steps).",
+            "index": 1
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "id": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

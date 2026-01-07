@@ -1,0 +1,90 @@
+{
+  "name": "appmixer.clientify.crm.BatchCreateContacts",
+  "author": "Clientify",
+  "label": "Batch Create Contacts",
+  "description": "Create multiple contacts in a single request.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contacts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "contacts"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contacts": {
+            "type": "expression",
+            "label": "Contacts",
+            "tooltip": "Set Contacts (can be mapped from previous steps).",
+            "index": 1
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "id": {
+              "type": "number"
+            },
+            "url": {
+              "type": "string"
+            },
+            "first_name": {
+              "type": "string"
+            },
+            "last_name": {
+              "type": "string"
+            },
+            "email": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "company_id": {
+              "type": [
+                "number",
+                "null"
+              ]
+            },
+            "company_name": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          },
+          "required": [
+            "id"
+          ]
+        }
+      }
+    }
+  ]
+}

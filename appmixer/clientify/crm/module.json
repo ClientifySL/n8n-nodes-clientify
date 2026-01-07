@@ -1,0 +1,7 @@
+{
+  "name": "appmixer.clientify.crm",
+  "label": "CRM",
+  "category": "crm",
+  "icon": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgdmlld0JveD0iMCAwIDY0IDY0Ij48cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxMiIgZmlsbD0iIzBlYTVlOSIvPjx0ZXh0IHg9IjMyIiB5PSI0MSIgZm9udC1mYW1pbHk9IkFyaWFsLCBIZWx2ZXRpY2EsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMjgiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmYiPkM8L3RleHQ+PC9zdmc+",
+  "description": "Clientify CRM actions."
+}

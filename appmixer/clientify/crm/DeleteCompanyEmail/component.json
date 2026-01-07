@@ -1,0 +1,62 @@
+{
+  "name": "appmixer.clientify.crm.DeleteCompanyEmail",
+  "author": "Clientify",
+  "label": "Delete Company Email",
+  "description": "Delete a company email entry.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "companyId": {
+            "type": "number"
+          },
+          "emailId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "companyId",
+          "emailId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "companyId": {
+            "type": "number",
+            "label": "Company ID",
+            "tooltip": "Set Company ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "emailId": {
+            "type": "number",
+            "label": "Email ID",
+            "tooltip": "Set Email ID (can be mapped from previous steps).",
+            "index": 2
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ]
+}

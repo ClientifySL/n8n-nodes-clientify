@@ -1,0 +1,98 @@
+{
+  "name": "appmixer.clientify.crm.AddCompanyCheckin",
+  "author": "Clientify",
+  "label": "Add Company Check-in",
+  "description": "Log a meeting/check-in on a company.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "companyId": {
+            "type": "number"
+          },
+          "type": {
+            "type": "string",
+            "description": "Example: virtual"
+          },
+          "comment": {
+            "type": "string"
+          },
+          "outcome": {
+            "type": "string",
+            "description": "Example: scheduled"
+          },
+          "date": {
+            "type": "string",
+            "description": "Example: 2021-07-08 12:34"
+          }
+        },
+        "required": [
+          "companyId",
+          "type",
+          "comment",
+          "outcome",
+          "date"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "companyId": {
+            "type": "number",
+            "label": "Company ID",
+            "tooltip": "Set Company ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "type": {
+            "type": "text",
+            "label": "Type",
+            "tooltip": "Set Type (can be mapped from previous steps).",
+            "index": 2
+          },
+          "comment": {
+            "type": "text",
+            "label": "Comment",
+            "tooltip": "Set Comment (can be mapped from previous steps).",
+            "index": 3
+          },
+          "outcome": {
+            "type": "text",
+            "label": "Outcome",
+            "tooltip": "Set Outcome (can be mapped from previous steps).",
+            "index": 4
+          },
+          "date": {
+            "type": "text",
+            "label": "Date",
+            "tooltip": "Set Date (can be mapped from previous steps).",
+            "index": 5
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

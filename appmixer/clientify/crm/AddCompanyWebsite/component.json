@@ -1,0 +1,65 @@
+{
+  "name": "appmixer.clientify.crm.AddCompanyWebsite",
+  "author": "Clientify",
+  "label": "Add Company Website",
+  "description": "Add a website to a company.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "companyId": {
+            "type": "number"
+          },
+          "website": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "companyId",
+          "website"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "companyId": {
+            "type": "number",
+            "label": "Company ID",
+            "tooltip": "Set Company ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "website": {
+            "type": "text",
+            "label": "Website",
+            "tooltip": "Set Website (can be mapped from previous steps).",
+            "index": 2
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

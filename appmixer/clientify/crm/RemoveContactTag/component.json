@@ -1,0 +1,62 @@
+{
+  "name": "appmixer.clientify.crm.RemoveContactTag",
+  "author": "Clientify",
+  "label": "Remove Contact Tag",
+  "description": "Remove a tag from a contact.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "tagId": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "contactId",
+          "tagId"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "tagId": {
+            "type": "number",
+            "label": "Tag ID",
+            "tooltip": "Set Tag ID (can be mapped from previous steps).",
+            "index": 2
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  ]
+}

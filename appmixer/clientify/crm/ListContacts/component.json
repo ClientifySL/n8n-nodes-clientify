@@ -1,0 +1,138 @@
+{
+  "name": "appmixer.clientify.crm.ListContacts",
+  "author": "Clientify",
+  "label": "List Contacts",
+  "description": "List contacts from Clientify.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "number"
+          },
+          "page_size": {
+            "type": "number"
+          },
+          "search": {
+            "type": "string"
+          },
+          "ordering": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "string"
+          }
+        }
+      },
+      "inspector": {
+        "inputs": {
+          "page": {
+            "type": "number",
+            "label": "Page",
+            "tooltip": "Set Page (can be mapped from previous steps).",
+            "index": 1
+          },
+          "page_size": {
+            "type": "number",
+            "label": "Page Size",
+            "tooltip": "Set Page Size (can be mapped from previous steps).",
+            "index": 2
+          },
+          "search": {
+            "type": "text",
+            "label": "Search",
+            "tooltip": "Set Search (can be mapped from previous steps).",
+            "index": 3
+          },
+          "ordering": {
+            "type": "text",
+            "label": "Ordering",
+            "tooltip": "Set Ordering (can be mapped from previous steps).",
+            "index": 4
+          },
+          "fields": {
+            "type": "text",
+            "label": "Fields",
+            "tooltip": "Set Fields (can be mapped from previous steps).",
+            "index": 5
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "next": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "previous": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "id": {
+                  "type": "number"
+                },
+                "url": {
+                  "type": "string"
+                },
+                "first_name": {
+                  "type": "string"
+                },
+                "last_name": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "company_id": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "company_name": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              },
+              "required": [
+                "id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

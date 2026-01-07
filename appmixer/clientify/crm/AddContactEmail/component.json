@@ -1,0 +1,85 @@
+{
+  "name": "appmixer.clientify.crm.AddContactEmail",
+  "author": "Clientify",
+  "label": "Add Contact Email",
+  "description": "Add an email to a contact.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "contactId": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "type": {
+            "type": "number",
+            "description": "Email type id/choice."
+          }
+        },
+        "required": [
+          "contactId",
+          "email",
+          "type"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "contactId": {
+            "type": "number",
+            "label": "Contact ID",
+            "tooltip": "Set Contact ID (can be mapped from previous steps).",
+            "index": 1
+          },
+          "email": {
+            "type": "text",
+            "label": "Email",
+            "tooltip": "Set Email (can be mapped from previous steps).",
+            "index": 2
+          },
+          "type": {
+            "type": "number",
+            "label": "Type",
+            "tooltip": "Set Type (can be mapped from previous steps).",
+            "index": 3
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "type": {
+            "type": "number"
+          },
+          "email": {
+            "type": "string"
+          },
+          "is_hard_bounce": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}

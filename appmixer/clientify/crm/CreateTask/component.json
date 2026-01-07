@@ -1,0 +1,167 @@
+{
+  "name": "appmixer.clientify.crm.CreateTask",
+  "author": "Clientify",
+  "label": "Create Task",
+  "description": "Create a new task/activity.",
+  "private": false,
+  "version": "0.1.0",
+  "auth": {
+    "service": "appmixer:clientify"
+  },
+  "inPorts": [
+    {
+      "name": "in",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "owner": {
+            "type": "number"
+          },
+          "assigned_to": {
+            "type": "number"
+          },
+          "type": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "remarks": {
+            "type": "string"
+          },
+          "due_date": {
+            "type": "string"
+          },
+          "status": {
+            "type": "number"
+          },
+          "recurring_type": {
+            "type": "number"
+          },
+          "recurring_end_date": {
+            "type": "string"
+          },
+          "recurring_days_of_week": {
+            "type": "array"
+          },
+          "recurring_interval": {
+            "type": "number"
+          },
+          "priority": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "name",
+          "type"
+        ]
+      },
+      "inspector": {
+        "inputs": {
+          "owner": {
+            "type": "number",
+            "label": "Owner",
+            "tooltip": "Set Owner (can be mapped from previous steps).",
+            "index": 1
+          },
+          "assigned_to": {
+            "type": "number",
+            "label": "Assigned To",
+            "tooltip": "Set Assigned To (can be mapped from previous steps).",
+            "index": 2
+          },
+          "type": {
+            "type": "number",
+            "label": "Type",
+            "tooltip": "Set Type (can be mapped from previous steps).",
+            "index": 3
+          },
+          "name": {
+            "type": "text",
+            "label": "Name",
+            "tooltip": "Set Name (can be mapped from previous steps).",
+            "index": 4
+          },
+          "description": {
+            "type": "text",
+            "label": "Description",
+            "tooltip": "Set Description (can be mapped from previous steps).",
+            "index": 5
+          },
+          "remarks": {
+            "type": "text",
+            "label": "Remarks",
+            "tooltip": "Set Remarks (can be mapped from previous steps).",
+            "index": 6
+          },
+          "due_date": {
+            "type": "text",
+            "label": "Due Date",
+            "tooltip": "Set Due Date (can be mapped from previous steps).",
+            "index": 7
+          },
+          "status": {
+            "type": "number",
+            "label": "Status",
+            "tooltip": "Set Status (can be mapped from previous steps).",
+            "index": 8
+          },
+          "recurring_type": {
+            "type": "number",
+            "label": "Recurring Type",
+            "tooltip": "Set Recurring Type (can be mapped from previous steps).",
+            "index": 9
+          },
+          "recurring_end_date": {
+            "type": "text",
+            "label": "Recurring End Date",
+            "tooltip": "Set Recurring End Date (can be mapped from previous steps).",
+            "index": 10
+          },
+          "recurring_days_of_week": {
+            "type": "expression",
+            "label": "Recurring Days Of Week",
+            "tooltip": "Set Recurring Days Of Week (can be mapped from previous steps).",
+            "index": 11
+          },
+          "recurring_interval": {
+            "type": "number",
+            "label": "Recurring Interval",
+            "tooltip": "Set Recurring Interval (can be mapped from previous steps).",
+            "index": 12
+          },
+          "priority": {
+            "type": "number",
+            "label": "Priority",
+            "tooltip": "Set Priority (can be mapped from previous steps).",
+            "index": 13
+          }
+        }
+      }
+    }
+  ],
+  "outPorts": [
+    {
+      "name": "out",
+      "schema": {
+        "type": "object",
+        "additionalProperties": true,
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "url": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ]
+      }
+    }
+  ]
+}
