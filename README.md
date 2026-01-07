@@ -95,7 +95,7 @@ Mapping is field-based:
 ## Support
 
 - **Clientify API docs:** https://newapi.clientify.com/
-- **Triggers reference:** `TRIGGERS_REFERENCE.md`
+- **Triggers reference:** [`TRIGGERS_REFERENCE.md`](TRIGGERS_REFERENCE.md)
 
 ## License
 

@@ -1,6 +1,6 @@
 # Clientify Triggers - Complete Reference
 
-**Package:** n8n-nodes-clientify v0.2.0
+**Package:** n8n-nodes-clientify
 **Total Triggers:** 16
 
 ---
