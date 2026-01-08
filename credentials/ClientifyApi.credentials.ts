@@ -14,8 +14,11 @@ export class ClientifyApi implements ICredentialType {
 	};
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: '={{$credentials.baseUrl}}',
+			// NOTE: n8n’s automated verification expects a literal baseURL here (not an expression).
+			// Runtime requests still use the user-provided `baseUrl` credential value.
+			baseURL: 'https://api-plus.clientify.com/v2',
 			url: '/me/?fields=id,email',
+			method: 'GET',
 		},
 	};
 	properties: INodeProperties[] = [
