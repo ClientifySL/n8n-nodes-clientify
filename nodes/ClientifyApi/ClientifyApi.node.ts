@@ -4,10 +4,9 @@ import {
 	INodeType,
 	INodeTypeDescription,
 	INodeProperties,
+	IDataObject,
 	NodeOperationError,
 } from 'n8n-workflow';
-
-import { ClientifyClient } from '@clientify/api-client';
 
 import {
 	operationDefinitions,
@@ -25,7 +24,7 @@ export class ClientifyApi implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"]}}',
-		description: 'Clientify CRM (direct API via @clientify/api-client)',
+		description: 'Clientify CRM (direct REST API)',
 		defaults: {
 			name: 'Clientify',
 		},
@@ -63,9 +62,6 @@ export class ClientifyApi implements INodeType {
 		const apiKey = credentials.apiKey as string;
 		const baseUrl = (credentials.baseUrl as string) || 'https://api-plus.clientify.com/v2';
 
-		const client = new ClientifyClient({ apiKey, baseUrl });
-		const http = client.getHttpClient();
-
 		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
 			const operation = this.getNodeParameter('operation', itemIndex) as string;
 			const def = operationDefinitions[operation];
@@ -73,7 +69,7 @@ export class ClientifyApi implements INodeType {
 			if (!def) {
 				throw new NodeOperationError(
 					this.getNode(),
-					`Unknown operation "${operation}". Ensure the AppMixer CRM catalog is present in this node package build output.`
+					`Unknown operation "${operation}". Ensure the operation catalog is present in this node package build output.`
 				);
 			}
 
@@ -116,17 +112,22 @@ export class ClientifyApi implements INodeType {
 				}
 
 				const url = renderPathTemplate(def.pathTemplate, input);
-				const rest = omitKeys(input, def.pathParamNames);
+				const rest = omitKeys(input, def.pathParamNames) as IDataObject;
 
 				const isQueryMethod = def.method === 'GET' || def.method === 'DELETE';
-				const params = isQueryMethod ? { ...def.fixedQuery, ...rest } : undefined;
-				const data = !isQueryMethod && Object.keys(rest).length > 0 ? rest : undefined;
+				const qs = isQueryMethod ? ({ ...(def.fixedQuery || {}), ...rest } as IDataObject) : undefined;
+				const body =
+					!isQueryMethod && Object.keys(rest).length > 0 ? (rest as IDataObject) : undefined;
 
-				const result = await http.request({
+				const result = await this.helpers.httpRequest({
 					method: def.method,
-					url,
-					params,
-					data,
+					url: `${baseUrl}${url}`,
+					qs,
+					body,
+					json: true,
+					headers: {
+						Authorization: `Token ${apiKey}`,
+					},
 				});
 
 				const normalized =

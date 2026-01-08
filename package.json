@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-clientify",
-  "version": "0.2.6",
+  "version": "0.2.12",
   "description": "N8N node for Clientify CRM integration",
   "keywords": [
     "n8n-node",
@@ -23,7 +23,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "rm -rf dist && tsc && cp package.json dist/ && cp README.md dist/ && cp TRIGGERS_REFERENCE.md dist/ && mkdir -p dist/nodes/ClientifyApi dist/nodes/ClientifyTrigger && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyTrigger/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyTrigger/ 2>/dev/null || true && mkdir -p dist/appmixer/clientify && cp -R appmixer/clientify/crm dist/appmixer/clientify/",
+    "build": "node scripts/generateOperationCatalog.cjs && rm -rf dist && tsc && cp package.json dist/ && cp README.md dist/ && cp TRIGGERS_REFERENCE.md dist/ && mkdir -p dist/nodes/ClientifyApi dist/nodes/ClientifyTrigger && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyTrigger/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyTrigger/ 2>/dev/null || true",
     "dev": "tsc --watch",
     "lint": "eslint nodes credentials --ext .ts",
     "lintfix": "eslint nodes credentials --ext .ts --fix",
@@ -41,9 +41,6 @@
       "dist/nodes/ClientifyApi/ClientifyApi.node.js",
       "dist/nodes/ClientifyTrigger/ClientifyTrigger.node.js"
     ]
-  },
-  "dependencies": {
-    "@clientify/api-client": "^0.1.1"
   },
   "overrides": {
     "form-data": "^4.0.4"

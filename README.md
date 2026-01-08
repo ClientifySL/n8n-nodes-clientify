@@ -5,9 +5,8 @@
 
 Connect n8n to Clientify CRM via the Clientify REST API using API keys (`Authorization: Token <apiKey>`).
 
-This package stays aligned with the official action catalog by generating actions/fields from the same connector spec used elsewhere (bundled inside this package under `appmixer/clientify/crm/`).
-
-Under the hood, requests are executed via `@clientify/api-client`.
+This package stays aligned with the action catalog by generating actions/fields from a single shared connector spec at build time.
+Under the hood, requests are executed directly via n8n’s HTTP request helper with `Authorization: Token <apiKey>`.
 
 ## Installation
 

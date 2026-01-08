@@ -1,9 +1,23 @@
-import { ICredentialType, INodeProperties } from 'n8n-workflow';
+import { ICredentialTestRequest, ICredentialType, INodeProperties } from 'n8n-workflow';
 
 export class ClientifyApi implements ICredentialType {
 	name = 'clientifyApi';
 	displayName = 'Clientify API';
 	documentationUrl = 'https://newapi.clientify.com/';
+	authenticate: ICredentialType['authenticate'] = {
+		type: 'generic',
+		properties: {
+			headers: {
+				Authorization: '=Token {{$credentials.apiKey}}',
+			},
+		},
+	};
+	test: ICredentialTestRequest = {
+		request: {
+			baseURL: '={{$credentials.baseUrl}}',
+			url: '/me/?fields=id,email',
+		},
+	};
 	properties: INodeProperties[] = [
 		{
 			displayName: 'API Key',
