@@ -1,0 +1,344 @@
+{
+  "id": "DemoWebhookLead1",
+  "name": "Demo — Webhook Lead → Clientify Contact/Company + Tag/Note + Cleanup",
+  "active": false,
+  "isArchived": false,
+  "createdAt": "2025-12-28T13:05:00.000Z",
+  "updatedAt": "2025-12-28T13:05:00.000Z",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "clientify-demo-lead",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "b8b7e2e0-3113-4c22-bb24-9ea4b42b4f74",
+      "name": "WebhookLead"
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const body = $json?.body && typeof $json.body === 'object' ? $json.body : $json;\n\nconst now = new Date();\nconst stamp = now.toISOString().replace(/[-:.TZ]/g, '').slice(0, 14);\n\nconst companyName = body.companyName || `Demo Company ${stamp}`;\nconst firstName = body.firstName || 'Demo';\nconst lastName = body.lastName || 'Lead';\nconst email = body.email || `demo+${stamp}@example.com`;\nconst note = body.note || `Inbound lead demo created at ${now.toISOString()}`;\nconst tagName = body.tagName || 'demo-n8n';\n\nreturn [{\n  json: {\n    companyName,\n    firstName,\n    lastName,\n    email,\n    note,\n    tagName,\n    stamp,\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "id": "c7c196f7-97a9-433d-966a-6d7ff42046e3",
+      "name": "Normalize Input"
+    },
+    {
+      "parameters": {
+        "operation": "CreateCompany",
+        "name": "={{$json.companyName}}"
+      },
+      "type": "n8n-nodes-clientify.clientifyApi",
+      "typeVersion": 1,
+      "position": [
+        480,
+        0
+      ],
+      "id": "bb56c178-a6aa-4b36-8ec7-0a2a4816ea9f",
+      "name": "Create Company",
+      "credentials": {
+        "clientifyApi": {
+          "id": "wp0yKcd1RltJuAAU",
+          "name": "Clientify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "CreateContact",
+        "first_name": "={{$node[\"Normalize Input\"].json.firstName}}",
+        "last_name": "={{$node[\"Normalize Input\"].json.lastName}}",
+        "email": "={{$node[\"Normalize Input\"].json.email}}",
+        "company": "={{$node[\"Create Company\"].json.name}}"
+      },
+      "type": "n8n-nodes-clientify.clientifyApi",
+      "typeVersion": 1,
+      "position": [
+        720,
+        0
+      ],
+      "id": "c25c9abb-612c-4633-8659-5f64fbfdcb15",
+      "name": "Create Contact",
+      "credentials": {
+        "clientifyApi": {
+          "id": "wp0yKcd1RltJuAAU",
+          "name": "Clientify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "AddContactTag",
+        "contactId": "={{$node[\"Create Contact\"].json.id}}",
+        "name": "={{$node[\"Normalize Input\"].json.tagName}}"
+      },
+      "type": "n8n-nodes-clientify.clientifyApi",
+      "typeVersion": 1,
+      "position": [
+        960,
+        0
+      ],
+      "id": "924dd854-bf37-4058-ae78-8aa5f73fc2fe",
+      "name": "Add Contact Tag",
+      "credentials": {
+        "clientifyApi": {
+          "id": "wp0yKcd1RltJuAAU",
+          "name": "Clientify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "AddContactNote",
+        "contactId": "={{$node[\"Create Contact\"].json.id}}",
+        "name": "Demo (n8n)",
+        "comment": "={{$node[\"Normalize Input\"].json.note}}"
+      },
+      "type": "n8n-nodes-clientify.clientifyApi",
+      "typeVersion": 1,
+      "position": [
+        1200,
+        0
+      ],
+      "id": "95c4b70b-9cca-416e-9b18-6f6c8bc1d11f",
+      "name": "Add Contact Note",
+      "credentials": {
+        "clientifyApi": {
+          "id": "wp0yKcd1RltJuAAU",
+          "name": "Clientify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "ListContactWallentries",
+        "contactId": "={{$node[\"Create Contact\"].json.id}}"
+      },
+      "type": "n8n-nodes-clientify.clientifyApi",
+      "typeVersion": 1,
+      "position": [
+        1440,
+        0
+      ],
+      "id": "b6d7e641-231b-4181-97b2-6a2f6c728f82",
+      "name": "List Contact Wall Entries",
+      "credentials": {
+        "clientifyApi": {
+          "id": "wp0yKcd1RltJuAAU",
+          "name": "Clientify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "DeleteContact",
+        "contactId": "={{$node[\"Create Contact\"].json.id}}"
+      },
+      "type": "n8n-nodes-clientify.clientifyApi",
+      "typeVersion": 1,
+      "position": [
+        1680,
+        0
+      ],
+      "id": "6a5a0a94-8a1e-4a4e-8e33-fae7055f5448",
+      "name": "Delete Contact",
+      "credentials": {
+        "clientifyApi": {
+          "id": "wp0yKcd1RltJuAAU",
+          "name": "Clientify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "DeleteCompany",
+        "companyId": "={{$node[\"Create Company\"].json.id}}"
+      },
+      "type": "n8n-nodes-clientify.clientifyApi",
+      "typeVersion": 1,
+      "position": [
+        1920,
+        0
+      ],
+      "id": "c9e415b1-8b93-40bb-b2a4-d5c93fca011a",
+      "name": "Delete Company",
+      "credentials": {
+        "clientifyApi": {
+          "id": "wp0yKcd1RltJuAAU",
+          "name": "Clientify account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "runOnceForAllItems",
+        "language": "javaScript",
+        "jsCode": "const company = $('Create Company').first().json;\nconst contact = $('Create Contact').first().json;\nconst tag = $('Add Contact Tag').first().json;\nconst note = $('Add Contact Note').first().json;\nconst wallEntries = $('List Contact Wall Entries').first().json;\nconst deletedContact = $('Delete Contact').first().json;\nconst deletedCompany = $('Delete Company').first().json;\n\nreturn [{\n  json: {\n    ok: true,\n    company,\n    contact,\n    tag,\n    note,\n    wallEntries,\n    deleted: {\n      contact: deletedContact,\n      company: deletedCompany,\n    },\n  },\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2160,
+        0
+      ],
+      "id": "74fa8aa3-700a-4fce-b5c1-c0d6f2ea445b",
+      "name": "Build Response"
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        2400,
+        0
+      ],
+      "id": "90c57ca0-af64-4b71-9b46-dae43e3bc0cc",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "connections": {
+    "WebhookLead": {
+      "main": [
+        [
+          {
+            "node": "Normalize Input",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Input": {
+      "main": [
+        [
+          {
+            "node": "Create Company",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Company": {
+      "main": [
+        [
+          {
+            "node": "Create Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Contact": {
+      "main": [
+        [
+          {
+            "node": "Add Contact Tag",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Contact Tag": {
+      "main": [
+        [
+          {
+            "node": "Add Contact Note",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Add Contact Note": {
+      "main": [
+        [
+          {
+            "node": "List Contact Wall Entries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List Contact Wall Entries": {
+      "main": [
+        [
+          {
+            "node": "Delete Contact",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Contact": {
+      "main": [
+        [
+          {
+            "node": "Delete Company",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Company": {
+      "main": [
+        [
+          {
+            "node": "Build Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Response": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "staticData": null,
+  "meta": {
+    "templateCredsSetupCompleted": true
+  },
+  "pinData": {},
+  "versionId": "c3efb06f-0a21-4704-9d3b-8b3ea49c69a9",
+  "activeVersionId": null,
+  "versionCounter": 1,
+  "triggerCount": 0,
+  "tags": []
+}
