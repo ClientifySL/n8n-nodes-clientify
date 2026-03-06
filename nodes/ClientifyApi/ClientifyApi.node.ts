@@ -1,169 +1,205 @@
 import {
-	IExecuteFunctions,
-	INodeExecutionData,
-	INodeType,
-	INodeTypeDescription,
-	INodeProperties,
-	IDataObject,
-	NodeOperationError,
-} from 'n8n-workflow';
+  IExecuteFunctions,
+  INodeExecutionData,
+  INodeType,
+  INodeTypeDescription,
+  INodeProperties,
+  IDataObject,
+  NodeOperationError,
+} from "n8n-workflow";
 
 import {
-	operationDefinitions,
-	operationOptions,
-	operationFields,
-	omitKeys,
-	renderPathTemplate,
-} from './ClientifyApiCatalog';
+  getResourceForOperation,
+  resourceOptions,
+  operationDefinitions,
+  operationOptions,
+  operationFields,
+  omitKeys,
+  renderPathTemplate,
+} from "./ClientifyApiCatalog";
 
 export class ClientifyApi implements INodeType {
-	description: INodeTypeDescription = {
-		displayName: 'Clientify',
-		name: 'clientifyApi',
-		icon: 'file:clientify.svg',
-		group: ['transform'],
-		version: 1,
-		subtitle: '={{$parameter["operation"]}}',
-		description: 'Clientify CRM (direct REST API)',
-		defaults: {
-			name: 'Clientify',
-		},
-		inputs: ['main'],
-		outputs: ['main'],
-		credentials: [
-			{
-				name: 'clientifyApi',
-				required: true,
-			},
-		],
-		properties: (() => {
-			const props: INodeProperties[] = [
-				{
-					displayName: 'Action',
-					name: 'operation',
-					type: 'options',
-					options: operationOptions,
-					default: 'GetCurrentUser',
-					required: true,
-					noDataExpression: true,
-					description: 'Select the Clientify action to execute (mirrors the AppMixer connector action list)',
-				},
-				...operationFields,
-			];
-			return props;
-		})(),
-	};
+  description: INodeTypeDescription = {
+    displayName: "Clientify",
+    name: "clientifyApi",
+    icon: "file:clientify.svg",
+    group: ["transform"],
+    version: 1,
+    subtitle: '={{$parameter["resource"] + " · " + $parameter["operation"]}}',
+    description: "Clientify CRM (direct REST API)",
+    defaults: {
+      name: "Clientify",
+    },
+    inputs: ["main"],
+    outputs: ["main"],
+    credentials: [
+      {
+        name: "clientifyApi",
+        required: true,
+      },
+    ],
+    properties: (() => {
+      const props: INodeProperties[] = [
+        {
+          displayName: "Resource",
+          name: "resource",
+          type: "options",
+          options: resourceOptions,
+          default: "auto",
+          required: true,
+          noDataExpression: true,
+          description: "Choose a resource first, then pick an action",
+        },
+        {
+          displayName: "Action",
+          name: "operation",
+          type: "options",
+          options: operationOptions,
+          default: "GetCurrentUser",
+          required: true,
+          noDataExpression: true,
+          description:
+            "Select the Clientify action to execute (mirrors the AppMixer connector action list)",
+        },
+        ...operationFields,
+      ];
+      return props;
+    })(),
+  };
 
-	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
-		const items = this.getInputData();
-		const returnData: INodeExecutionData[] = [];
+  async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
+    const items = this.getInputData();
+    const returnData: INodeExecutionData[] = [];
 
-		const credentials = await this.getCredentials('clientifyApi');
-		const apiKey = credentials.apiKey as string;
-		const baseUrl = (credentials.baseUrl as string) || 'https://api-plus.clientify.com/v2';
+    const credentials = await this.getCredentials("clientifyApi");
+    const baseUrl =
+      (credentials.baseUrl as string) || "https://api-plus.clientify.com/v2";
 
-		for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
-			const operation = this.getNodeParameter('operation', itemIndex) as string;
-			const def = operationDefinitions[operation];
+    for (let itemIndex = 0; itemIndex < items.length; itemIndex++) {
+      const selectedResource = this.getNodeParameter(
+        "resource",
+        itemIndex,
+        "auto"
+      ) as string;
+      const operation = this.getNodeParameter("operation", itemIndex) as string;
+      const def = operationDefinitions[operation];
 
-			if (!def) {
-				throw new NodeOperationError(
-					this.getNode(),
-					`Unknown operation "${operation}". Ensure the operation catalog is present in this node package build output.`
-				);
-			}
+      if (!def) {
+        throw new NodeOperationError(
+          this.getNode(),
+          `Unknown operation "${operation}". Ensure the operation catalog is present in this node package build output.`
+        );
+      }
 
-			try {
-				const input: Record<string, unknown> = {};
+      try {
+        const input: Record<string, unknown> = {};
 
-				for (const fieldName of def.fieldNames) {
-					let value: unknown;
-					try {
-						value = this.getNodeParameter(fieldName, itemIndex);
-					} catch {
-						continue;
-					}
+        for (const fieldName of def.fieldNames) {
+          let value: unknown;
+          try {
+            value = this.getNodeParameter(fieldName, itemIndex);
+          } catch {
+            continue;
+          }
 
-					// Apply per-operation defaults if user left the field empty.
-					if ((value === '' || value === null || value === undefined) && fieldName in def.fieldDefaults) {
-						value = def.fieldDefaults[fieldName];
-					}
+          // Apply per-operation defaults if user left the field empty.
+          if (
+            (value === "" || value === null || value === undefined) &&
+            fieldName in def.fieldDefaults
+          ) {
+            value = def.fieldDefaults[fieldName];
+          }
 
-					// Avoid accidentally sending empty optional values (n8n defaults).
-					const isRequired = def.requiredFieldNames.includes(fieldName);
-					if (!isRequired) {
-						if (value === '' || value === null || value === undefined) continue;
-						if (typeof value === 'number' && value === 0) continue;
-						if (typeof value === 'boolean' && value === false) continue;
-					}
+          // Avoid accidentally sending empty optional values (n8n defaults).
+          const isRequired = def.requiredFieldNames.includes(fieldName);
+          if (!isRequired) {
+            if (value === "" || value === null || value === undefined) continue;
+            if (typeof value === "number" && value === 0) continue;
+            if (typeof value === "boolean" && value === false) continue;
+          }
 
-					input[fieldName] = value;
-				}
+          input[fieldName] = value;
+        }
 
-				// Validate required fields are present (avoid confusing API errors).
-				for (const fieldName of def.requiredFieldNames) {
-					const value = input[fieldName];
-					if (value === undefined || value === null || value === '') {
-						throw new NodeOperationError(this.getNode(), `${fieldName} is required`);
-					}
-					if (typeof value === 'number' && value <= 0) {
-						throw new NodeOperationError(this.getNode(), `${fieldName} must be a positive number`);
-					}
-				}
+        // Validate required fields are present (avoid confusing API errors).
+        for (const fieldName of def.requiredFieldNames) {
+          const value = input[fieldName];
+          if (value === undefined || value === null || value === "") {
+            throw new NodeOperationError(
+              this.getNode(),
+              `${fieldName} is required`
+            );
+          }
+          if (typeof value === "number" && value <= 0) {
+            throw new NodeOperationError(
+              this.getNode(),
+              `${fieldName} must be a positive number`
+            );
+          }
+        }
 
-				const url = renderPathTemplate(def.pathTemplate, input);
-				const rest = omitKeys(input, def.pathParamNames) as IDataObject;
+        const url = renderPathTemplate(def.pathTemplate, input);
+        const rest = omitKeys(input, def.pathParamNames) as IDataObject;
 
-				const isQueryMethod = def.method === 'GET' || def.method === 'DELETE';
-				const qs = isQueryMethod ? ({ ...(def.fixedQuery || {}), ...rest } as IDataObject) : undefined;
-				const body =
-					!isQueryMethod && Object.keys(rest).length > 0 ? (rest as IDataObject) : undefined;
+        const isQueryMethod = def.method === "GET" || def.method === "DELETE";
+        const qs = isQueryMethod
+          ? ({ ...(def.fixedQuery || {}), ...rest } as IDataObject)
+          : undefined;
+        const body =
+          !isQueryMethod && Object.keys(rest).length > 0
+            ? (rest as IDataObject)
+            : undefined;
 
-				const result = await this.helpers.httpRequest({
-					method: def.method,
-					url: `${baseUrl}${url}`,
-					qs,
-					body,
-					json: true,
-					headers: {
-						Authorization: `Token ${apiKey}`,
-					},
-				});
+        const result = await this.helpers.httpRequestWithAuthentication.call(
+          this,
+          "clientifyApi",
+          {
+            method: def.method,
+            url: `${baseUrl}${url}`,
+            qs,
+            body,
+            json: true,
+          }
+        );
 
-				const normalized =
-					result === undefined || result === null || result === ''
-						? { ok: true }
-						: typeof result === 'object'
-							? result
-							: { data: result };
+        const normalized =
+          result === undefined || result === null || result === ""
+            ? { ok: true }
+            : typeof result === "object"
+            ? result
+            : { data: result };
 
-				returnData.push({
-					json: {
-						...normalized,
-						_meta: {
-							operation,
-							method: def.method,
-							path: url,
-						},
-					},
-					pairedItem: itemIndex,
-				});
-			} catch (error) {
-				if (this.continueOnFail()) {
-					returnData.push({
-						json: {
-							success: false,
-							operation,
-							error: error instanceof Error ? error.message : String(error),
-						},
-						pairedItem: itemIndex,
-					});
-					continue;
-				}
-				throw error;
-			}
-		}
+        returnData.push({
+          json: {
+            ...normalized,
+            _meta: {
+              resource:
+                selectedResource === "auto"
+                  ? getResourceForOperation(operation)
+                  : selectedResource,
+              operation,
+              method: def.method,
+              path: url,
+            },
+          },
+          pairedItem: itemIndex,
+        });
+      } catch (error) {
+        if (this.continueOnFail()) {
+          returnData.push({
+            json: {
+              success: false,
+              operation,
+              error: error instanceof Error ? error.message : String(error),
+            },
+            pairedItem: itemIndex,
+          });
+          continue;
+        }
+        throw error;
+      }
+    }
 
-		return [returnData];
-	}
+    return [returnData];
+  }
 }

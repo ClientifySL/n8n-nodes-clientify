@@ -25,4 +25,2994 @@ export type ClientifyOperationDefinition = {
   inspectorInputs: Record<string, AppmixerInspectorInput>;
 };
 
-export const operationDefinitions: Record<string, ClientifyOperationDefinition> = {"AddCompanyAddress":{"operation":"AddCompanyAddress","label":"Add Company Address","description":"Add an address to a company.","method":"POST","pathTemplate":"/companies/${companyId}/addresses/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","type","street","city","state","country","postal_code"],"requiredFieldNames":["companyId","type","street","city","state","country","postal_code"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":2},"street":{"type":"text","label":"Street","tooltip":"Set Street (can be mapped from previous steps).","index":3},"city":{"type":"text","label":"City","tooltip":"Set City (can be mapped from previous steps).","index":4},"state":{"type":"text","label":"State","tooltip":"Set State (can be mapped from previous steps).","index":5},"country":{"type":"text","label":"Country","tooltip":"Set Country (can be mapped from previous steps).","index":6},"postal_code":{"type":"text","label":"Postal Code","tooltip":"Set Postal Code (can be mapped from previous steps).","index":7}}},"AddCompanyCall":{"operation":"AddCompanyCall","label":"Add Company Call","description":"Log a call on a company.","method":"POST","pathTemplate":"/companies/${companyId}/call/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","type","comment","outcome","call_date","call_time"],"requiredFieldNames":["companyId","type","comment","outcome","call_date","call_time"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"type":{"type":"text","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":2},"comment":{"type":"text","label":"Comment","tooltip":"Set Comment (can be mapped from previous steps).","index":3},"outcome":{"type":"text","label":"Outcome","tooltip":"Set Outcome (can be mapped from previous steps).","index":4},"call_date":{"type":"text","label":"Call Date","tooltip":"Set Call Date (can be mapped from previous steps).","index":5},"call_time":{"type":"text","label":"Call Time","tooltip":"Set Call Time (can be mapped from previous steps).","index":6}}},"AddCompanyCheckin":{"operation":"AddCompanyCheckin","label":"Add Company Check-in","description":"Log a meeting/check-in on a company.","method":"POST","pathTemplate":"/companies/${companyId}/checkin/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","type","comment","outcome","date"],"requiredFieldNames":["companyId","type","comment","outcome","date"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"type":{"type":"text","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":2},"comment":{"type":"text","label":"Comment","tooltip":"Set Comment (can be mapped from previous steps).","index":3},"outcome":{"type":"text","label":"Outcome","tooltip":"Set Outcome (can be mapped from previous steps).","index":4},"date":{"type":"text","label":"Date","tooltip":"Set Date (can be mapped from previous steps).","index":5}}},"AddCompanyEmail":{"operation":"AddCompanyEmail","label":"Add Company Email","description":"Add an email to a company.","method":"POST","pathTemplate":"/companies/${companyId}/emails/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","email","type"],"requiredFieldNames":["companyId","email","type"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"email":{"type":"text","label":"Email","tooltip":"Set Email (can be mapped from previous steps).","index":2},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":3}}},"AddCompanyEmployee":{"operation":"AddCompanyEmployee","label":"Add Company Employee","description":"Link a contact as an employee of a company.","method":"PUT","pathTemplate":"/companies/${companyId}/employees/${contactId}/","pathParamNames":["companyId","contactId"],"fixedQuery":{},"fieldNames":["companyId","contactId"],"requiredFieldNames":["companyId","contactId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":2}}},"AddCompanyNote":{"operation":"AddCompanyNote","label":"Add Company Note","description":"Add a note to a company.","method":"POST","pathTemplate":"/companies/${companyId}/note/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","name","comment"],"requiredFieldNames":["companyId","name","comment"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"name":{"type":"text","label":"Name","tooltip":"Set Name (can be mapped from previous steps).","index":2},"comment":{"type":"text","label":"Comment","tooltip":"Set Comment (can be mapped from previous steps).","index":3}}},"AddCompanyPhone":{"operation":"AddCompanyPhone","label":"Add Company Phone","description":"Add a phone to a company.","method":"POST","pathTemplate":"/companies/${companyId}/phones/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","phone","type"],"requiredFieldNames":["companyId","phone","type"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"phone":{"type":"text","label":"Phone","tooltip":"Set Phone (can be mapped from previous steps).","index":2},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":3}}},"AddCompanyTag":{"operation":"AddCompanyTag","label":"Add Company Tag","description":"Add a tag to a company (creates the tag if needed).","method":"POST","pathTemplate":"/companies/${companyId}/tags/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","name"],"requiredFieldNames":["companyId","name"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"name":{"type":"text","label":"Name","tooltip":"Set Name (can be mapped from previous steps).","index":2}}},"AddCompanyWebsite":{"operation":"AddCompanyWebsite","label":"Add Company Website","description":"Add a website to a company.","method":"POST","pathTemplate":"/companies/${companyId}/websites/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","website"],"requiredFieldNames":["companyId","website"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"website":{"type":"text","label":"Website","tooltip":"Set Website (can be mapped from previous steps).","index":2}}},"AddContactAddress":{"operation":"AddContactAddress","label":"Add Contact Address","description":"Add an address to a contact.","method":"POST","pathTemplate":"/contacts/${contactId}/addresses/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","type","street","city","state","country","postal_code"],"requiredFieldNames":["contactId","type","street","city","state","country","postal_code"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":2},"street":{"type":"text","label":"Street","tooltip":"Set Street (can be mapped from previous steps).","index":3},"city":{"type":"text","label":"City","tooltip":"Set City (can be mapped from previous steps).","index":4},"state":{"type":"text","label":"State","tooltip":"Set State (can be mapped from previous steps).","index":5},"country":{"type":"text","label":"Country","tooltip":"Set Country (can be mapped from previous steps).","index":6},"postal_code":{"type":"text","label":"Postal Code","tooltip":"Set Postal Code (can be mapped from previous steps).","index":7}}},"AddContactCall":{"operation":"AddContactCall","label":"Add Contact Call","description":"Log a call on a contact.","method":"POST","pathTemplate":"/contacts/${contactId}/call/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"AddContactCheckin":{"operation":"AddContactCheckin","label":"Add Contact Check-in","description":"Log a meeting/check-in on a contact.","method":"POST","pathTemplate":"/contacts/${contactId}/checkin/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","type","comment","outcome","date","owner"],"requiredFieldNames":["contactId","type","comment","outcome","date","owner"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"type":{"type":"text","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":2},"comment":{"type":"text","label":"Comment","tooltip":"Set Comment (can be mapped from previous steps).","index":3},"outcome":{"type":"text","label":"Outcome","tooltip":"Set Outcome (can be mapped from previous steps).","index":4},"date":{"type":"text","label":"Date","tooltip":"Set Date (can be mapped from previous steps).","index":5},"owner":{"type":"number","label":"Owner","tooltip":"Set Owner (can be mapped from previous steps).","index":6}}},"AddContactEmail":{"operation":"AddContactEmail","label":"Add Contact Email","description":"Add an email to a contact.","method":"POST","pathTemplate":"/contacts/${contactId}/emails/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","email","type"],"requiredFieldNames":["contactId","email","type"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"email":{"type":"text","label":"Email","tooltip":"Set Email (can be mapped from previous steps).","index":2},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":3}}},"AddContactNote":{"operation":"AddContactNote","label":"Add Contact Note","description":"Add a note to a contact.","method":"POST","pathTemplate":"/contacts/${contactId}/note/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","name","comment"],"requiredFieldNames":["contactId","name","comment"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"name":{"type":"text","label":"Name","tooltip":"Set Name (can be mapped from previous steps).","index":2},"comment":{"type":"text","label":"Comment","tooltip":"Set Comment (can be mapped from previous steps).","index":3}}},"AddContactOtherCompany":{"operation":"AddContactOtherCompany","label":"Add Contact Other Company","description":"Create an additional company relationship for a contact (by title).","method":"POST","pathTemplate":"/contacts/${contactId}/other_companies/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","title"],"requiredFieldNames":["contactId","title"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"title":{"type":"text","label":"Title","tooltip":"Set Title (can be mapped from previous steps).","index":2}}},"AddContactPhone":{"operation":"AddContactPhone","label":"Add Contact Phone","description":"Add a phone to a contact.","method":"POST","pathTemplate":"/contacts/${contactId}/phones/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","phone","type"],"requiredFieldNames":["contactId","phone","type"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"phone":{"type":"text","label":"Phone","tooltip":"Set Phone (can be mapped from previous steps).","index":2},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":3}}},"AddContactTag":{"operation":"AddContactTag","label":"Add Contact Tag","description":"Add a tag to a contact (creates the tag if needed).","method":"POST","pathTemplate":"/contacts/${contactId}/tags/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","name"],"requiredFieldNames":["contactId","name"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"name":{"type":"text","label":"Name","tooltip":"Set Name (can be mapped from previous steps).","index":2}}},"AssignContactOwner":{"operation":"AssignContactOwner","label":"Assign Contact Owner","description":"Assign an owner/user to a contact.","method":"PUT","pathTemplate":"/contacts/${contactId}/owner/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","ownerId"],"requiredFieldNames":["contactId","ownerId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"ownerId":{"type":"number","label":"Owner ID","tooltip":"Set Owner ID (can be mapped from previous steps).","index":2}}},"BatchCreateContacts":{"operation":"BatchCreateContacts","label":"Batch Create Contacts","description":"Create multiple contacts in a single request.","method":"POST","pathTemplate":"/multiple-contacts/","pathParamNames":[],"fixedQuery":{},"fieldNames":["contacts"],"requiredFieldNames":["contacts"],"fieldDefaults":{},"inspectorInputs":{"contacts":{"type":"expression","label":"Contacts","tooltip":"Set Contacts (can be mapped from previous steps).","index":1}}},"CompleteTask":{"operation":"CompleteTask","label":"Complete Task","description":"Mark a task as completed.","method":"POST","pathTemplate":"/tasks/${taskId}/complete/","pathParamNames":["taskId"],"fixedQuery":{},"fieldNames":["taskId"],"requiredFieldNames":["taskId"],"fieldDefaults":{},"inspectorInputs":{"taskId":{"type":"number","label":"Task ID","tooltip":"Set Task ID (can be mapped from previous steps).","index":1}}},"CreateCompany":{"operation":"CreateCompany","label":"Create Company","description":"Create a new company.","method":"POST","pathTemplate":"/companies/","pathParamNames":[],"fixedQuery":{},"fieldNames":["name"],"requiredFieldNames":["name"],"fieldDefaults":{},"inspectorInputs":{"name":{"type":"text","label":"Name","tooltip":"Set Name (can be mapped from previous steps).","index":1}}},"CreateContact":{"operation":"CreateContact","label":"Create Contact","description":"Create a new contact.","method":"POST","pathTemplate":"/contacts/","pathParamNames":[],"fixedQuery":{},"fieldNames":["first_name","last_name","email","company"],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{"first_name":{"type":"text","label":"First Name","tooltip":"Set First Name (can be mapped from previous steps).","index":1},"last_name":{"type":"text","label":"Last Name","tooltip":"Set Last Name (can be mapped from previous steps).","index":2},"email":{"type":"text","label":"Email","tooltip":"Set Email (can be mapped from previous steps).","index":3},"company":{"type":"text","label":"Company","tooltip":"Set Company (can be mapped from previous steps).","index":4}}},"CreateTask":{"operation":"CreateTask","label":"Create Task","description":"Create a new task/activity.","method":"POST","pathTemplate":"/tasks/","pathParamNames":[],"fixedQuery":{},"fieldNames":["owner","assigned_to","type","name","description","remarks","due_date","status","recurring_type","recurring_end_date","recurring_days_of_week","recurring_interval","priority"],"requiredFieldNames":["name","type"],"fieldDefaults":{},"inspectorInputs":{"owner":{"type":"number","label":"Owner","tooltip":"Set Owner (can be mapped from previous steps).","index":1},"assigned_to":{"type":"number","label":"Assigned To","tooltip":"Set Assigned To (can be mapped from previous steps).","index":2},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":3},"name":{"type":"text","label":"Name","tooltip":"Set Name (can be mapped from previous steps).","index":4},"description":{"type":"text","label":"Description","tooltip":"Set Description (can be mapped from previous steps).","index":5},"remarks":{"type":"text","label":"Remarks","tooltip":"Set Remarks (can be mapped from previous steps).","index":6},"due_date":{"type":"text","label":"Due Date","tooltip":"Set Due Date (can be mapped from previous steps).","index":7},"status":{"type":"number","label":"Status","tooltip":"Set Status (can be mapped from previous steps).","index":8},"recurring_type":{"type":"number","label":"Recurring Type","tooltip":"Set Recurring Type (can be mapped from previous steps).","index":9},"recurring_end_date":{"type":"text","label":"Recurring End Date","tooltip":"Set Recurring End Date (can be mapped from previous steps).","index":10},"recurring_days_of_week":{"type":"expression","label":"Recurring Days Of Week","tooltip":"Set Recurring Days Of Week (can be mapped from previous steps).","index":11},"recurring_interval":{"type":"number","label":"Recurring Interval","tooltip":"Set Recurring Interval (can be mapped from previous steps).","index":12},"priority":{"type":"number","label":"Priority","tooltip":"Set Priority (can be mapped from previous steps).","index":13}}},"DeleteCompany":{"operation":"DeleteCompany","label":"Delete Company","description":"Delete a company by id.","method":"DELETE","pathTemplate":"/companies/${companyId}/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"DeleteCompanyAddress":{"operation":"DeleteCompanyAddress","label":"Delete Company Address","description":"Delete a company address entry.","method":"DELETE","pathTemplate":"/companies/${companyId}/addresses/${addressId}/","pathParamNames":["companyId","addressId"],"fixedQuery":{},"fieldNames":["companyId","addressId"],"requiredFieldNames":["companyId","addressId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"addressId":{"type":"number","label":"Address ID","tooltip":"Set Address ID (can be mapped from previous steps).","index":2}}},"DeleteCompanyEmail":{"operation":"DeleteCompanyEmail","label":"Delete Company Email","description":"Delete a company email entry.","method":"DELETE","pathTemplate":"/companies/${companyId}/emails/${emailId}/","pathParamNames":["companyId","emailId"],"fixedQuery":{},"fieldNames":["companyId","emailId"],"requiredFieldNames":["companyId","emailId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"emailId":{"type":"number","label":"Email ID","tooltip":"Set Email ID (can be mapped from previous steps).","index":2}}},"DeleteCompanyPhone":{"operation":"DeleteCompanyPhone","label":"Delete Company Phone","description":"Delete a company phone entry.","method":"DELETE","pathTemplate":"/companies/${companyId}/phones/${phoneId}/","pathParamNames":["companyId","phoneId"],"fixedQuery":{},"fieldNames":["companyId","phoneId"],"requiredFieldNames":["companyId","phoneId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"phoneId":{"type":"number","label":"Phone ID","tooltip":"Set Phone ID (can be mapped from previous steps).","index":2}}},"DeleteCompanyWebsite":{"operation":"DeleteCompanyWebsite","label":"Delete Company Website","description":"Delete a company website entry.","method":"DELETE","pathTemplate":"/companies/${companyId}/websites/${websiteId}/","pathParamNames":["companyId","websiteId"],"fixedQuery":{},"fieldNames":["companyId","websiteId"],"requiredFieldNames":["companyId","websiteId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"websiteId":{"type":"number","label":"Website ID","tooltip":"Set Website ID (can be mapped from previous steps).","index":2}}},"DeleteContact":{"operation":"DeleteContact","label":"Delete Contact","description":"Delete a contact by id.","method":"DELETE","pathTemplate":"/contacts/${contactId}/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"DeleteContactAddress":{"operation":"DeleteContactAddress","label":"Delete Contact Address","description":"Delete a contact address entry.","method":"DELETE","pathTemplate":"/contacts/${contactId}/addresses/${addressId}/","pathParamNames":["contactId","addressId"],"fixedQuery":{},"fieldNames":["contactId","addressId"],"requiredFieldNames":["contactId","addressId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"addressId":{"type":"number","label":"Address ID","tooltip":"Set Address ID (can be mapped from previous steps).","index":2}}},"DeleteContactEmail":{"operation":"DeleteContactEmail","label":"Delete Contact Email","description":"Delete a contact email entry.","method":"DELETE","pathTemplate":"/contacts/${contactId}/emails/${emailId}/","pathParamNames":["contactId","emailId"],"fixedQuery":{},"fieldNames":["contactId","emailId"],"requiredFieldNames":["contactId","emailId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"emailId":{"type":"number","label":"Email ID","tooltip":"Set Email ID (can be mapped from previous steps).","index":2}}},"DeleteContactOtherCompany":{"operation":"DeleteContactOtherCompany","label":"Delete Contact Other Company","description":"Delete a contact other-company relationship.","method":"DELETE","pathTemplate":"/contacts/${contactId}/other_companies/${otherCompanyId}/","pathParamNames":["contactId","otherCompanyId"],"fixedQuery":{},"fieldNames":["contactId","otherCompanyId"],"requiredFieldNames":["contactId","otherCompanyId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"otherCompanyId":{"type":"number","label":"Other Company ID","tooltip":"Set Other Company ID (can be mapped from previous steps).","index":2}}},"DeleteContactPhone":{"operation":"DeleteContactPhone","label":"Delete Contact Phone","description":"Delete a contact phone entry.","method":"DELETE","pathTemplate":"/contacts/${contactId}/phones/${phoneId}/","pathParamNames":["contactId","phoneId"],"fixedQuery":{},"fieldNames":["contactId","phoneId"],"requiredFieldNames":["contactId","phoneId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"phoneId":{"type":"number","label":"Phone ID","tooltip":"Set Phone ID (can be mapped from previous steps).","index":2}}},"GetCompany":{"operation":"GetCompany","label":"Get Company","description":"Get a company by id.","method":"GET","pathTemplate":"/companies/${companyId}/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId","fields"],"requiredFieldNames":["companyId"],"fieldDefaults":{"fields":"id,name,sector,company_sector,business_name,taxpayer_identification_number,fax,number_of_employees,number_of_employees_desc,owner,owner_name,rank,rank_manual,picture_url,facebook_url,linkedin_url,twitter_url,private,last_viewed,last_interaction,facebook_id,twitter_id,linkedin_id,founded,online_since,full_contact_extra,approx_employees,description,remarks,summary,linkedin_picture_url,created,modified,youtube_url,instagram_url,owner_picture,industry"},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"fields":{"type":"text","label":"Fields","tooltip":"Set Fields (can be mapped from previous steps).","index":2}}},"GetContact":{"operation":"GetContact","label":"Get Contact","description":"Get a contact by id.","method":"GET","pathTemplate":"/contacts/${contactId}/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","fields"],"requiredFieldNames":["contactId"],"fieldDefaults":{"fields":"id,owner_id,first_name,last_name,status,title,company_id,company_name,company_picture,contact_type,contact_source,picture_url,description,remarks,summary"},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"fields":{"type":"text","label":"Fields","tooltip":"Set Fields (can be mapped from previous steps).","index":2}}},"GetCurrentUser":{"operation":"GetCurrentUser","label":"Get Current User","description":"Get the currently authenticated Clientify user.","method":"GET","pathTemplate":"/me/","pathParamNames":[],"fixedQuery":{"fields":"id,email"},"fieldNames":[],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{}},"GetTask":{"operation":"GetTask","label":"Get Task","description":"Get a task by id.","method":"GET","pathTemplate":"/tasks/${taskId}/","pathParamNames":["taskId"],"fixedQuery":{},"fieldNames":["taskId","fields"],"requiredFieldNames":["taskId"],"fieldDefaults":{"fields":"url,id,owner,owner_name,owner_id,assigned_to,assigned_to_name,assigned_to_id,assigned_to_picture,name,description,remarks,due_date,start_datetime,end_datetime,duration,type,status,status_desc,deals,task_type,type_desc,task_stage,priority,related_companies,related_companies_names,related_companies_data,related_contacts,related_contacts_names,related_contacts_data,related_deals_data,tags,notes,phone_number,colors,additional_option,location,guest_users,created,modified,completed_date,activity_type,parent_task,parent_task_id,recurring_days_of_week,recurring_days_of_month,recurring_days_of_year,recurring_type,recurring_end_date,recurring_interval,meeting_goal,url_meeting,number_of_repetitions,outcome,is_holiday"},"inspectorInputs":{"taskId":{"type":"number","label":"Task ID","tooltip":"Set Task ID (can be mapped from previous steps).","index":1},"fields":{"type":"text","label":"Fields","tooltip":"Set Fields (can be mapped from previous steps).","index":2}}},"ListAllCompanyTags":{"operation":"ListAllCompanyTags","label":"List All Company Tags","description":"List all available company tags (picklist helper; can be slow).","method":"GET","pathTemplate":"/companies/tags/","pathParamNames":[],"fixedQuery":{},"fieldNames":[],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{}},"ListAllContactTags":{"operation":"ListAllContactTags","label":"List All Contact Tags","description":"List all available contact tags (picklist helper; can be slow).","method":"GET","pathTemplate":"/contacts/tags/","pathParamNames":[],"fixedQuery":{},"fieldNames":[],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{}},"ListCompanies":{"operation":"ListCompanies","label":"List Companies","description":"List companies from Clientify.","method":"GET","pathTemplate":"/companies/","pathParamNames":[],"fixedQuery":{},"fieldNames":["page","page_size","search","ordering","fields"],"requiredFieldNames":[],"fieldDefaults":{"fields":"id,name,sector,company_sector,business_name,taxpayer_identification_number,fax,number_of_employees,number_of_employees_desc,owner,owner_name,rank,rank_manual,picture_url,facebook_url,linkedin_url,twitter_url,private,last_viewed,last_interaction,facebook_id,twitter_id,linkedin_id,founded,online_since,full_contact_extra,approx_employees,description,remarks,summary,linkedin_picture_url,created,modified,youtube_url,instagram_url,owner_picture,industry"},"inspectorInputs":{"page":{"type":"number","label":"Page","tooltip":"Set Page (can be mapped from previous steps).","index":1},"page_size":{"type":"number","label":"Page Size","tooltip":"Set Page Size (can be mapped from previous steps).","index":2},"search":{"type":"text","label":"Search","tooltip":"Set Search (can be mapped from previous steps).","index":3},"ordering":{"type":"text","label":"Ordering","tooltip":"Set Ordering (can be mapped from previous steps).","index":4},"fields":{"type":"text","label":"Fields","tooltip":"Set Fields (can be mapped from previous steps).","index":5}}},"ListCompanyAddresses":{"operation":"ListCompanyAddresses","label":"List Company Addresses","description":"List addresses for a company.","method":"GET","pathTemplate":"/companies/${companyId}/addresses/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListCompanyCustomfields":{"operation":"ListCompanyCustomfields","label":"List Company Custom Fields","description":"List custom field values for a company.","method":"GET","pathTemplate":"/companies/${companyId}/customfields/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListCompanyEmails":{"operation":"ListCompanyEmails","label":"List Company Emails","description":"List emails for a company.","method":"GET","pathTemplate":"/companies/${companyId}/emails/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListCompanyEmployees":{"operation":"ListCompanyEmployees","label":"List Company Employees","description":"List employees (contacts) for a company.","method":"GET","pathTemplate":"/companies/${companyId}/employees/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListCompanyPhones":{"operation":"ListCompanyPhones","label":"List Company Phones","description":"List phones for a company.","method":"GET","pathTemplate":"/companies/${companyId}/phones/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListCompanySectors":{"operation":"ListCompanySectors","label":"List Company Sectors","description":"List company sectors (picklist helper).","method":"GET","pathTemplate":"/companies/sectors/","pathParamNames":[],"fixedQuery":{},"fieldNames":[],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{}},"ListCompanyTags":{"operation":"ListCompanyTags","label":"List Company Tags","description":"List tags for a company.","method":"GET","pathTemplate":"/companies/${companyId}/tags/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListCompanyTasks":{"operation":"ListCompanyTasks","label":"List Company Tasks","description":"List tasks for a company.","method":"GET","pathTemplate":"/companies/${companyId}/tasks/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListCompanyWallentries":{"operation":"ListCompanyWallentries","label":"List Company Wall Entries","description":"Get the company wall entries (timeline context).","method":"GET","pathTemplate":"/companies/${companyId}/wallentries/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListCompanyWebsites":{"operation":"ListCompanyWebsites","label":"List Company Websites","description":"List websites for a company.","method":"GET","pathTemplate":"/companies/${companyId}/websites/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"ListContactAddresses":{"operation":"ListContactAddresses","label":"List Contact Addresses","description":"List addresses for a contact.","method":"GET","pathTemplate":"/contacts/${contactId}/addresses/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"ListContactCustomfields":{"operation":"ListContactCustomfields","label":"List Contact Custom Fields","description":"List custom field values for a contact.","method":"GET","pathTemplate":"/contacts/${contactId}/customfields/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"ListContactEmails":{"operation":"ListContactEmails","label":"List Contact Emails","description":"List emails for a contact.","method":"GET","pathTemplate":"/contacts/${contactId}/emails/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"ListContactOtherCompanies":{"operation":"ListContactOtherCompanies","label":"List Contact Other Companies","description":"List additional company relationships for a contact.","method":"GET","pathTemplate":"/contacts/${contactId}/other_companies/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"ListContactPhones":{"operation":"ListContactPhones","label":"List Contact Phones","description":"List phones for a contact.","method":"GET","pathTemplate":"/contacts/${contactId}/phones/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"ListContactTags":{"operation":"ListContactTags","label":"List Contact Tags","description":"List tags for a contact.","method":"GET","pathTemplate":"/contacts/${contactId}/tags/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"ListContactTasks":{"operation":"ListContactTasks","label":"List Contact Tasks","description":"List tasks for a contact.","method":"GET","pathTemplate":"/contacts/${contactId}/tasks/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"ListContactWallentries":{"operation":"ListContactWallentries","label":"List Contact Wall Entries","description":"Get the contact wall entries (timeline context).","method":"GET","pathTemplate":"/contacts/${contactId}/wallentries","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"ListContacts":{"operation":"ListContacts","label":"List Contacts","description":"List contacts from Clientify.","method":"GET","pathTemplate":"/contacts/","pathParamNames":[],"fixedQuery":{},"fieldNames":["page","page_size","search","ordering","fields"],"requiredFieldNames":[],"fieldDefaults":{"fields":"id,owner_id,first_name,last_name,status,title,company_id,contact_type,contact_source,picture_url,description,remarks,summary,created"},"inspectorInputs":{"page":{"type":"number","label":"Page","tooltip":"Set Page (can be mapped from previous steps).","index":1},"page_size":{"type":"number","label":"Page Size","tooltip":"Set Page Size (can be mapped from previous steps).","index":2},"search":{"type":"text","label":"Search","tooltip":"Set Search (can be mapped from previous steps).","index":3},"ordering":{"type":"text","label":"Ordering","tooltip":"Set Ordering (can be mapped from previous steps).","index":4},"fields":{"type":"text","label":"Fields","tooltip":"Set Fields (can be mapped from previous steps).","index":5}}},"ListCustomFieldValues":{"operation":"ListCustomFieldValues","label":"List Custom Field Values","description":"List possible values for custom fields (use object_type to filter).","method":"GET","pathTemplate":"/custom-fields-values/","pathParamNames":[],"fixedQuery":{},"fieldNames":["object_type"],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{"object_type":{"type":"text","label":"Object Type","tooltip":"Set Object Type (can be mapped from previous steps).","index":1}}},"ListCustomFields":{"operation":"ListCustomFields","label":"List Custom Fields","description":"List custom fields (use object_type to filter).","method":"GET","pathTemplate":"/custom-fields/","pathParamNames":[],"fixedQuery":{},"fieldNames":["object_type"],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{"object_type":{"type":"text","label":"Object Type","tooltip":"Set Object Type (can be mapped from previous steps).","index":1}}},"ListTaskStages":{"operation":"ListTaskStages","label":"List Task Stages","description":"List task stages (picklist helper).","method":"GET","pathTemplate":"/tasks/stages/","pathParamNames":[],"fixedQuery":{},"fieldNames":["page","page_size"],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{"page":{"type":"number","label":"Page","tooltip":"Set Page (can be mapped from previous steps).","index":1},"page_size":{"type":"number","label":"Page Size","tooltip":"Set Page Size (can be mapped from previous steps).","index":2}}},"ListTaskTypes":{"operation":"ListTaskTypes","label":"List Task Types","description":"List task/activity types (picklist helper).","method":"GET","pathTemplate":"/tasks/types/","pathParamNames":[],"fixedQuery":{},"fieldNames":["page","page_size"],"requiredFieldNames":[],"fieldDefaults":{},"inspectorInputs":{"page":{"type":"number","label":"Page","tooltip":"Set Page (can be mapped from previous steps).","index":1},"page_size":{"type":"number","label":"Page Size","tooltip":"Set Page Size (can be mapped from previous steps).","index":2}}},"ListTasks":{"operation":"ListTasks","label":"List Tasks","description":"List tasks from Clientify.","method":"GET","pathTemplate":"/tasks/","pathParamNames":[],"fixedQuery":{},"fieldNames":["page","page_size","ordering","fields"],"requiredFieldNames":[],"fieldDefaults":{"fields":"url,id,owner,owner_name,owner_id,assigned_to,assigned_to_name,assigned_to_id,name,description,remarks,due_date,start_datetime,end_datetime,duration,type,status,status_desc,task_type,type_desc,task_stage,related_companies,additional_option,location,guest_users,created,modified,related_contacts,priority,recurring_type,recurring_end_date,recurring_interval,tags,activity_type,url_meeting,assigned_to_picture,parent_task_id,colors,recurring_days_of_week,recurring_days_of_month,recurring_days_of_year,number_of_repetitions,outcome,meeting_goal,is_holiday"},"inspectorInputs":{"page":{"type":"number","label":"Page","tooltip":"Set Page (can be mapped from previous steps).","index":1},"page_size":{"type":"number","label":"Page Size","tooltip":"Set Page Size (can be mapped from previous steps).","index":2},"ordering":{"type":"text","label":"Ordering","tooltip":"Set Ordering (can be mapped from previous steps).","index":3},"fields":{"type":"text","label":"Fields","tooltip":"Set Fields (can be mapped from previous steps).","index":4}}},"ListUsers":{"operation":"ListUsers","label":"List Users","description":"List users from Clientify (for assignment/routing).","method":"GET","pathTemplate":"/users/","pathParamNames":[],"fixedQuery":{},"fieldNames":["page","page_size","fields"],"requiredFieldNames":[],"fieldDefaults":{"fields":"id,username,full_name"},"inspectorInputs":{"page":{"type":"number","label":"Page","tooltip":"Set Page (can be mapped from previous steps).","index":1},"page_size":{"type":"number","label":"Page Size","tooltip":"Set Page Size (can be mapped from previous steps).","index":2},"fields":{"type":"text","label":"Fields","tooltip":"Set Fields (can be mapped from previous steps).","index":3}}},"RemoveCompanyEmployee":{"operation":"RemoveCompanyEmployee","label":"Remove Company Employee","description":"Unlink a contact from a company employees list.","method":"DELETE","pathTemplate":"/companies/${companyId}/employees/${contactId}/","pathParamNames":["companyId","contactId"],"fixedQuery":{},"fieldNames":["companyId","contactId"],"requiredFieldNames":["companyId","contactId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":2}}},"RemoveCompanyTag":{"operation":"RemoveCompanyTag","label":"Remove Company Tag","description":"Remove a tag from a company.","method":"DELETE","pathTemplate":"/companies/${companyId}/tags/${tagId}/","pathParamNames":["companyId","tagId"],"fixedQuery":{},"fieldNames":["companyId","tagId"],"requiredFieldNames":["companyId","tagId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"tagId":{"type":"number","label":"Tag ID","tooltip":"Set Tag ID (can be mapped from previous steps).","index":2}}},"RemoveContactTag":{"operation":"RemoveContactTag","label":"Remove Contact Tag","description":"Remove a tag from a contact.","method":"DELETE","pathTemplate":"/contacts/${contactId}/tags/${tagId}/","pathParamNames":["contactId","tagId"],"fixedQuery":{},"fieldNames":["contactId","tagId"],"requiredFieldNames":["contactId","tagId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"tagId":{"type":"number","label":"Tag ID","tooltip":"Set Tag ID (can be mapped from previous steps).","index":2}}},"SearchCompanies":{"operation":"SearchCompanies","label":"Search Companies","description":"Search companies (wrapper over list with query params).","method":"GET","pathTemplate":"/companies/","pathParamNames":[],"fixedQuery":{},"fieldNames":["query","page","page_size","fields"],"requiredFieldNames":["query"],"fieldDefaults":{"fields":"id,name,sector,company_sector,business_name,taxpayer_identification_number,fax,number_of_employees,number_of_employees_desc,owner,owner_name,rank,rank_manual,picture_url,facebook_url,linkedin_url,twitter_url,private,last_viewed,last_interaction,facebook_id,twitter_id,linkedin_id,founded,online_since,full_contact_extra,approx_employees,description,remarks,summary,linkedin_picture_url,created,modified,youtube_url,instagram_url,owner_picture,industry"},"inspectorInputs":{"query":{"type":"text","label":"Query","tooltip":"Set Query (can be mapped from previous steps).","index":1},"page":{"type":"number","label":"Page","tooltip":"Set Page (can be mapped from previous steps).","index":2},"page_size":{"type":"number","label":"Page Size","tooltip":"Set Page Size (can be mapped from previous steps).","index":3},"fields":{"type":"text","label":"Fields","tooltip":"Set Fields (can be mapped from previous steps).","index":4}}},"UpdateCompany":{"operation":"UpdateCompany","label":"Update Company","description":"Update an existing company.","method":"PUT","pathTemplate":"/companies/${companyId}/","pathParamNames":["companyId"],"fixedQuery":{},"fieldNames":["companyId"],"requiredFieldNames":["companyId"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1}}},"UpdateCompanyAddress":{"operation":"UpdateCompanyAddress","label":"Update Company Address","description":"Update a company address entry.","method":"PUT","pathTemplate":"/companies/${companyId}/addresses/${addressId}/","pathParamNames":["companyId","addressId"],"fixedQuery":{},"fieldNames":["companyId","addressId","type","street","city","state","country","postal_code"],"requiredFieldNames":["companyId","addressId","type","street","city","state","country","postal_code"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"addressId":{"type":"number","label":"Address ID","tooltip":"Set Address ID (can be mapped from previous steps).","index":2},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":3},"street":{"type":"text","label":"Street","tooltip":"Set Street (can be mapped from previous steps).","index":4},"city":{"type":"text","label":"City","tooltip":"Set City (can be mapped from previous steps).","index":5},"state":{"type":"text","label":"State","tooltip":"Set State (can be mapped from previous steps).","index":6},"country":{"type":"text","label":"Country","tooltip":"Set Country (can be mapped from previous steps).","index":7},"postal_code":{"type":"text","label":"Postal Code","tooltip":"Set Postal Code (can be mapped from previous steps).","index":8}}},"UpdateCompanyEmail":{"operation":"UpdateCompanyEmail","label":"Update Company Email","description":"Update a company email entry.","method":"PUT","pathTemplate":"/companies/${companyId}/emails/${emailId}/","pathParamNames":["companyId","emailId"],"fixedQuery":{},"fieldNames":["companyId","emailId","email","type"],"requiredFieldNames":["companyId","emailId","email","type"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"emailId":{"type":"number","label":"Email ID","tooltip":"Set Email ID (can be mapped from previous steps).","index":2},"email":{"type":"text","label":"Email","tooltip":"Set Email (can be mapped from previous steps).","index":3},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":4}}},"UpdateCompanyPhone":{"operation":"UpdateCompanyPhone","label":"Update Company Phone","description":"Update a company phone entry.","method":"PUT","pathTemplate":"/companies/${companyId}/phones/${phoneId}/","pathParamNames":["companyId","phoneId"],"fixedQuery":{},"fieldNames":["companyId","phoneId","phone","type"],"requiredFieldNames":["companyId","phoneId","phone","type"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"phoneId":{"type":"number","label":"Phone ID","tooltip":"Set Phone ID (can be mapped from previous steps).","index":2},"phone":{"type":"text","label":"Phone","tooltip":"Set Phone (can be mapped from previous steps).","index":3},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":4}}},"UpdateCompanyWebsite":{"operation":"UpdateCompanyWebsite","label":"Update Company Website","description":"Update a company website entry.","method":"PUT","pathTemplate":"/companies/${companyId}/websites/${websiteId}/","pathParamNames":["companyId","websiteId"],"fixedQuery":{},"fieldNames":["companyId","websiteId","website"],"requiredFieldNames":["companyId","websiteId","website"],"fieldDefaults":{},"inspectorInputs":{"companyId":{"type":"number","label":"Company ID","tooltip":"Set Company ID (can be mapped from previous steps).","index":1},"websiteId":{"type":"number","label":"Website ID","tooltip":"Set Website ID (can be mapped from previous steps).","index":2},"website":{"type":"text","label":"Website","tooltip":"Set Website (can be mapped from previous steps).","index":3}}},"UpdateContact":{"operation":"UpdateContact","label":"Update Contact","description":"Update an existing contact.","method":"PUT","pathTemplate":"/contacts/${contactId}/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId"],"requiredFieldNames":["contactId"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1}}},"UpdateContactAddress":{"operation":"UpdateContactAddress","label":"Update Contact Address","description":"Update a contact address entry.","method":"PUT","pathTemplate":"/contacts/${contactId}/addresses/${addressId}/","pathParamNames":["contactId","addressId"],"fixedQuery":{},"fieldNames":["contactId","addressId","type","street","city","state","country","postal_code"],"requiredFieldNames":["contactId","addressId","type","street","city","state","country","postal_code"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"addressId":{"type":"number","label":"Address ID","tooltip":"Set Address ID (can be mapped from previous steps).","index":2},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":3},"street":{"type":"text","label":"Street","tooltip":"Set Street (can be mapped from previous steps).","index":4},"city":{"type":"text","label":"City","tooltip":"Set City (can be mapped from previous steps).","index":5},"state":{"type":"text","label":"State","tooltip":"Set State (can be mapped from previous steps).","index":6},"country":{"type":"text","label":"Country","tooltip":"Set Country (can be mapped from previous steps).","index":7},"postal_code":{"type":"text","label":"Postal Code","tooltip":"Set Postal Code (can be mapped from previous steps).","index":8}}},"UpdateContactEmail":{"operation":"UpdateContactEmail","label":"Update Contact Email","description":"Update a contact email entry.","method":"PUT","pathTemplate":"/contacts/${contactId}/emails/${emailId}/","pathParamNames":["contactId","emailId"],"fixedQuery":{},"fieldNames":["contactId","emailId","email","type"],"requiredFieldNames":["contactId","emailId","email","type"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"emailId":{"type":"number","label":"Email ID","tooltip":"Set Email ID (can be mapped from previous steps).","index":2},"email":{"type":"text","label":"Email","tooltip":"Set Email (can be mapped from previous steps).","index":3},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":4}}},"UpdateContactMarketingStatus":{"operation":"UpdateContactMarketingStatus","label":"Update Contact Marketing Status","description":"Update a contact marketing status.","method":"PUT","pathTemplate":"/contacts/${contactId}/marketing_status/","pathParamNames":["contactId"],"fixedQuery":{},"fieldNames":["contactId","marketing_status"],"requiredFieldNames":["contactId","marketing_status"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"marketing_status":{"type":"toggle","label":"Marketing Status","tooltip":"Set Marketing Status (can be mapped from previous steps).","index":2}}},"UpdateContactOtherCompany":{"operation":"UpdateContactOtherCompany","label":"Update Contact Other Company","description":"Update a contact other-company relationship.","method":"PUT","pathTemplate":"/contacts/${contactId}/other_companies/${otherCompanyId}/","pathParamNames":["contactId","otherCompanyId"],"fixedQuery":{},"fieldNames":["contactId","otherCompanyId","title"],"requiredFieldNames":["contactId","otherCompanyId","title"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"otherCompanyId":{"type":"number","label":"Other Company ID","tooltip":"Set Other Company ID (can be mapped from previous steps).","index":2},"title":{"type":"text","label":"Title","tooltip":"Set Title (can be mapped from previous steps).","index":3}}},"UpdateContactPhone":{"operation":"UpdateContactPhone","label":"Update Contact Phone","description":"Update a contact phone entry.","method":"PUT","pathTemplate":"/contacts/${contactId}/phones/${phoneId}/","pathParamNames":["contactId","phoneId"],"fixedQuery":{},"fieldNames":["contactId","phoneId","phone","type"],"requiredFieldNames":["contactId","phoneId","phone","type"],"fieldDefaults":{},"inspectorInputs":{"contactId":{"type":"number","label":"Contact ID","tooltip":"Set Contact ID (can be mapped from previous steps).","index":1},"phoneId":{"type":"number","label":"Phone ID","tooltip":"Set Phone ID (can be mapped from previous steps).","index":2},"phone":{"type":"text","label":"Phone","tooltip":"Set Phone (can be mapped from previous steps).","index":3},"type":{"type":"number","label":"Type","tooltip":"Set Type (can be mapped from previous steps).","index":4}}},"UpdateTask":{"operation":"UpdateTask","label":"Update Task","description":"Update an existing task.","method":"PUT","pathTemplate":"/tasks/${taskId}/","pathParamNames":["taskId"],"fixedQuery":{},"fieldNames":["taskId"],"requiredFieldNames":["taskId"],"fieldDefaults":{},"inspectorInputs":{"taskId":{"type":"number","label":"Task ID","tooltip":"Set Task ID (can be mapped from previous steps).","index":1}}}} as any;
+export const operationDefinitions: Record<string, ClientifyOperationDefinition> = {
+  "AddCompanyAddress": {
+    "description": "Add an address to a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "type",
+      "street",
+      "city",
+      "state",
+      "country",
+      "postal_code"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "city": {
+        "index": 4,
+        "label": "City",
+        "tooltip": "Set City (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "country": {
+        "index": 6,
+        "label": "Country",
+        "tooltip": "Set Country (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "postal_code": {
+        "index": 7,
+        "label": "Postal Code",
+        "tooltip": "Set Postal Code (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "state": {
+        "index": 5,
+        "label": "State",
+        "tooltip": "Set State (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "street": {
+        "index": 3,
+        "label": "Street",
+        "tooltip": "Set Street (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 2,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Add Company Address",
+    "method": "POST",
+    "operation": "AddCompanyAddress",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/addresses/",
+    "requiredFieldNames": [
+      "companyId",
+      "type",
+      "street",
+      "city",
+      "state",
+      "country",
+      "postal_code"
+    ]
+  },
+  "AddCompanyCall": {
+    "description": "Log a call on a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "type",
+      "comment",
+      "outcome",
+      "call_date",
+      "call_time"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "call_date": {
+        "index": 5,
+        "label": "Call Date",
+        "tooltip": "Set Call Date (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "call_time": {
+        "index": 6,
+        "label": "Call Time",
+        "tooltip": "Set Call Time (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "comment": {
+        "index": 3,
+        "label": "Comment",
+        "tooltip": "Set Comment (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "outcome": {
+        "index": 4,
+        "label": "Outcome",
+        "tooltip": "Set Outcome (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 2,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Company Call",
+    "method": "POST",
+    "operation": "AddCompanyCall",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/call/",
+    "requiredFieldNames": [
+      "companyId",
+      "type",
+      "comment",
+      "outcome",
+      "call_date",
+      "call_time"
+    ]
+  },
+  "AddCompanyCheckin": {
+    "description": "Log a meeting/check-in on a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "type",
+      "comment",
+      "outcome",
+      "date"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "comment": {
+        "index": 3,
+        "label": "Comment",
+        "tooltip": "Set Comment (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "date": {
+        "index": 5,
+        "label": "Date",
+        "tooltip": "Set Date (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "outcome": {
+        "index": 4,
+        "label": "Outcome",
+        "tooltip": "Set Outcome (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 2,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Company Check-in",
+    "method": "POST",
+    "operation": "AddCompanyCheckin",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/checkin/",
+    "requiredFieldNames": [
+      "companyId",
+      "type",
+      "comment",
+      "outcome",
+      "date"
+    ]
+  },
+  "AddCompanyEmail": {
+    "description": "Add an email to a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "email",
+      "type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "email": {
+        "index": 2,
+        "label": "Email",
+        "tooltip": "Set Email (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 3,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Add Company Email",
+    "method": "POST",
+    "operation": "AddCompanyEmail",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/emails/",
+    "requiredFieldNames": [
+      "companyId",
+      "email",
+      "type"
+    ]
+  },
+  "AddCompanyEmployee": {
+    "description": "Link a contact as an employee of a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "contactId": {
+        "index": 2,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Add Company Employee",
+    "method": "PUT",
+    "operation": "AddCompanyEmployee",
+    "pathParamNames": [
+      "companyId",
+      "contactId"
+    ],
+    "pathTemplate": "/companies/${companyId}/employees/${contactId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "contactId"
+    ]
+  },
+  "AddCompanyNote": {
+    "description": "Add a note to a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "name",
+      "comment"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "comment": {
+        "index": 3,
+        "label": "Comment",
+        "tooltip": "Set Comment (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "name": {
+        "index": 2,
+        "label": "Name",
+        "tooltip": "Set Name (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Company Note",
+    "method": "POST",
+    "operation": "AddCompanyNote",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/note/",
+    "requiredFieldNames": [
+      "companyId",
+      "name",
+      "comment"
+    ]
+  },
+  "AddCompanyPhone": {
+    "description": "Add a phone to a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "phone",
+      "type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "phone": {
+        "index": 2,
+        "label": "Phone",
+        "tooltip": "Set Phone (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 3,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Add Company Phone",
+    "method": "POST",
+    "operation": "AddCompanyPhone",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/phones/",
+    "requiredFieldNames": [
+      "companyId",
+      "phone",
+      "type"
+    ]
+  },
+  "AddCompanyTag": {
+    "description": "Add a tag to a company (creates the tag if needed).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "name"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "name": {
+        "index": 2,
+        "label": "Name",
+        "tooltip": "Set Name (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Company Tag",
+    "method": "POST",
+    "operation": "AddCompanyTag",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/tags/",
+    "requiredFieldNames": [
+      "companyId",
+      "name"
+    ]
+  },
+  "AddCompanyWebsite": {
+    "description": "Add a website to a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "website"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "website": {
+        "index": 2,
+        "label": "Website",
+        "tooltip": "Set Website (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Company Website",
+    "method": "POST",
+    "operation": "AddCompanyWebsite",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/websites/",
+    "requiredFieldNames": [
+      "companyId",
+      "website"
+    ]
+  },
+  "AddContactAddress": {
+    "description": "Add an address to a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "type",
+      "street",
+      "city",
+      "state",
+      "country",
+      "postal_code"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "city": {
+        "index": 4,
+        "label": "City",
+        "tooltip": "Set City (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "country": {
+        "index": 6,
+        "label": "Country",
+        "tooltip": "Set Country (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "postal_code": {
+        "index": 7,
+        "label": "Postal Code",
+        "tooltip": "Set Postal Code (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "state": {
+        "index": 5,
+        "label": "State",
+        "tooltip": "Set State (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "street": {
+        "index": 3,
+        "label": "Street",
+        "tooltip": "Set Street (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 2,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Add Contact Address",
+    "method": "POST",
+    "operation": "AddContactAddress",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/addresses/",
+    "requiredFieldNames": [
+      "contactId",
+      "type",
+      "street",
+      "city",
+      "state",
+      "country",
+      "postal_code"
+    ]
+  },
+  "AddContactCall": {
+    "description": "Log a call on a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Add Contact Call",
+    "method": "POST",
+    "operation": "AddContactCall",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/call/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "AddContactCheckin": {
+    "description": "Log a meeting/check-in on a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "type",
+      "comment",
+      "outcome",
+      "date",
+      "owner"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "comment": {
+        "index": 3,
+        "label": "Comment",
+        "tooltip": "Set Comment (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "date": {
+        "index": 5,
+        "label": "Date",
+        "tooltip": "Set Date (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "outcome": {
+        "index": 4,
+        "label": "Outcome",
+        "tooltip": "Set Outcome (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "owner": {
+        "index": 6,
+        "label": "Owner",
+        "tooltip": "Set Owner (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "type": {
+        "index": 2,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Contact Check-in",
+    "method": "POST",
+    "operation": "AddContactCheckin",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/checkin/",
+    "requiredFieldNames": [
+      "contactId",
+      "type",
+      "comment",
+      "outcome",
+      "date",
+      "owner"
+    ]
+  },
+  "AddContactEmail": {
+    "description": "Add an email to a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "email",
+      "type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "email": {
+        "index": 2,
+        "label": "Email",
+        "tooltip": "Set Email (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 3,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Add Contact Email",
+    "method": "POST",
+    "operation": "AddContactEmail",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/emails/",
+    "requiredFieldNames": [
+      "contactId",
+      "email",
+      "type"
+    ]
+  },
+  "AddContactNote": {
+    "description": "Add a note to a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "name",
+      "comment"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "comment": {
+        "index": 3,
+        "label": "Comment",
+        "tooltip": "Set Comment (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "name": {
+        "index": 2,
+        "label": "Name",
+        "tooltip": "Set Name (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Contact Note",
+    "method": "POST",
+    "operation": "AddContactNote",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/note/",
+    "requiredFieldNames": [
+      "contactId",
+      "name",
+      "comment"
+    ]
+  },
+  "AddContactOtherCompany": {
+    "description": "Create an additional company relationship for a contact (by title).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "title"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "title": {
+        "index": 2,
+        "label": "Title",
+        "tooltip": "Set Title (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Contact Other Company",
+    "method": "POST",
+    "operation": "AddContactOtherCompany",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/other_companies/",
+    "requiredFieldNames": [
+      "contactId",
+      "title"
+    ]
+  },
+  "AddContactPhone": {
+    "description": "Add a phone to a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "phone",
+      "type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "phone": {
+        "index": 2,
+        "label": "Phone",
+        "tooltip": "Set Phone (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 3,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Add Contact Phone",
+    "method": "POST",
+    "operation": "AddContactPhone",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/phones/",
+    "requiredFieldNames": [
+      "contactId",
+      "phone",
+      "type"
+    ]
+  },
+  "AddContactTag": {
+    "description": "Add a tag to a contact (creates the tag if needed).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "name"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "name": {
+        "index": 2,
+        "label": "Name",
+        "tooltip": "Set Name (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Add Contact Tag",
+    "method": "POST",
+    "operation": "AddContactTag",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/tags/",
+    "requiredFieldNames": [
+      "contactId",
+      "name"
+    ]
+  },
+  "AssignContactOwner": {
+    "description": "Assign an owner/user to a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "ownerId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "ownerId": {
+        "index": 2,
+        "label": "Owner ID",
+        "tooltip": "Set Owner ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Assign Contact Owner",
+    "method": "PUT",
+    "operation": "AssignContactOwner",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/owner/",
+    "requiredFieldNames": [
+      "contactId",
+      "ownerId"
+    ]
+  },
+  "BatchCreateContacts": {
+    "description": "Create multiple contacts in a single request.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contacts"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contacts": {
+        "index": 1,
+        "label": "Contacts",
+        "tooltip": "Set Contacts (can be mapped from previous steps).",
+        "type": "expression"
+      }
+    },
+    "label": "Batch Create Contacts",
+    "method": "POST",
+    "operation": "BatchCreateContacts",
+    "pathParamNames": [],
+    "pathTemplate": "/multiple-contacts/",
+    "requiredFieldNames": [
+      "contacts"
+    ]
+  },
+  "CompleteTask": {
+    "description": "Mark a task as completed.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "taskId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "taskId": {
+        "index": 1,
+        "label": "Task ID",
+        "tooltip": "Set Task ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Complete Task",
+    "method": "POST",
+    "operation": "CompleteTask",
+    "pathParamNames": [
+      "taskId"
+    ],
+    "pathTemplate": "/tasks/${taskId}/complete/",
+    "requiredFieldNames": [
+      "taskId"
+    ]
+  },
+  "CreateCompany": {
+    "description": "Create a new company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "name"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "name": {
+        "index": 1,
+        "label": "Name",
+        "tooltip": "Set Name (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Create Company",
+    "method": "POST",
+    "operation": "CreateCompany",
+    "pathParamNames": [],
+    "pathTemplate": "/companies/",
+    "requiredFieldNames": [
+      "name"
+    ]
+  },
+  "CreateContact": {
+    "description": "Create a new contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "first_name",
+      "last_name",
+      "email",
+      "company"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "company": {
+        "index": 4,
+        "label": "Company",
+        "tooltip": "Set Company (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "email": {
+        "index": 3,
+        "label": "Email",
+        "tooltip": "Set Email (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "first_name": {
+        "index": 1,
+        "label": "First Name",
+        "tooltip": "Set First Name (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "last_name": {
+        "index": 2,
+        "label": "Last Name",
+        "tooltip": "Set Last Name (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Create Contact",
+    "method": "POST",
+    "operation": "CreateContact",
+    "pathParamNames": [],
+    "pathTemplate": "/contacts/",
+    "requiredFieldNames": []
+  },
+  "CreateTask": {
+    "description": "Create a new task/activity.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "owner",
+      "assigned_to",
+      "type",
+      "name",
+      "description",
+      "remarks",
+      "due_date",
+      "status",
+      "recurring_type",
+      "recurring_end_date",
+      "recurring_days_of_week",
+      "recurring_interval",
+      "priority"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "assigned_to": {
+        "index": 2,
+        "label": "Assigned To",
+        "tooltip": "Set Assigned To (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "description": {
+        "index": 5,
+        "label": "Description",
+        "tooltip": "Set Description (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "due_date": {
+        "index": 7,
+        "label": "Due Date",
+        "tooltip": "Set Due Date (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "name": {
+        "index": 4,
+        "label": "Name",
+        "tooltip": "Set Name (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "owner": {
+        "index": 1,
+        "label": "Owner",
+        "tooltip": "Set Owner (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "priority": {
+        "index": 13,
+        "label": "Priority",
+        "tooltip": "Set Priority (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "recurring_days_of_week": {
+        "index": 11,
+        "label": "Recurring Days Of Week",
+        "tooltip": "Set Recurring Days Of Week (can be mapped from previous steps).",
+        "type": "expression"
+      },
+      "recurring_end_date": {
+        "index": 10,
+        "label": "Recurring End Date",
+        "tooltip": "Set Recurring End Date (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "recurring_interval": {
+        "index": 12,
+        "label": "Recurring Interval",
+        "tooltip": "Set Recurring Interval (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "recurring_type": {
+        "index": 9,
+        "label": "Recurring Type",
+        "tooltip": "Set Recurring Type (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "remarks": {
+        "index": 6,
+        "label": "Remarks",
+        "tooltip": "Set Remarks (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "status": {
+        "index": 8,
+        "label": "Status",
+        "tooltip": "Set Status (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "type": {
+        "index": 3,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Create Task",
+    "method": "POST",
+    "operation": "CreateTask",
+    "pathParamNames": [],
+    "pathTemplate": "/tasks/",
+    "requiredFieldNames": [
+      "name",
+      "type"
+    ]
+  },
+  "DeleteCompany": {
+    "description": "Delete a company by id.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Company",
+    "method": "DELETE",
+    "operation": "DeleteCompany",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "DeleteCompanyAddress": {
+    "description": "Delete a company address entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "addressId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "addressId": {
+        "index": 2,
+        "label": "Address ID",
+        "tooltip": "Set Address ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Company Address",
+    "method": "DELETE",
+    "operation": "DeleteCompanyAddress",
+    "pathParamNames": [
+      "companyId",
+      "addressId"
+    ],
+    "pathTemplate": "/companies/${companyId}/addresses/${addressId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "addressId"
+    ]
+  },
+  "DeleteCompanyEmail": {
+    "description": "Delete a company email entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "emailId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "emailId": {
+        "index": 2,
+        "label": "Email ID",
+        "tooltip": "Set Email ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Company Email",
+    "method": "DELETE",
+    "operation": "DeleteCompanyEmail",
+    "pathParamNames": [
+      "companyId",
+      "emailId"
+    ],
+    "pathTemplate": "/companies/${companyId}/emails/${emailId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "emailId"
+    ]
+  },
+  "DeleteCompanyPhone": {
+    "description": "Delete a company phone entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "phoneId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "phoneId": {
+        "index": 2,
+        "label": "Phone ID",
+        "tooltip": "Set Phone ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Company Phone",
+    "method": "DELETE",
+    "operation": "DeleteCompanyPhone",
+    "pathParamNames": [
+      "companyId",
+      "phoneId"
+    ],
+    "pathTemplate": "/companies/${companyId}/phones/${phoneId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "phoneId"
+    ]
+  },
+  "DeleteCompanyWebsite": {
+    "description": "Delete a company website entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "websiteId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "websiteId": {
+        "index": 2,
+        "label": "Website ID",
+        "tooltip": "Set Website ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Company Website",
+    "method": "DELETE",
+    "operation": "DeleteCompanyWebsite",
+    "pathParamNames": [
+      "companyId",
+      "websiteId"
+    ],
+    "pathTemplate": "/companies/${companyId}/websites/${websiteId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "websiteId"
+    ]
+  },
+  "DeleteContact": {
+    "description": "Delete a contact by id.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Contact",
+    "method": "DELETE",
+    "operation": "DeleteContact",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "DeleteContactAddress": {
+    "description": "Delete a contact address entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "addressId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "addressId": {
+        "index": 2,
+        "label": "Address ID",
+        "tooltip": "Set Address ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Contact Address",
+    "method": "DELETE",
+    "operation": "DeleteContactAddress",
+    "pathParamNames": [
+      "contactId",
+      "addressId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/addresses/${addressId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "addressId"
+    ]
+  },
+  "DeleteContactEmail": {
+    "description": "Delete a contact email entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "emailId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "emailId": {
+        "index": 2,
+        "label": "Email ID",
+        "tooltip": "Set Email ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Contact Email",
+    "method": "DELETE",
+    "operation": "DeleteContactEmail",
+    "pathParamNames": [
+      "contactId",
+      "emailId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/emails/${emailId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "emailId"
+    ]
+  },
+  "DeleteContactOtherCompany": {
+    "description": "Delete a contact other-company relationship.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "otherCompanyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "otherCompanyId": {
+        "index": 2,
+        "label": "Other Company ID",
+        "tooltip": "Set Other Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Contact Other Company",
+    "method": "DELETE",
+    "operation": "DeleteContactOtherCompany",
+    "pathParamNames": [
+      "contactId",
+      "otherCompanyId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/other_companies/${otherCompanyId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "otherCompanyId"
+    ]
+  },
+  "DeleteContactPhone": {
+    "description": "Delete a contact phone entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "phoneId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "phoneId": {
+        "index": 2,
+        "label": "Phone ID",
+        "tooltip": "Set Phone ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Delete Contact Phone",
+    "method": "DELETE",
+    "operation": "DeleteContactPhone",
+    "pathParamNames": [
+      "contactId",
+      "phoneId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/phones/${phoneId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "phoneId"
+    ]
+  },
+  "GetCompany": {
+    "description": "Get a company by id.",
+    "fieldDefaults": {
+      "fields": "id,name,sector,company_sector,business_name,taxpayer_identification_number,fax,number_of_employees,number_of_employees_desc,owner,owner_name,rank,rank_manual,picture_url,facebook_url,linkedin_url,twitter_url,private,last_viewed,last_interaction,facebook_id,twitter_id,linkedin_id,founded,online_since,full_contact_extra,approx_employees,description,remarks,summary,linkedin_picture_url,created,modified,youtube_url,instagram_url,owner_picture,industry"
+    },
+    "fieldNames": [
+      "companyId",
+      "fields"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "fields": {
+        "index": 2,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Get Company",
+    "method": "GET",
+    "operation": "GetCompany",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "GetContact": {
+    "description": "Get a contact by id.",
+    "fieldDefaults": {
+      "fields": "id,owner_id,first_name,last_name,status,title,company_id,company_name,company_picture,contact_type,contact_source,picture_url,description,remarks,summary"
+    },
+    "fieldNames": [
+      "contactId",
+      "fields"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "fields": {
+        "index": 2,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Get Contact",
+    "method": "GET",
+    "operation": "GetContact",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "GetCurrentUser": {
+    "description": "Get the currently authenticated Clientify user.",
+    "fieldDefaults": {},
+    "fieldNames": [],
+    "fixedQuery": {
+      "fields": "id,email"
+    },
+    "inspectorInputs": {},
+    "label": "Get Current User",
+    "method": "GET",
+    "operation": "GetCurrentUser",
+    "pathParamNames": [],
+    "pathTemplate": "/me/",
+    "requiredFieldNames": []
+  },
+  "GetTask": {
+    "description": "Get a task by id.",
+    "fieldDefaults": {
+      "fields": "url,id,owner,owner_name,owner_id,assigned_to,assigned_to_name,assigned_to_id,assigned_to_picture,name,description,remarks,due_date,start_datetime,end_datetime,duration,type,status,status_desc,deals,task_type,type_desc,task_stage,priority,related_companies,related_companies_names,related_companies_data,related_contacts,related_contacts_names,related_contacts_data,related_deals_data,tags,notes,phone_number,colors,additional_option,location,guest_users,created,modified,completed_date,activity_type,parent_task,parent_task_id,recurring_days_of_week,recurring_days_of_month,recurring_days_of_year,recurring_type,recurring_end_date,recurring_interval,meeting_goal,url_meeting,number_of_repetitions,outcome,is_holiday"
+    },
+    "fieldNames": [
+      "taskId",
+      "fields"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "fields": {
+        "index": 2,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "taskId": {
+        "index": 1,
+        "label": "Task ID",
+        "tooltip": "Set Task ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Get Task",
+    "method": "GET",
+    "operation": "GetTask",
+    "pathParamNames": [
+      "taskId"
+    ],
+    "pathTemplate": "/tasks/${taskId}/",
+    "requiredFieldNames": [
+      "taskId"
+    ]
+  },
+  "ListAllCompanyTags": {
+    "description": "List all available company tags (picklist helper; can be slow).",
+    "fieldDefaults": {},
+    "fieldNames": [],
+    "fixedQuery": {},
+    "inspectorInputs": {},
+    "label": "List All Company Tags",
+    "method": "GET",
+    "operation": "ListAllCompanyTags",
+    "pathParamNames": [],
+    "pathTemplate": "/companies/tags/",
+    "requiredFieldNames": []
+  },
+  "ListAllContactTags": {
+    "description": "List all available contact tags (picklist helper; can be slow).",
+    "fieldDefaults": {},
+    "fieldNames": [],
+    "fixedQuery": {},
+    "inspectorInputs": {},
+    "label": "List All Contact Tags",
+    "method": "GET",
+    "operation": "ListAllContactTags",
+    "pathParamNames": [],
+    "pathTemplate": "/contacts/tags/",
+    "requiredFieldNames": []
+  },
+  "ListCompanies": {
+    "description": "List companies from Clientify.",
+    "fieldDefaults": {
+      "fields": "id,name,sector,company_sector,business_name,taxpayer_identification_number,fax,number_of_employees,number_of_employees_desc,owner,owner_name,rank,rank_manual,picture_url,facebook_url,linkedin_url,twitter_url,private,last_viewed,last_interaction,facebook_id,twitter_id,linkedin_id,founded,online_since,full_contact_extra,approx_employees,description,remarks,summary,linkedin_picture_url,created,modified,youtube_url,instagram_url,owner_picture,industry"
+    },
+    "fieldNames": [
+      "page",
+      "page_size",
+      "search",
+      "ordering",
+      "fields"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "fields": {
+        "index": 5,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "ordering": {
+        "index": 4,
+        "label": "Ordering",
+        "tooltip": "Set Ordering (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "page": {
+        "index": 1,
+        "label": "Page",
+        "tooltip": "Set Page (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "page_size": {
+        "index": 2,
+        "label": "Page Size",
+        "tooltip": "Set Page Size (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "search": {
+        "index": 3,
+        "label": "Search",
+        "tooltip": "Set Search (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "List Companies",
+    "method": "GET",
+    "operation": "ListCompanies",
+    "pathParamNames": [],
+    "pathTemplate": "/companies/",
+    "requiredFieldNames": []
+  },
+  "ListCompanyAddresses": {
+    "description": "List addresses for a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Addresses",
+    "method": "GET",
+    "operation": "ListCompanyAddresses",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/addresses/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListCompanyCustomfields": {
+    "description": "List custom field values for a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Custom Fields",
+    "method": "GET",
+    "operation": "ListCompanyCustomfields",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/customfields/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListCompanyEmails": {
+    "description": "List emails for a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Emails",
+    "method": "GET",
+    "operation": "ListCompanyEmails",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/emails/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListCompanyEmployees": {
+    "description": "List employees (contacts) for a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Employees",
+    "method": "GET",
+    "operation": "ListCompanyEmployees",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/employees/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListCompanyPhones": {
+    "description": "List phones for a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Phones",
+    "method": "GET",
+    "operation": "ListCompanyPhones",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/phones/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListCompanySectors": {
+    "description": "List company sectors (picklist helper).",
+    "fieldDefaults": {},
+    "fieldNames": [],
+    "fixedQuery": {},
+    "inspectorInputs": {},
+    "label": "List Company Sectors",
+    "method": "GET",
+    "operation": "ListCompanySectors",
+    "pathParamNames": [],
+    "pathTemplate": "/companies/sectors/",
+    "requiredFieldNames": []
+  },
+  "ListCompanyTags": {
+    "description": "List tags for a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Tags",
+    "method": "GET",
+    "operation": "ListCompanyTags",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/tags/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListCompanyTasks": {
+    "description": "List tasks for a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Tasks",
+    "method": "GET",
+    "operation": "ListCompanyTasks",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/tasks/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListCompanyWallentries": {
+    "description": "Get the company wall entries (timeline context).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Wall Entries",
+    "method": "GET",
+    "operation": "ListCompanyWallentries",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/wallentries/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListCompanyWebsites": {
+    "description": "List websites for a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Company Websites",
+    "method": "GET",
+    "operation": "ListCompanyWebsites",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/websites/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "ListContactAddresses": {
+    "description": "List addresses for a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Contact Addresses",
+    "method": "GET",
+    "operation": "ListContactAddresses",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/addresses/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "ListContactCustomfields": {
+    "description": "List custom field values for a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Contact Custom Fields",
+    "method": "GET",
+    "operation": "ListContactCustomfields",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/customfields/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "ListContactEmails": {
+    "description": "List emails for a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Contact Emails",
+    "method": "GET",
+    "operation": "ListContactEmails",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/emails/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "ListContactOtherCompanies": {
+    "description": "List additional company relationships for a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Contact Other Companies",
+    "method": "GET",
+    "operation": "ListContactOtherCompanies",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/other_companies/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "ListContactPhones": {
+    "description": "List phones for a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Contact Phones",
+    "method": "GET",
+    "operation": "ListContactPhones",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/phones/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "ListContactTags": {
+    "description": "List tags for a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Contact Tags",
+    "method": "GET",
+    "operation": "ListContactTags",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/tags/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "ListContactTasks": {
+    "description": "List tasks for a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Contact Tasks",
+    "method": "GET",
+    "operation": "ListContactTasks",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/tasks/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "ListContactWallentries": {
+    "description": "Get the contact wall entries (timeline context).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Contact Wall Entries",
+    "method": "GET",
+    "operation": "ListContactWallentries",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/wallentries",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "ListContacts": {
+    "description": "List contacts from Clientify.",
+    "fieldDefaults": {
+      "fields": "id,owner_id,first_name,last_name,status,title,company_id,contact_type,contact_source,picture_url,description,remarks,summary,created"
+    },
+    "fieldNames": [
+      "page",
+      "page_size",
+      "search",
+      "ordering",
+      "fields"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "fields": {
+        "index": 5,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "ordering": {
+        "index": 4,
+        "label": "Ordering",
+        "tooltip": "Set Ordering (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "page": {
+        "index": 1,
+        "label": "Page",
+        "tooltip": "Set Page (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "page_size": {
+        "index": 2,
+        "label": "Page Size",
+        "tooltip": "Set Page Size (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "search": {
+        "index": 3,
+        "label": "Search",
+        "tooltip": "Set Search (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "List Contacts",
+    "method": "GET",
+    "operation": "ListContacts",
+    "pathParamNames": [],
+    "pathTemplate": "/contacts/",
+    "requiredFieldNames": []
+  },
+  "ListCustomFieldValues": {
+    "description": "List possible values for custom fields (use object_type to filter).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "object_type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "object_type": {
+        "index": 1,
+        "label": "Object Type",
+        "tooltip": "Set Object Type (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "List Custom Field Values",
+    "method": "GET",
+    "operation": "ListCustomFieldValues",
+    "pathParamNames": [],
+    "pathTemplate": "/custom-fields-values/",
+    "requiredFieldNames": []
+  },
+  "ListCustomFields": {
+    "description": "List custom fields (use object_type to filter).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "object_type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "object_type": {
+        "index": 1,
+        "label": "Object Type",
+        "tooltip": "Set Object Type (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "List Custom Fields",
+    "method": "GET",
+    "operation": "ListCustomFields",
+    "pathParamNames": [],
+    "pathTemplate": "/custom-fields/",
+    "requiredFieldNames": []
+  },
+  "ListTaskStages": {
+    "description": "List task stages (picklist helper).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "page",
+      "page_size"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "page": {
+        "index": 1,
+        "label": "Page",
+        "tooltip": "Set Page (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "page_size": {
+        "index": 2,
+        "label": "Page Size",
+        "tooltip": "Set Page Size (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Task Stages",
+    "method": "GET",
+    "operation": "ListTaskStages",
+    "pathParamNames": [],
+    "pathTemplate": "/tasks/stages/",
+    "requiredFieldNames": []
+  },
+  "ListTaskTypes": {
+    "description": "List task/activity types (picklist helper).",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "page",
+      "page_size"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "page": {
+        "index": 1,
+        "label": "Page",
+        "tooltip": "Set Page (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "page_size": {
+        "index": 2,
+        "label": "Page Size",
+        "tooltip": "Set Page Size (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Task Types",
+    "method": "GET",
+    "operation": "ListTaskTypes",
+    "pathParamNames": [],
+    "pathTemplate": "/tasks/types/",
+    "requiredFieldNames": []
+  },
+  "ListTasks": {
+    "description": "List tasks from Clientify.",
+    "fieldDefaults": {
+      "fields": "url,id,owner,owner_name,owner_id,assigned_to,assigned_to_name,assigned_to_id,name,description,remarks,due_date,start_datetime,end_datetime,duration,type,status,status_desc,task_type,type_desc,task_stage,related_companies,additional_option,location,guest_users,created,modified,related_contacts,priority,recurring_type,recurring_end_date,recurring_interval,tags,activity_type,url_meeting,assigned_to_picture,parent_task_id,colors,recurring_days_of_week,recurring_days_of_month,recurring_days_of_year,number_of_repetitions,outcome,meeting_goal,is_holiday"
+    },
+    "fieldNames": [
+      "page",
+      "page_size",
+      "ordering",
+      "fields"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "fields": {
+        "index": 4,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "ordering": {
+        "index": 3,
+        "label": "Ordering",
+        "tooltip": "Set Ordering (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "page": {
+        "index": 1,
+        "label": "Page",
+        "tooltip": "Set Page (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "page_size": {
+        "index": 2,
+        "label": "Page Size",
+        "tooltip": "Set Page Size (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Tasks",
+    "method": "GET",
+    "operation": "ListTasks",
+    "pathParamNames": [],
+    "pathTemplate": "/tasks/",
+    "requiredFieldNames": []
+  },
+  "ListUsers": {
+    "description": "List users from Clientify (for assignment/routing).",
+    "fieldDefaults": {
+      "fields": "id,username,full_name"
+    },
+    "fieldNames": [
+      "page",
+      "page_size",
+      "fields"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "fields": {
+        "index": 3,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "page": {
+        "index": 1,
+        "label": "Page",
+        "tooltip": "Set Page (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "page_size": {
+        "index": 2,
+        "label": "Page Size",
+        "tooltip": "Set Page Size (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "List Users",
+    "method": "GET",
+    "operation": "ListUsers",
+    "pathParamNames": [],
+    "pathTemplate": "/users/",
+    "requiredFieldNames": []
+  },
+  "RemoveCompanyEmployee": {
+    "description": "Unlink a contact from a company employees list.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "contactId": {
+        "index": 2,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Remove Company Employee",
+    "method": "DELETE",
+    "operation": "RemoveCompanyEmployee",
+    "pathParamNames": [
+      "companyId",
+      "contactId"
+    ],
+    "pathTemplate": "/companies/${companyId}/employees/${contactId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "contactId"
+    ]
+  },
+  "RemoveCompanyTag": {
+    "description": "Remove a tag from a company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "tagId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "tagId": {
+        "index": 2,
+        "label": "Tag ID",
+        "tooltip": "Set Tag ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Remove Company Tag",
+    "method": "DELETE",
+    "operation": "RemoveCompanyTag",
+    "pathParamNames": [
+      "companyId",
+      "tagId"
+    ],
+    "pathTemplate": "/companies/${companyId}/tags/${tagId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "tagId"
+    ]
+  },
+  "RemoveContactTag": {
+    "description": "Remove a tag from a contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "tagId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "tagId": {
+        "index": 2,
+        "label": "Tag ID",
+        "tooltip": "Set Tag ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Remove Contact Tag",
+    "method": "DELETE",
+    "operation": "RemoveContactTag",
+    "pathParamNames": [
+      "contactId",
+      "tagId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/tags/${tagId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "tagId"
+    ]
+  },
+  "SearchCompanies": {
+    "description": "Search companies (wrapper over list with query params).",
+    "fieldDefaults": {
+      "fields": "id,name,sector,company_sector,business_name,taxpayer_identification_number,fax,number_of_employees,number_of_employees_desc,owner,owner_name,rank,rank_manual,picture_url,facebook_url,linkedin_url,twitter_url,private,last_viewed,last_interaction,facebook_id,twitter_id,linkedin_id,founded,online_since,full_contact_extra,approx_employees,description,remarks,summary,linkedin_picture_url,created,modified,youtube_url,instagram_url,owner_picture,industry"
+    },
+    "fieldNames": [
+      "query",
+      "page",
+      "page_size",
+      "fields"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "fields": {
+        "index": 4,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "page": {
+        "index": 2,
+        "label": "Page",
+        "tooltip": "Set Page (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "page_size": {
+        "index": 3,
+        "label": "Page Size",
+        "tooltip": "Set Page Size (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "query": {
+        "index": 1,
+        "label": "Query",
+        "tooltip": "Set Query (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Search Companies",
+    "method": "GET",
+    "operation": "SearchCompanies",
+    "pathParamNames": [],
+    "pathTemplate": "/companies/",
+    "requiredFieldNames": [
+      "query"
+    ]
+  },
+  "UpdateCompany": {
+    "description": "Update an existing company.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Company",
+    "method": "PUT",
+    "operation": "UpdateCompany",
+    "pathParamNames": [
+      "companyId"
+    ],
+    "pathTemplate": "/companies/${companyId}/",
+    "requiredFieldNames": [
+      "companyId"
+    ]
+  },
+  "UpdateCompanyAddress": {
+    "description": "Update a company address entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "addressId",
+      "type",
+      "street",
+      "city",
+      "state",
+      "country",
+      "postal_code"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "addressId": {
+        "index": 2,
+        "label": "Address ID",
+        "tooltip": "Set Address ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "city": {
+        "index": 5,
+        "label": "City",
+        "tooltip": "Set City (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "country": {
+        "index": 7,
+        "label": "Country",
+        "tooltip": "Set Country (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "postal_code": {
+        "index": 8,
+        "label": "Postal Code",
+        "tooltip": "Set Postal Code (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "state": {
+        "index": 6,
+        "label": "State",
+        "tooltip": "Set State (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "street": {
+        "index": 4,
+        "label": "Street",
+        "tooltip": "Set Street (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 3,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Company Address",
+    "method": "PUT",
+    "operation": "UpdateCompanyAddress",
+    "pathParamNames": [
+      "companyId",
+      "addressId"
+    ],
+    "pathTemplate": "/companies/${companyId}/addresses/${addressId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "addressId",
+      "type",
+      "street",
+      "city",
+      "state",
+      "country",
+      "postal_code"
+    ]
+  },
+  "UpdateCompanyEmail": {
+    "description": "Update a company email entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "emailId",
+      "email",
+      "type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "email": {
+        "index": 3,
+        "label": "Email",
+        "tooltip": "Set Email (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "emailId": {
+        "index": 2,
+        "label": "Email ID",
+        "tooltip": "Set Email ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "type": {
+        "index": 4,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Company Email",
+    "method": "PUT",
+    "operation": "UpdateCompanyEmail",
+    "pathParamNames": [
+      "companyId",
+      "emailId"
+    ],
+    "pathTemplate": "/companies/${companyId}/emails/${emailId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "emailId",
+      "email",
+      "type"
+    ]
+  },
+  "UpdateCompanyPhone": {
+    "description": "Update a company phone entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "phoneId",
+      "phone",
+      "type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "phone": {
+        "index": 3,
+        "label": "Phone",
+        "tooltip": "Set Phone (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "phoneId": {
+        "index": 2,
+        "label": "Phone ID",
+        "tooltip": "Set Phone ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "type": {
+        "index": 4,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Company Phone",
+    "method": "PUT",
+    "operation": "UpdateCompanyPhone",
+    "pathParamNames": [
+      "companyId",
+      "phoneId"
+    ],
+    "pathTemplate": "/companies/${companyId}/phones/${phoneId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "phoneId",
+      "phone",
+      "type"
+    ]
+  },
+  "UpdateCompanyWebsite": {
+    "description": "Update a company website entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "companyId",
+      "websiteId",
+      "website"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "companyId": {
+        "index": 1,
+        "label": "Company ID",
+        "tooltip": "Set Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "website": {
+        "index": 3,
+        "label": "Website",
+        "tooltip": "Set Website (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "websiteId": {
+        "index": 2,
+        "label": "Website ID",
+        "tooltip": "Set Website ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Company Website",
+    "method": "PUT",
+    "operation": "UpdateCompanyWebsite",
+    "pathParamNames": [
+      "companyId",
+      "websiteId"
+    ],
+    "pathTemplate": "/companies/${companyId}/websites/${websiteId}/",
+    "requiredFieldNames": [
+      "companyId",
+      "websiteId",
+      "website"
+    ]
+  },
+  "UpdateContact": {
+    "description": "Update an existing contact.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Contact",
+    "method": "PUT",
+    "operation": "UpdateContact",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/",
+    "requiredFieldNames": [
+      "contactId"
+    ]
+  },
+  "UpdateContactAddress": {
+    "description": "Update a contact address entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "addressId",
+      "type",
+      "street",
+      "city",
+      "state",
+      "country",
+      "postal_code"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "addressId": {
+        "index": 2,
+        "label": "Address ID",
+        "tooltip": "Set Address ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "city": {
+        "index": 5,
+        "label": "City",
+        "tooltip": "Set City (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "country": {
+        "index": 7,
+        "label": "Country",
+        "tooltip": "Set Country (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "postal_code": {
+        "index": 8,
+        "label": "Postal Code",
+        "tooltip": "Set Postal Code (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "state": {
+        "index": 6,
+        "label": "State",
+        "tooltip": "Set State (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "street": {
+        "index": 4,
+        "label": "Street",
+        "tooltip": "Set Street (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "type": {
+        "index": 3,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Contact Address",
+    "method": "PUT",
+    "operation": "UpdateContactAddress",
+    "pathParamNames": [
+      "contactId",
+      "addressId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/addresses/${addressId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "addressId",
+      "type",
+      "street",
+      "city",
+      "state",
+      "country",
+      "postal_code"
+    ]
+  },
+  "UpdateContactEmail": {
+    "description": "Update a contact email entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "emailId",
+      "email",
+      "type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "email": {
+        "index": 3,
+        "label": "Email",
+        "tooltip": "Set Email (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "emailId": {
+        "index": 2,
+        "label": "Email ID",
+        "tooltip": "Set Email ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "type": {
+        "index": 4,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Contact Email",
+    "method": "PUT",
+    "operation": "UpdateContactEmail",
+    "pathParamNames": [
+      "contactId",
+      "emailId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/emails/${emailId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "emailId",
+      "email",
+      "type"
+    ]
+  },
+  "UpdateContactMarketingStatus": {
+    "description": "Update a contact marketing status.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "marketing_status"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "marketing_status": {
+        "index": 2,
+        "label": "Marketing Status",
+        "tooltip": "Set Marketing Status (can be mapped from previous steps).",
+        "type": "toggle"
+      }
+    },
+    "label": "Update Contact Marketing Status",
+    "method": "PUT",
+    "operation": "UpdateContactMarketingStatus",
+    "pathParamNames": [
+      "contactId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/marketing_status/",
+    "requiredFieldNames": [
+      "contactId",
+      "marketing_status"
+    ]
+  },
+  "UpdateContactOtherCompany": {
+    "description": "Update a contact other-company relationship.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "otherCompanyId",
+      "title"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "otherCompanyId": {
+        "index": 2,
+        "label": "Other Company ID",
+        "tooltip": "Set Other Company ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "title": {
+        "index": 3,
+        "label": "Title",
+        "tooltip": "Set Title (can be mapped from previous steps).",
+        "type": "text"
+      }
+    },
+    "label": "Update Contact Other Company",
+    "method": "PUT",
+    "operation": "UpdateContactOtherCompany",
+    "pathParamNames": [
+      "contactId",
+      "otherCompanyId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/other_companies/${otherCompanyId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "otherCompanyId",
+      "title"
+    ]
+  },
+  "UpdateContactPhone": {
+    "description": "Update a contact phone entry.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "contactId",
+      "phoneId",
+      "phone",
+      "type"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "contactId": {
+        "index": 1,
+        "label": "Contact ID",
+        "tooltip": "Set Contact ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "phone": {
+        "index": 3,
+        "label": "Phone",
+        "tooltip": "Set Phone (can be mapped from previous steps).",
+        "type": "text"
+      },
+      "phoneId": {
+        "index": 2,
+        "label": "Phone ID",
+        "tooltip": "Set Phone ID (can be mapped from previous steps).",
+        "type": "number"
+      },
+      "type": {
+        "index": 4,
+        "label": "Type",
+        "tooltip": "Set Type (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Contact Phone",
+    "method": "PUT",
+    "operation": "UpdateContactPhone",
+    "pathParamNames": [
+      "contactId",
+      "phoneId"
+    ],
+    "pathTemplate": "/contacts/${contactId}/phones/${phoneId}/",
+    "requiredFieldNames": [
+      "contactId",
+      "phoneId",
+      "phone",
+      "type"
+    ]
+  },
+  "UpdateTask": {
+    "description": "Update an existing task.",
+    "fieldDefaults": {},
+    "fieldNames": [
+      "taskId"
+    ],
+    "fixedQuery": {},
+    "inspectorInputs": {
+      "taskId": {
+        "index": 1,
+        "label": "Task ID",
+        "tooltip": "Set Task ID (can be mapped from previous steps).",
+        "type": "number"
+      }
+    },
+    "label": "Update Task",
+    "method": "PUT",
+    "operation": "UpdateTask",
+    "pathParamNames": [
+      "taskId"
+    ],
+    "pathTemplate": "/tasks/${taskId}/",
+    "requiredFieldNames": [
+      "taskId"
+    ]
+  }
+} as any;

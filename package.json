@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-clientify",
-  "version": "0.2.13",
+  "version": "0.2.15",
   "description": "N8N node for Clientify CRM integration",
   "keywords": [
     "n8n-node",
@@ -25,8 +25,9 @@
   "scripts": {
     "build": "node scripts/generateOperationCatalog.cjs && rm -rf dist && tsc && cp package.json dist/ && cp README.md dist/ && cp TRIGGERS_REFERENCE.md dist/ && mkdir -p dist/nodes/ClientifyApi dist/nodes/ClientifyTrigger && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyTrigger/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyTrigger/ 2>/dev/null || true",
     "dev": "tsc --watch",
-    "lint": "eslint nodes credentials --ext .ts",
-    "lintfix": "eslint nodes credentials --ext .ts --fix",
+    "format": "prettier \"nodes/**/*.ts\" \"credentials/**/*.ts\" \"scripts/**/*.cjs\" package.json --write",
+    "lint": "eslint nodes credentials package.json --ext .ts",
+    "lintfix": "eslint nodes credentials package.json --ext .ts --fix",
     "prepublishOnly": "npm run build && npm run lint"
   },
   "files": [
@@ -41,9 +42,6 @@
       "dist/nodes/ClientifyApi/ClientifyApi.node.js",
       "dist/nodes/ClientifyTrigger/ClientifyTrigger.node.js"
     ]
-  },
-  "overrides": {
-    "form-data": "^4.0.4"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
