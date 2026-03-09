@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-clientify",
-  "version": "0.2.15",
+  "version": "0.2.16",
   "description": "N8N node for Clientify CRM integration",
   "keywords": [
     "n8n-node",
