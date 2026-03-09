@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const fs = require("fs");
 const path = require("path");
 
@@ -53,8 +52,6 @@ function getPathParamNames(pathTemplate) {
 function loadFieldsJs(crmDir) {
   const p = path.join(crmDir, "fields.js");
   if (!fs.existsSync(p)) return null;
-  // fields.js is CommonJS
-  // eslint-disable-next-line global-require, import/no-dynamic-require
   return require(p);
 }
 

@@ -92,7 +92,7 @@ export const operationFields: INodeProperties[] = (() => {
   for (const def of Object.values(operationDefinitions)) {
     const resource = getResourceForOperation(def.operation);
     const inspectorInputs: Record<string, AppmixerInspectorInput> =
-      (def as any).inspectorInputs || {};
+      def.inspectorInputs || {};
     const sortedFieldEntries = Object.entries(inspectorInputs).sort((a, b) => {
       const ai = a[1]?.index ?? 9999;
       const bi = b[1]?.index ?? 9999;
@@ -103,15 +103,17 @@ export const operationFields: INodeProperties[] = (() => {
       const isRequired = def.requiredFieldNames.includes(fieldName);
       const n8nType = mapInspectorTypeToN8nType(inputDef?.type);
 
+      const fallbackDefault: string | number | boolean =
+        n8nType === "number" ? 0 : n8nType === "boolean" ? false : "";
       const defaultValue =
-        def.fieldDefaults[fieldName] ??
-        (n8nType === "number" ? 0 : n8nType === "boolean" ? false : "");
+        (def.fieldDefaults[fieldName] as string | number | boolean | undefined) ??
+        fallbackDefault;
 
       fields.push({
         displayName: inputDef?.label || fieldName,
         name: fieldName,
         type: n8nType,
-        default: defaultValue as any,
+        default: defaultValue,
         required: isRequired,
         description: inputDef?.tooltip || "",
         displayOptions: {

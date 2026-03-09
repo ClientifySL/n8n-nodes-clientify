@@ -1,14 +1,31 @@
 import {
+	IDataObject,
 	IWebhookFunctions,
 	INodeType,
 	INodeTypeDescription,
 	IWebhookResponseData,
 } from 'n8n-workflow';
 
+type ClientifyWebhookPayload = {
+	event?: string;
+	timestamp?: string | number;
+	account_id?: string | number;
+	user_id?: string | number;
+	data?: {
+		contact?: IDataObject;
+		company?: IDataObject;
+		deal?: IDataObject;
+		task?: IDataObject;
+		changes?: IDataObject;
+	};
+	[key: string]: unknown;
+};
+
 export class ClientifyTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Clientify Trigger',
 		name: 'clientifyTrigger',
+		usableAsTool: true,
 		icon: 'file:clientify.svg',
 		group: ['trigger'],
 		version: 1,
@@ -130,7 +147,7 @@ export class ClientifyTrigger implements INodeType {
 		const event = this.getNodeParameter('event') as string;
 
 		// Get webhook payload from request body
-		const payload = req.body as any;
+			const payload = req.body as ClientifyWebhookPayload;
 
 		// Validate that we received a payload
 		if (!payload || typeof payload !== 'object') {
@@ -148,10 +165,10 @@ export class ClientifyTrigger implements INodeType {
 		}
 
 		// Extract and flatten data based on event type for easier access in workflows
-		let workflowData: any = {
-			event: payload.event,
-			timestamp: payload.timestamp,
-		};
+			let workflowData: IDataObject = {
+				event: payload.event,
+				timestamp: payload.timestamp,
+			};
 
 		// Add account and user info if present
 		if (payload.account_id) {

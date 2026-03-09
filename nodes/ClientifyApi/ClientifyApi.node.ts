@@ -22,6 +22,7 @@ export class ClientifyApi implements INodeType {
   description: INodeTypeDescription = {
     displayName: "Clientify",
     name: "clientifyApi",
+    usableAsTool: true,
     icon: "file:clientify.svg",
     group: ["transform"],
     version: 1,
