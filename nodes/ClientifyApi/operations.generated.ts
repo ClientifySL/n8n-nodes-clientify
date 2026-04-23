@@ -1748,9 +1748,12 @@ export const operationDefinitions: Record<string, ClientifyOperationDefinition> 
   },
   "ListCompanyTags": {
     "description": "List tags for a company.",
-    "fieldDefaults": {},
+    "fieldDefaults": {
+      "fields": "name, color, id"
+    },
     "fieldNames": [
-      "companyId"
+      "companyId",
+      "fields"
     ],
     "fixedQuery": {},
     "inspectorInputs": {
@@ -1759,6 +1762,12 @@ export const operationDefinitions: Record<string, ClientifyOperationDefinition> 
         "label": "Company ID",
         "tooltip": "Set Company ID (can be mapped from previous steps).",
         "type": "number"
+      },
+      "fields": {
+        "index": 2,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
       }
     },
     "label": "List Company Tags",
@@ -1982,9 +1991,12 @@ export const operationDefinitions: Record<string, ClientifyOperationDefinition> 
   },
   "ListContactTags": {
     "description": "List tags for a contact.",
-    "fieldDefaults": {},
+    "fieldDefaults": {
+      "fields": "name, color, id"
+    },
     "fieldNames": [
-      "contactId"
+      "contactId",
+      "fields"
     ],
     "fixedQuery": {},
     "inspectorInputs": {
@@ -1993,6 +2005,12 @@ export const operationDefinitions: Record<string, ClientifyOperationDefinition> 
         "label": "Contact ID",
         "tooltip": "Set Contact ID (can be mapped from previous steps).",
         "type": "number"
+      },
+      "fields": {
+        "index": 2,
+        "label": "Fields",
+        "tooltip": "Set Fields (can be mapped from previous steps).",
+        "type": "text"
       }
     },
     "label": "List Contact Tags",

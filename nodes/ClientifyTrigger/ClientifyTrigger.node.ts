@@ -8,6 +8,10 @@ import {
 
 type ClientifyWebhookPayload = {
 	event?: string;
+	hook?: {
+		event?: string;
+		[key: string]: unknown;
+	};
 	timestamp?: string | number;
 	account_id?: string | number;
 	user_id?: string | number;
@@ -20,6 +24,24 @@ type ClientifyWebhookPayload = {
 	};
 	[key: string]: unknown;
 };
+
+function getPayloadEvent(payload: ClientifyWebhookPayload): string | undefined {
+	return payload.event || payload.hook?.event;
+}
+
+function getPayloadEntity(payload: ClientifyWebhookPayload, entity: string): IDataObject | undefined {
+	const fromData = payload.data?.[entity as keyof NonNullable<ClientifyWebhookPayload['data']>];
+	if (fromData && typeof fromData === 'object') {
+		return fromData;
+	}
+
+	const fromRoot = payload[entity];
+	if (fromRoot && typeof fromRoot === 'object') {
+		return fromRoot as IDataObject;
+	}
+
+	return undefined;
+}
 
 export class ClientifyTrigger implements INodeType {
 	description: INodeTypeDescription = {
@@ -50,92 +72,34 @@ export class ClientifyTrigger implements INodeType {
 				name: 'event',
 				type: 'options',
 				required: true,
-				default: 'contact.created',
+				default: 'contact.saved',
 				description: 'The Clientify event that will trigger this workflow',
 				options: [
-					// Company Events
-					{
-						name: 'Company Created',
-						value: 'company.created',
-						description: 'Triggers when a new company is created in Clientify',
-					},
+					// Clientify sends saved events for create and update operations.
 					{
 						name: 'Company Deleted',
 						value: 'company.deleted',
 						description: 'Triggers when a company is deleted from Clientify',
 					},
 					{
-						name: 'Company Updated',
-						value: 'company.updated',
-						description: 'Triggers when a company is updated in Clientify',
-					},
-					// Contact Events
-					{
-						name: 'Contact Created',
-						value: 'contact.created',
-						description: 'Triggers when a new contact is created in Clientify',
+						name: 'Company Saved',
+						value: 'company.saved',
+						description: 'Triggers when a company is created or updated in Clientify',
 					},
 					{
-						name: 'Contact Deleted',
-						value: 'contact.deleted',
-						description: 'Triggers when a contact is deleted from Clientify',
+						name: 'Contact Saved',
+						value: 'contact.saved',
+						description: 'Triggers when a contact is created or updated in Clientify',
 					},
 					{
-						name: 'Contact Updated',
-						value: 'contact.updated',
-						description: 'Triggers when a contact is updated in Clientify',
-					},
-					// Deal Events
-					{
-						name: 'Deal Created',
-						value: 'deal.created',
-						description: 'Triggers when a new deal is created in Clientify',
+						name: 'Deal Saved',
+						value: 'deal.saved',
+						description: 'Triggers when a deal is created, updated, won, lost, or moved in Clientify',
 					},
 					{
-						name: 'Deal Deleted',
-						value: 'deal.deleted',
-						description: 'Triggers when a deal is deleted from Clientify',
-					},
-					{
-						name: 'Deal Lost',
-						value: 'deal.lost',
-						description: 'Triggers when a deal is marked as lost',
-					},
-					{
-						name: 'Deal Stage Changed',
-						value: 'deal.stage_changed',
-						description: 'Triggers when a deal moves to a different stage',
-					},
-					{
-						name: 'Deal Updated',
-						value: 'deal.updated',
-						description: 'Triggers when a deal is updated in Clientify',
-					},
-					{
-						name: 'Deal Won',
-						value: 'deal.won',
-						description: 'Triggers when a deal is marked as won',
-					},
-					// Task Events
-					{
-						name: 'Task Completed',
-						value: 'task.completed',
-						description: 'Triggers when a task is marked as completed',
-					},
-					{
-						name: 'Task Created',
-						value: 'task.created',
-						description: 'Triggers when a new task is created in Clientify',
-					},
-					{
-						name: 'Task Due Soon',
-						value: 'task.due_soon',
-						description: 'Triggers when a task is approaching its due date',
-					},
-					{
-						name: 'Task Overdue',
-						value: 'task.overdue',
-						description: 'Triggers when a task is overdue',
+						name: 'Task Saved',
+						value: 'task.saved',
+						description: 'Triggers when a task is created or updated in Clientify',
 					},
 				],
 			},
@@ -147,7 +111,7 @@ export class ClientifyTrigger implements INodeType {
 		const event = this.getNodeParameter('event') as string;
 
 		// Get webhook payload from request body
-			const payload = req.body as ClientifyWebhookPayload;
+		const payload = req.body as ClientifyWebhookPayload;
 
 		// Validate that we received a payload
 		if (!payload || typeof payload !== 'object') {
@@ -156,19 +120,21 @@ export class ClientifyTrigger implements INodeType {
 			};
 		}
 
+		const payloadEvent = getPayloadEvent(payload);
+
 		// Validate that the event matches what user configured
 		// If events don't match, don't trigger the workflow
-		if (payload.event !== event) {
+		if (payloadEvent !== event) {
 			return {
 				workflowData: [],
 			};
 		}
 
 		// Extract and flatten data based on event type for easier access in workflows
-			let workflowData: IDataObject = {
-				event: payload.event,
-				timestamp: payload.timestamp,
-			};
+		let workflowData: IDataObject = {
+			event: payloadEvent,
+			timestamp: payload.timestamp,
+		};
 
 		// Add account and user info if present
 		if (payload.account_id) {
@@ -179,52 +145,56 @@ export class ClientifyTrigger implements INodeType {
 		}
 
 		// Flatten the nested data structure based on event type
-		if (payload.event.startsWith('contact.')) {
+		if (payloadEvent.startsWith('contact.')) {
 			// Contact events
-			if (payload.data?.contact) {
+			const contact = getPayloadEntity(payload, 'contact');
+			if (contact) {
 				workflowData = {
 					...workflowData,
-					contact_id: payload.data.contact.id,
-					...payload.data.contact,
+					contact_id: contact.id,
+					...contact,
 				};
 			}
 			// Include changes for update events
 			if (payload.data?.changes) {
 				workflowData.changes = payload.data.changes;
 			}
-		} else if (payload.event.startsWith('company.')) {
+		} else if (payloadEvent.startsWith('company.')) {
 			// Company events
-			if (payload.data?.company) {
+			const company = getPayloadEntity(payload, 'company');
+			if (company) {
 				workflowData = {
 					...workflowData,
-					company_id: payload.data.company.id,
-					...payload.data.company,
+					company_id: company.id,
+					...company,
 				};
 			}
 			// Include changes for update events
 			if (payload.data?.changes) {
 				workflowData.changes = payload.data.changes;
 			}
-		} else if (payload.event.startsWith('deal.')) {
+		} else if (payloadEvent.startsWith('deal.')) {
 			// Deal events
-			if (payload.data?.deal) {
+			const deal = getPayloadEntity(payload, 'deal');
+			if (deal) {
 				workflowData = {
 					...workflowData,
-					deal_id: payload.data.deal.id,
-					...payload.data.deal,
+					deal_id: deal.id,
+					...deal,
 				};
 			}
 			// Include changes for update events
 			if (payload.data?.changes) {
 				workflowData.changes = payload.data.changes;
 			}
-		} else if (payload.event.startsWith('task.')) {
+		} else if (payloadEvent.startsWith('task.')) {
 			// Task events
-			if (payload.data?.task) {
+			const task = getPayloadEntity(payload, 'task');
+			if (task) {
 				workflowData = {
 					...workflowData,
-					task_id: payload.data.task.id,
-					...payload.data.task,
+					task_id: task.id,
+					...task,
 				};
 			}
 		}

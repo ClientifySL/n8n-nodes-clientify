@@ -63,8 +63,10 @@ function getDefaultFieldsValue(fields, operation, pathTemplate) {
   const isUser = pathTemplate.startsWith("/users/");
 
   if (operation === "ListContacts" && isContact) return fields.contacts?.list;
+  if (operation === "ListContactTags" && isContact) return fields.contacts?.tags;
   if (operation === "GetContact" && isContact) return fields.contacts?.detail;
   if (operation === "ListCompanies" && isCompany) return fields.companies?.list;
+  if (operation === "ListCompanyTags" && isCompany) return fields.companies?.tags;
   if (operation === "SearchCompanies" && isCompany)
     return fields.companies?.list;
   if (operation === "GetCompany" && isCompany) return fields.companies?.detail;
