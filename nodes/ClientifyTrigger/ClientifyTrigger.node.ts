@@ -4,6 +4,7 @@ import {
 	INodeType,
 	INodeTypeDescription,
 	IWebhookResponseData,
+	NodeConnectionTypes,
 } from 'n8n-workflow';
 
 type ClientifyWebhookPayload = {
@@ -57,7 +58,7 @@ export class ClientifyTrigger implements INodeType {
 			name: 'Clientify Trigger',
 		},
 		inputs: [],
-		outputs: ['main'],
+		outputs: [NodeConnectionTypes.Main],
 		webhooks: [
 			{
 				name: 'default',
