@@ -1,0 +1,13 @@
+{
+	"node": "n8n-nodes-clientify.clientifyTrigger",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales", "Marketing"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/ClientifySL/clientify_n8n#readme"
+			}
+		]
+	}
+}
