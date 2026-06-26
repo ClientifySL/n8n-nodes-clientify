@@ -5,6 +5,9 @@ import {
   INodeTypeDescription,
   INodeProperties,
   IDataObject,
+  JsonObject,
+  NodeApiError,
+  NodeConnectionTypes,
   NodeOperationError,
 } from "n8n-workflow";
 
@@ -31,8 +34,8 @@ export class ClientifyApi implements INodeType {
     defaults: {
       name: "Clientify",
     },
-    inputs: ["main"],
-    outputs: ["main"],
+    inputs: [NodeConnectionTypes.Main],
+    outputs: [NodeConnectionTypes.Main],
     credentials: [
       {
         name: "clientifyApi",
@@ -197,7 +200,10 @@ export class ClientifyApi implements INodeType {
           });
           continue;
         }
-        throw error;
+        // Internal validation errors are already NodeOperationError; rethrow as-is.
+        // Wrap HTTP/API failures in NodeApiError so n8n surfaces status code and response details.
+        if (error instanceof NodeOperationError) throw error;
+        throw new NodeApiError(this.getNode(), error as JsonObject);
       }
     }
 

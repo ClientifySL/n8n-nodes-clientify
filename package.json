@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-clientify",
-  "version": "0.2.18",
+  "version": "0.2.19",
   "description": "N8N node for Clientify CRM integration",
   "keywords": [
     "n8n-node",
@@ -9,21 +9,21 @@
     "crm"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/contacteitor/clientify_n8n#readme",
+  "homepage": "https://github.com/ClientifySL/clientify_n8n#readme",
   "author": {
     "name": "Clientify",
     "email": "develop@clientify.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/contacteitor/clientify_n8n.git"
+    "url": "https://github.com/ClientifySL/clientify_n8n.git"
   },
   "engines": {
     "node": ">=20.15"
   },
   "main": "index.js",
   "scripts": {
-    "build": "node scripts/generateOperationCatalog.cjs && n8n-node build && cp TRIGGERS_REFERENCE.md dist/ && mkdir -p dist/nodes/ClientifyApi dist/nodes/ClientifyTrigger && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyApi/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.png dist/nodes/ClientifyTrigger/ 2>/dev/null || true && cp nodes/ClientifyMcp/*.svg dist/nodes/ClientifyTrigger/ 2>/dev/null || true",
+    "build": "node scripts/generateOperationCatalog.cjs && n8n-node build && node -e \"const fs=require('fs');fs.copyFileSync('TRIGGERS_REFERENCE.md','dist/TRIGGERS_REFERENCE.md');fs.copyFileSync('nodes/ClientifyApi/ClientifyApi.node.json','dist/nodes/ClientifyApi/ClientifyApi.node.json');fs.copyFileSync('nodes/ClientifyTrigger/ClientifyTrigger.node.json','dist/nodes/ClientifyTrigger/ClientifyTrigger.node.json');\"",
     "build:watch": "tsc --watch",
     "dev": "n8n-node dev",
     "format": "prettier \"nodes/**/*.ts\" \"credentials/**/*.ts\" \"scripts/**/*.cjs\" package.json --write",
@@ -46,8 +46,8 @@
     ]
   },
   "devDependencies": {
-    "@n8n/node-cli": "0.23.0",
     "@eslint/js": "9.39.1",
+    "@n8n/node-cli": "0.23.0",
     "@types/node": "^20.0.0",
     "eslint": "9.39.1",
     "n8n-workflow": "^2.2.1",
