@@ -28,10 +28,11 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          # Node 22: npm@latest (12.x) exige node 22+, y el npm 10.x que trae
+          # node 20 IGNORA el OIDC en silencio (trusted publishing esta desde
+          # npm 11.5.1). El build del nodo funciona igual en 22.
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org'
-      # El npm que trae node 20 es 10.x y IGNORA el OIDC en silencio. El soporte
-      # de trusted publishing esta desde npm 11.5.1.
       - run: npm install -g npm@latest
       - run: npm ci
       - run: npm run build
