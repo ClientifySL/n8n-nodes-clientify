@@ -9,14 +9,14 @@
     "crm"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/ClientifySL/clientify_n8n#readme",
+  "homepage": "https://github.com/ClientifySL/n8n-nodes-clientify#readme",
   "author": {
     "name": "Clientify",
     "email": "develop@clientify.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ClientifySL/clientify_n8n.git"
+    "url": "git+https://github.com/ClientifySL/n8n-nodes-clientify.git"
   },
   "engines": {
     "node": ">=20.15"
@@ -56,5 +56,8 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/ClientifySL/n8n-nodes-clientify/issues"
   }
 }
