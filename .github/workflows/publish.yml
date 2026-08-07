@@ -1,3 +1,14 @@
+# Publica n8n-nodes-clientify en npm al pushear un tag `v*`.
+#
+# Preparado para TRUSTED PUBLISHING (OIDC): una vez configurado en npmjs.com que
+# este paquete confia en este repo + este fichero de workflow, npm autentica con
+# un token efimero firmado y NO hace falta ningun NPM_TOKEN. El `NODE_AUTH_TOKEN`
+# se queda como respaldo mientras se hace la transicion; el CLI intenta OIDC
+# primero y solo cae al token si no lo encuentra.
+#
+# ⚠️ `runs-on` DEBE ser un runner de GitHub, nunca uno self-hosted nuestro:
+#   (a) trusted publishing solo soporta runners cloud-hosted;
+#   (b) en un repo publico, un PR desde un fork correria en nuestro cluster.
 name: Publish to npm
 
 on:
@@ -10,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      # Imprescindible: es lo que permite emitir el token OIDC del que salen
+      # tanto el provenance como el trusted publishing.
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -17,9 +30,14 @@ jobs:
         with:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
+      # El npm que trae node 20 es 10.x y IGNORA el OIDC en silencio. El soporte
+      # de trusted publishing esta desde npm 11.5.1.
+      - run: npm install -g npm@latest
       - run: npm ci
       - run: npm run build
       - run: npm run lint
+      # Con trusted publishing el `--provenance` es redundante (se genera solo),
+      # pero explicito no molesta y cubre el caso de publicar con token.
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
