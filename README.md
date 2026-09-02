@@ -101,3 +101,6 @@ Mapping is field-based:
 MIT License - see [LICENSE](LICENSE) file for details.
 
 Copyright (c) 2025 Clientify
+
+
+<!-- Security scan triggered at 2026-09-02 07:08:13 -->
