@@ -64,15 +64,17 @@ You'll need:
 2. Pick an **Action**.
 3. Fill fields directly or map them from previous nodes using expressions.
 
-### Clientify Trigger (webhook helper)
+### Clientify Trigger
 
-Use this when you want a Clientify-branded trigger in the workflow. Under the hood it behaves like an n8n webhook:
+Starts the workflow when Clientify reports a change in the CRM. It registers its own webhook:
 
-- Use **Test URL** when executing on the canvas.
-- Use **Production URL** for always-on external calls (runs show up in **Executions**).
-- The trigger verifies the incoming payload `event` matches the selected event type.
+- Activating the workflow registers its URL in Clientify, and deactivating it removes it. Nothing has to be configured by hand in **Settings → Integrations → Webhooks**.
+- It needs the same **Clientify API** credential as the action node, and a **public HTTPS** webhook URL: Clientify rejects local or private addresses, so set `WEBHOOK_URL` to the public address of your n8n.
+- Clientify keeps **one webhook per entity** (contacts, companies, deals, tasks, budgets, products), each with a single address. If the slot already points somewhere else, the workflow refuses to activate rather than repointing an existing integration.
+- Each slot delivers both the saved and the deleted event of its entity. The node emits only the selected one unless **Receive Both Entity Events** is enabled.
+- Payloads are checked against a shared secret the node registers with the webhook, since Clientify does not sign the body.
 
-For payload formats and examples, see `TRIGGERS_REFERENCE.md`.
+For events, payload formats and delivery behaviour, see `TRIGGERS_REFERENCE.md`.
 
 ## Available Operations
 
@@ -93,7 +95,8 @@ Mapping is field-based:
 
 ## Support
 
-- **Clientify API docs:** https://newapi.clientify.com/
+- **Clientify API docs:** https://api-plus.clientify.com/api/docs/v2/scalar/
+- **Clientify webhooks guide:** https://api-plus.clientify.com/api/docs/v2/webhooks/
 - **Triggers reference:** [`TRIGGERS_REFERENCE.md`](TRIGGERS_REFERENCE.md)
 
 ## License
@@ -101,6 +104,3 @@ Mapping is field-based:
 MIT License - see [LICENSE](LICENSE) file for details.
 
 Copyright (c) 2025 Clientify
-
-
-<!-- Security scan triggered at 2026-09-02 07:08:13 -->

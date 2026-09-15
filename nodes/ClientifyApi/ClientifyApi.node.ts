@@ -21,12 +21,29 @@ import {
   renderPathTemplate,
 } from "./ClientifyApiCatalog";
 
+/**
+ * Normaliza cualquier fallo a un error de n8n: los de validacion se conservan
+ * tal cual y el resto se envuelve en NodeApiError.
+ */
+function toNodeError(
+  this: IExecuteFunctions,
+  error: unknown
+): NodeOperationError | NodeApiError {
+  if (error instanceof NodeOperationError || error instanceof NodeApiError) {
+    return error;
+  }
+  return new NodeApiError(this.getNode(), error as JsonObject);
+}
+
 export class ClientifyApi implements INodeType {
   description: INodeTypeDescription = {
     displayName: "Clientify",
     name: "clientifyApi",
     usableAsTool: true,
-    icon: "file:clientify.svg",
+    icon: {
+      light: "file:clientify.svg",
+      dark: "file:clientify.dark.svg",
+    },
     group: ["transform"],
     version: 1,
     subtitle: '={{$parameter["resource"] + " · " + $parameter["operation"]}}',
@@ -200,10 +217,10 @@ export class ClientifyApi implements INodeType {
           });
           continue;
         }
-        // Internal validation errors are already NodeOperationError; rethrow as-is.
-        // Wrap HTTP/API failures in NodeApiError so n8n surfaces status code and response details.
-        if (error instanceof NodeOperationError) throw error;
-        throw new NodeApiError(this.getNode(), error as JsonObject);
+        // Nunca se propaga un error crudo: los de validacion ya son errores de n8n
+        // y los fallos HTTP se envuelven en NodeApiError para que n8n muestre el
+        // codigo de estado y el detalle de la respuesta.
+        throw toNodeError.call(this, error);
       }
     }
 
