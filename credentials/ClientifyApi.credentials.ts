@@ -8,8 +8,11 @@ import {
 export class ClientifyApi implements ICredentialType {
   name = "clientifyApi";
   displayName = "Clientify API";
-  icon = "file:clientify.svg" as const;
-  documentationUrl = "https://newapi.clientify.com/";
+  icon = {
+    light: "file:clientify.svg",
+    dark: "file:clientify.dark.svg",
+  } as const;
+  documentationUrl = "https://api-plus.clientify.com/api/docs/v2/scalar/";
   authenticate: IAuthenticateGeneric = {
     type: "generic",
     properties: {

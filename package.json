@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-clientify",
-  "version": "0.2.19",
+  "version": "0.3.0",
   "description": "N8N node for Clientify CRM integration",
   "keywords": [
     "n8n-node",
@@ -30,7 +30,8 @@
     "lint": "n8n-node lint",
     "lint:fix": "n8n-node lint --fix",
     "prepublishOnly": "npm run build && npm run lint",
-    "release": "n8n-node release"
+    "release": "n8n-node release",
+    "test": "npm run build && node test/lifecycle.test.cjs"
   },
   "files": [
     "dist"
