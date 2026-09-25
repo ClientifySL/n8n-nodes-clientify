@@ -15,10 +15,10 @@ import {
 } from 'n8n-workflow';
 
 /**
- * Clientify expone seis webhooks fijos, uno por entidad del CRM: no se pueden
- * crear más ni tener dos direcciones para la misma entidad. Cada hueco cubre
- * siempre los dos eventos de su entidad (guardado y borrado), así que el prefijo
- * del evento elegido es lo que determina el hueco a registrar.
+ * Clientify exposes six fixed webhooks, one per CRM entity: no more can be
+ * created and one entity cannot have two addresses. Each slot always covers
+ * both events of its entity (saved and deleted), so the prefix of the chosen
+ * event determines which slot to register.
  */
 const EVENT_PREFIX_TO_ENTITY: Record<string, string> = {
 	budget: 'budgets',
@@ -29,7 +29,7 @@ const EVENT_PREFIX_TO_ENTITY: Record<string, string> = {
 	task: 'tasks',
 };
 
-/** Cabecera con el secreto compartido que se fija al registrar el webhook. */
+/** Header carrying the shared secret set when the webhook is registered. */
 const SECRET_HEADER_NAME = 'X-Clientify-Secret';
 
 const DEFAULT_BASE_URL = 'https://api-plus.clientify.com/v2';
@@ -61,7 +61,7 @@ type ClientifyApiResponse = {
 	body: IDataObject;
 };
 
-/** Llama a la API v2 de Clientify sin lanzar excepción por el código de estado. */
+/** Calls the Clientify v2 API without throwing on the status code. */
 async function clientifyApiRequest(
 	this: IHookFunctions,
 	method: IHttpRequestMethods,
@@ -86,7 +86,7 @@ async function clientifyApiRequest(
 	};
 }
 
-/** Compara direcciones ignorando espacios y la barra final. */
+/** Compares addresses ignoring whitespace and the trailing slash. */
 function isSameTarget(a?: string, b?: string): boolean {
 	if (!a || !b) {
 		return false;
@@ -94,7 +94,7 @@ function isSameTarget(a?: string, b?: string): boolean {
 	return a.trim().replace(/\/+$/, '') === b.trim().replace(/\/+$/, '');
 }
 
-/** Resume el cuerpo de error de la API para incluirlo en el mensaje del nodo. */
+/** Summarizes the API error body so it can be included in the node message. */
 function describeApiError(body: IDataObject): string {
 	if (!body || typeof body !== 'object') {
 		return '';
@@ -139,7 +139,7 @@ function throwApiError(
 	});
 }
 
-/** Enciende el interruptor del hueco si alguien lo apagó desde el panel. */
+/** Turns the slot back on if someone switched it off from the dashboard. */
 async function activateWebhook(this: IHookFunctions, entity: string): Promise<void> {
 	const response = await clientifyApiRequest.call(this, 'POST', `/webhooks/${entity}/activate/`);
 	if (response.statusCode >= 400) {
@@ -165,7 +165,7 @@ function buildConflictError(
 	);
 }
 
-/** Devuelve el recurso que viaja en el aviso, admitiendo los formatos históricos. */
+/** Returns the resource carried in the notification, supporting legacy formats. */
 function getPayloadResource(
 	payload: ClientifyWebhookPayload,
 	entityKey: string,
@@ -190,11 +190,12 @@ function getPayloadResource(
 	return undefined;
 }
 
+// Trigger nodes cannot be invoked as AI tools, so usableAsTool is intentionally omitted.
+// eslint-disable-next-line @n8n/community-nodes/node-usable-as-tool
 export class ClientifyTrigger implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Clientify Trigger',
 		name: 'clientifyTrigger',
-		usableAsTool: true,
 		icon: {
 			light: 'file:clientify.svg',
 			dark: 'file:clientify.dark.svg',
@@ -309,8 +310,8 @@ export class ClientifyTrigger implements INodeType {
 	webhookMethods = {
 		default: {
 			/**
-			 * n8n pregunta si el webhook ya está dado de alta. Solo se responde que sí
-			 * cuando el hueco de esa entidad apunta a la URL de este workflow.
+			 * n8n asks whether the webhook is already registered. It only answers yes
+			 * when that entity's slot points to this workflow's URL.
 			 */
 			async checkExists(this: IHookFunctions): Promise<boolean> {
 				const webhookUrl = this.getNodeWebhookUrl('default');
@@ -330,7 +331,7 @@ export class ClientifyTrigger implements INodeType {
 
 				const hook = response.body as ClientifyWebhook;
 				if (!isSameTarget(hook.target, webhookUrl)) {
-					// El hueco está libre u ocupado por otra integración: lo resuelve create().
+					// The slot is free or taken by another integration: create() handles it.
 					return false;
 				}
 
@@ -345,7 +346,7 @@ export class ClientifyTrigger implements INodeType {
 				return true;
 			},
 
-			/** Da de alta la URL de este workflow en el hueco de la entidad. */
+			/** Registers this workflow's URL in the entity slot. */
 			async create(this: IHookFunctions): Promise<boolean> {
 				const node = this.getNode();
 				const webhookUrl = this.getNodeWebhookUrl('default');
@@ -392,7 +393,7 @@ export class ClientifyTrigger implements INodeType {
 				const staticData = this.getWorkflowStaticData('node');
 
 				if (isSameTarget(currentTarget, webhookUrl)) {
-					// Ya estaba puesta (por el panel o por una activación anterior).
+					// Already set (from the dashboard or by a previous activation).
 					if (hook.is_active === false) {
 						await activateWebhook.call(this, entity);
 					}
@@ -401,8 +402,8 @@ export class ClientifyTrigger implements INodeType {
 					return true;
 				}
 
-				// Sin firma HMAC por parte de Clientify, el secreto compartido en una
-				// cabecera es lo único que permite reconocer el aviso como propio.
+				// Clientify does not sign requests with HMAC, so a shared secret in a
+				// header is the only way to recognize the notification as ours.
 				const secret = randomBytes(24).toString('hex');
 				const created = await clientifyApiRequest.call(this, 'POST', `/webhooks/${entity}/`, {
 					target: webhookUrl,
@@ -412,7 +413,7 @@ export class ClientifyTrigger implements INodeType {
 				});
 
 				if (created.statusCode === 409) {
-					// Alguien ocupó el hueco entre la lectura y el alta.
+					// Someone took the slot between the read and the registration.
 					const latest = await clientifyApiRequest.call(this, 'GET', `/webhooks/${entity}/`);
 					const latestTarget = ((latest.body as ClientifyWebhook).target ?? '').trim();
 
@@ -448,7 +449,7 @@ export class ClientifyTrigger implements INodeType {
 				return true;
 			},
 
-			/** Deja el hueco libre al desactivar el workflow. */
+			/** Frees the slot when the workflow is deactivated. */
 			async delete(this: IHookFunctions): Promise<boolean> {
 				const staticData = this.getWorkflowStaticData('node');
 				const webhookUrl = this.getNodeWebhookUrl('default');
@@ -463,7 +464,7 @@ export class ClientifyTrigger implements INodeType {
 					const isOurs =
 						isSameTarget(currentTarget, registeredTarget) || isSameTarget(currentTarget, webhookUrl);
 
-					// Si otra integración ha ocupado el hueco entretanto, no se toca.
+					// If another integration has taken the slot in the meantime, leave it alone.
 					if (isOurs) {
 						const removed = await clientifyApiRequest.call(
 							this,
@@ -495,7 +496,7 @@ export class ClientifyTrigger implements INodeType {
 		const staticData = this.getWorkflowStaticData('node');
 		const expectedSecret = staticData.webhookSecret as string | undefined;
 
-		// Si el webhook lo registró este nodo, el aviso tiene que traer su secreto.
+		// If this node registered the webhook, the notification must carry its secret.
 		if (expectedSecret) {
 			const receivedSecret = req.headers[SECRET_HEADER_NAME.toLowerCase()];
 			if (receivedSecret !== expectedSecret) {
@@ -521,8 +522,8 @@ export class ClientifyTrigger implements INodeType {
 			};
 		}
 
-		// Un mismo hueco entrega los dos eventos de la entidad, así que se descarta
-		// el que no se ha pedido salvo que el usuario quiera ambos.
+		// A single slot delivers both events of the entity, so the one not requested
+		// is discarded unless the user wants both.
 		const matchesEvent = bothEntityEvents
 			? payloadEvent.split('.')[0] === event.split('.')[0]
 			: payloadEvent === event;
@@ -550,8 +551,8 @@ export class ClientifyTrigger implements INodeType {
 			workflowData.user_id = payload.user_id;
 		}
 
-		// El recurso viaja completo en `data`; se aplana y se deja un alias de id
-		// por entidad para no tener que recordar dónde está.
+		// The full resource travels in `data`; it is flattened and a per-entity id
+		// alias is added so users do not have to remember where it lives.
 		const entityKey = payloadEvent.split('.')[0];
 		const resource = getPayloadResource(payload, entityKey);
 
@@ -568,7 +569,7 @@ export class ClientifyTrigger implements INodeType {
 			workflowData.changes = changes as IDataObject;
 		}
 
-		// Se conserva el aviso original para quien necesite un campo sin aplanar.
+		// Keep the original notification for anyone who needs an unflattened field.
 		workflowData._raw = payload as IDataObject;
 
 		return {
