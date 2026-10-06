@@ -22,8 +22,8 @@ import {
 } from "./ClientifyApiCatalog";
 
 /**
- * Normaliza cualquier fallo a un error de n8n: los de validacion se conservan
- * tal cual y el resto se envuelve en NodeApiError.
+ * Normalizes any failure into an n8n error: validation errors are kept
+ * as they are and everything else is wrapped in NodeApiError.
  */
 function toNodeError(
   this: IExecuteFunctions,
@@ -217,9 +217,9 @@ export class ClientifyApi implements INodeType {
           });
           continue;
         }
-        // Nunca se propaga un error crudo: los de validacion ya son errores de n8n
-        // y los fallos HTTP se envuelven en NodeApiError para que n8n muestre el
-        // codigo de estado y el detalle de la respuesta.
+        // A raw error is never propagated: validation errors are already n8n errors,
+        // and HTTP failures are wrapped in NodeApiError so n8n shows the status
+        // code and the response details.
         throw toNodeError.call(this, error);
       }
     }

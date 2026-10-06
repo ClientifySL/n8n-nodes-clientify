@@ -1,14 +1,14 @@
-# Publica n8n-nodes-clientify en npm al pushear un tag `v*`.
+# Publishes n8n-nodes-clientify to npm when a `v*` tag is pushed.
 #
-# Preparado para TRUSTED PUBLISHING (OIDC): una vez configurado en npmjs.com que
-# este paquete confia en este repo + este fichero de workflow, npm autentica con
-# un token efimero firmado y NO hace falta ningun NPM_TOKEN. El `NODE_AUTH_TOKEN`
-# se queda como respaldo mientras se hace la transicion; el CLI intenta OIDC
-# primero y solo cae al token si no lo encuentra.
+# Ready for TRUSTED PUBLISHING (OIDC): once npmjs.com is configured to trust
+# this repo + this workflow file for the package, npm authenticates with a
+# short-lived signed token and no NPM_TOKEN is needed. `NODE_AUTH_TOKEN` stays
+# as a fallback during the transition; the CLI tries OIDC first and only falls
+# back to the token if OIDC is not available.
 #
-# ⚠️ `runs-on` DEBE ser un runner de GitHub, nunca uno self-hosted nuestro:
-#   (a) trusted publishing solo soporta runners cloud-hosted;
-#   (b) en un repo publico, un PR desde un fork correria en nuestro cluster.
+# ⚠️ `runs-on` MUST be a GitHub-hosted runner, never one of our self-hosted ones:
+#   (a) trusted publishing only supports cloud-hosted runners;
+#   (b) in a public repo, a PR from a fork would run on our cluster.
 name: Publish to npm
 
 on:
@@ -21,24 +21,24 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      # Imprescindible: es lo que permite emitir el token OIDC del que salen
-      # tanto el provenance como el trusted publishing.
+      # Required: this is what allows issuing the OIDC token that both
+      # provenance and trusted publishing rely on.
       id-token: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          # Node 22: npm@latest (12.x) exige node 22+, y el npm 10.x que trae
-          # node 20 IGNORA el OIDC en silencio (trusted publishing esta desde
-          # npm 11.5.1). El build del nodo funciona igual en 22.
+          # Node 22: npm@latest (12.x) requires node 22+, and the npm 10.x bundled
+          # with node 20 silently IGNORES OIDC (trusted publishing exists since
+          # npm 11.5.1). The node builds the same on 22.
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install -g npm@latest
       - run: npm ci
       - run: npm run build
       - run: npm run lint
-      # Con trusted publishing el `--provenance` es redundante (se genera solo),
-      # pero explicito no molesta y cubre el caso de publicar con token.
+      # With trusted publishing `--provenance` is redundant (it is generated
+      # automatically), but being explicit is harmless and covers token publishing.
       - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

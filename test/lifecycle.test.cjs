@@ -1,6 +1,6 @@
 /**
- * Pruebas del ciclo de vida del webhook del Clientify Trigger.
- * Simula las funciones que n8n inyecta y comprueba las llamadas a la API.
+ * Webhook lifecycle tests for the Clientify Trigger.
+ * Mocks the functions n8n injects and checks the calls made to the API.
  */
 const assert = require('assert');
 const { ClientifyTrigger } = require('../dist/nodes/ClientifyTrigger/ClientifyTrigger.node.js');
@@ -46,13 +46,13 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 	{
 		const ctx = makeHookContext({ responses: { 'GET /webhooks/contacts/': hookBody('', false) } });
 		assert.strictEqual(await checkExists.call(ctx), false);
-		ok('checkExists: hueco libre -> false');
+		ok('checkExists: free slot -> false');
 	}
 	{
 		const ctx = makeHookContext({ responses: { 'GET /webhooks/contacts/': hookBody(PROD_URL, true) } });
 		assert.strictEqual(await checkExists.call(ctx), true);
 		assert.strictEqual(ctx.calls.length, 1);
-		ok('checkExists: nuestra URL activa -> true sin tocar nada');
+		ok('checkExists: our URL active -> true without changing anything');
 	}
 	{
 		const ctx = makeHookContext({
@@ -63,12 +63,12 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		});
 		assert.strictEqual(await checkExists.call(ctx), true);
 		assert.strictEqual(ctx.calls[1].method, 'POST');
-		ok('checkExists: nuestra URL apagada -> la reactiva');
+		ok('checkExists: our URL disabled -> re-enables it');
 	}
 	{
-		const ctx = makeHookContext({ responses: { 'GET /webhooks/contacts/': hookBody('https://otro.com/hook') } });
+		const ctx = makeHookContext({ responses: { 'GET /webhooks/contacts/': hookBody('https://other.example.com/hook') } });
 		assert.strictEqual(await checkExists.call(ctx), false);
-		ok('checkExists: hueco de otra integracion -> false');
+		ok('checkExists: slot owned by another integration -> false');
 	}
 
 	// --- create ------------------------------------------------------------
@@ -82,19 +82,19 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		assert.strictEqual(await create.call(ctx), true);
 		const post = ctx.calls.find((c) => c.method === 'POST');
 		assert.strictEqual(post.body.target, PROD_URL);
-		assert.ok(/^[0-9a-f]{48}$/.test(post.body.headers['X-Clientify-Secret']), 'secreto generado');
+		assert.ok(/^[0-9a-f]{48}$/.test(post.body.headers['X-Clientify-Secret']), 'secret generated');
 		assert.strictEqual(ctx.staticData.webhookSecret, post.body.headers['X-Clientify-Secret']);
 		assert.strictEqual(ctx.staticData.webhookEntity, 'contacts');
-		ok('create: hueco libre -> alta con target + secreto y guarda static data');
+		ok('create: free slot -> registers target + secret and stores static data');
 	}
 	{
-		const ctx = makeHookContext({ responses: { 'GET /webhooks/contacts/': hookBody('https://otro.com/hook') } });
+		const ctx = makeHookContext({ responses: { 'GET /webhooks/contacts/': hookBody('https://other.example.com/hook') } });
 		await assert.rejects(() => create.call(ctx), (err) => {
-			assert.match(err.message, /already pointing to https:\/\/otro\.com\/hook/);
+			assert.match(err.message, /already pointing to https:\/\/other\.example\.com\/hook/);
 			return true;
 		});
-		assert.strictEqual(ctx.calls.length, 1, 'no se escribe nada cuando el hueco es de otro');
-		ok('create: hueco ocupado -> error claro y no lo pisa');
+		assert.strictEqual(ctx.calls.length, 1, 'nothing is written when the slot belongs to someone else');
+		ok('create: slot taken -> clear error and does not overwrite it');
 	}
 	{
 		const ctx = makeHookContext({ responses: {}, webhookUrl: 'http://localhost:5678/webhook/abc/webhook' });
@@ -102,8 +102,8 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 			assert.match(err.message, /only accepts public HTTPS/);
 			return true;
 		});
-		assert.strictEqual(ctx.calls.length, 0, 'ni siquiera llama a la API');
-		ok('create: URL no https -> error explicativo sin llamar a la API');
+		assert.strictEqual(ctx.calls.length, 0, 'does not even call the API');
+		ok('create: non-https URL -> explanatory error without calling the API');
 	}
 	{
 		const ctx = makeHookContext({
@@ -113,22 +113,22 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 			},
 		});
 		assert.strictEqual(await create.call(ctx), true);
-		assert.ok(!ctx.calls.some((c) => c.method === 'POST' && c.url.endsWith('/webhooks/contacts/')), 'no re-crea');
-		ok('create: nuestra URL ya puesta pero apagada -> la activa, no duplica');
+		assert.ok(!ctx.calls.some((c) => c.method === 'POST' && c.url.endsWith('/webhooks/contacts/')), 'does not re-create');
+		ok('create: our URL already set but disabled -> enables it, no duplicate');
 	}
 	{
 		let gets = 0;
 		const ctx = makeHookContext({
 			responses: {
-				'GET /webhooks/contacts/': () => (++gets === 1 ? hookBody('', false) : hookBody('https://carrera.com/h')),
+				'GET /webhooks/contacts/': () => (++gets === 1 ? hookBody('', false) : hookBody('https://race.example.com/h')),
 				'POST /webhooks/contacts/': { statusCode: 409, body: { detail: 'Already configured' } },
 			},
 		});
 		await assert.rejects(() => create.call(ctx), (err) => {
-			assert.match(err.message, /already pointing to https:\/\/carrera\.com\/h/);
+			assert.match(err.message, /already pointing to https:\/\/race\.example\.com\/h/);
 			return true;
 		});
-		ok('create: 409 por carrera -> relee y explica el conflicto');
+		ok('create: 409 from a race -> re-reads and explains the conflict');
 	}
 	{
 		const ctx = makeHookContext({
@@ -142,7 +142,7 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 			assert.match(err.description, /target: Enter a valid URL/);
 			return true;
 		});
-		ok('create: 400 -> traslada el motivo de la API');
+		ok('create: 400 -> surfaces the reason from the API');
 	}
 
 	// --- delete ------------------------------------------------------------
@@ -157,16 +157,16 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		assert.strictEqual(await remove.call(ctx), true);
 		assert.ok(ctx.calls.some((c) => c.method === 'DELETE'));
 		assert.deepStrictEqual(ctx.staticData, {});
-		ok('delete: nuestro hueco -> lo libera y limpia static data');
+		ok('delete: our slot -> frees it and clears static data');
 	}
 	{
 		const ctx = makeHookContext({
 			staticData: { webhookEntity: 'contacts', webhookTarget: PROD_URL },
-			responses: { 'GET /webhooks/contacts/': hookBody('https://otro.com/hook') },
+			responses: { 'GET /webhooks/contacts/': hookBody('https://other.example.com/hook') },
 		});
 		assert.strictEqual(await remove.call(ctx), true);
-		assert.ok(!ctx.calls.some((c) => c.method === 'DELETE'), 'no borra lo que no es suyo');
-		ok('delete: hueco reocupado por otro -> no lo borra');
+		assert.ok(!ctx.calls.some((c) => c.method === 'DELETE'), 'does not delete what it does not own');
+		ok('delete: slot retaken by someone else -> does not delete it');
 	}
 	{
 		const ctx = makeHookContext({
@@ -174,7 +174,7 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 			responses: { 'GET /webhooks/contacts/': { statusCode: 404, body: {} } },
 		});
 		assert.strictEqual(await remove.call(ctx), true);
-		ok('delete: 404 -> no falla la desactivacion del workflow');
+		ok('delete: 404 -> workflow deactivation does not fail');
 	}
 
 	// --- webhook() ---------------------------------------------------------
@@ -201,34 +201,34 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		assert.strictEqual(json.first_name, 'Ada');
 		assert.strictEqual(json.hook_id, 412);
 		assert.deepStrictEqual(json._raw, documentedPayload);
-		ok('webhook: formato documentado {hook, data} -> aplanado con alias de id');
+		ok('webhook: documented {hook, data} shape -> flattened with id alias');
 	}
 	{
 		const legacy = { event: 'contact.saved', contact: { id: 1, first_name: 'Ada' } };
 		const res = await node.webhook.call(makeWebhookContext({ body: legacy }));
 		assert.strictEqual(res.workflowData[0][0].json.contact_id, 1);
-		ok('webhook: formato antiguo con la entidad en raiz sigue funcionando');
+		ok('webhook: legacy shape with the entity at the root still works');
 	}
 	{
 		const res = await node.webhook.call(
 			makeWebhookContext({ body: { hook: { event: 'contact.deleted' }, data: { id: 9 } } }),
 		);
 		assert.deepStrictEqual(res.workflowData, []);
-		ok('webhook: el otro evento de la entidad se descarta por defecto');
+		ok('webhook: the other event of the entity is discarded by default');
 	}
 	{
 		const res = await node.webhook.call(
 			makeWebhookContext({ body: { hook: { event: 'contact.deleted' }, data: { id: 9 } }, both: true }),
 		);
 		assert.strictEqual(res.workflowData[0][0].json.event, 'contact.deleted');
-		ok('webhook: con "Receive Both Entity Events" se emite tambien el borrado');
+		ok('webhook: with "Receive Both Entity Events" the deletion is emitted too');
 	}
 	{
 		const res = await node.webhook.call(
 			makeWebhookContext({ body: documentedPayload, staticData: { webhookSecret: 's3cr3t' } }),
 		);
 		assert.deepStrictEqual(res.workflowData, []);
-		ok('webhook: aviso sin el secreto registrado -> descartado');
+		ok('webhook: notification without the registered secret -> discarded');
 	}
 	{
 		const res = await node.webhook.call(
@@ -239,7 +239,7 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 			}),
 		);
 		assert.strictEqual(res.workflowData[0][0].json.contact_id, 88123456);
-		ok('webhook: aviso con el secreto correcto -> se procesa');
+		ok('webhook: notification with the correct secret -> processed');
 	}
 	{
 		const res = await node.webhook.call(
@@ -249,10 +249,10 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 			}),
 		);
 		assert.strictEqual(res.workflowData[0][0].json.budget_id, 77);
-		ok('webhook: entidades nuevas (budget/product) resuelven su alias de id');
+		ok('webhook: new entities (budget/product) resolve their id alias');
 	}
 
-	// --- errores del nodo de accion -----------------------------------------
+	// --- action node errors ------------------------------------------------
 	const { NodeApiError, NodeOperationError } = require('n8n-workflow');
 	const { ClientifyApi } = require('../dist/nodes/ClientifyApi/ClientifyApi.node.js');
 	const actionNode = new ClientifyApi();
@@ -281,7 +281,7 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		const [items] = await actionNode.execute.call(ctx);
 		assert.strictEqual(items[0].json.id, 7);
 		assert.strictEqual(items[0].json._meta.path, '/me/');
-		ok('accion: respuesta correcta -> item con _meta');
+		ok('action: successful response -> item with _meta');
 	}
 	{
 		const apiFailure = Object.assign(new Error('Request failed with status code 401'), {
@@ -290,29 +290,29 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		});
 		const ctx = makeExecuteContext({ result: apiFailure });
 		await assert.rejects(() => actionNode.execute.call(ctx), (err) => {
-			assert.ok(err instanceof NodeApiError, `se esperaba NodeApiError y llego ${err.constructor.name}`);
+			assert.ok(err instanceof NodeApiError, `expected NodeApiError but got ${err.constructor.name}`);
 			return true;
 		});
-		ok('accion: fallo HTTP -> NodeApiError, nunca el error crudo');
+		ok('action: HTTP failure -> NodeApiError, never the raw error');
 	}
 	{
 		const ctx = makeExecuteContext({ operation: 'AddCompanyAddress', params: { companyId: 0 } });
 		await assert.rejects(() => actionNode.execute.call(ctx), (err) => {
-			assert.ok(err instanceof NodeOperationError, `se esperaba NodeOperationError y llego ${err.constructor.name}`);
-			assert.ok(!(err instanceof NodeApiError), 'un error de validacion no debe viajar como NodeApiError');
+			assert.ok(err instanceof NodeOperationError, `expected NodeOperationError but got ${err.constructor.name}`);
+			assert.ok(!(err instanceof NodeApiError), 'a validation error must not be raised as NodeApiError');
 			return true;
 		});
-		ok('accion: campo requerido ausente -> NodeOperationError intacto');
+		ok('action: missing required field -> NodeOperationError unchanged');
 	}
 	{
 		const ctx = makeExecuteContext({ result: new Error('boom'), continueOnFail: true });
 		const [items] = await actionNode.execute.call(ctx);
 		assert.strictEqual(items[0].json.success, false);
-		ok('accion: con Continue On Fail el item recoge el error y no rompe el flujo');
+		ok('action: with Continue On Fail the item holds the error and the flow continues');
 	}
 
-	console.log(`\n${passed} pruebas OK`);
+	console.log(`\n${passed} tests passed`);
 })().catch((err) => {
-	console.error('FALLO:', err);
+	console.error('FAILED:', err);
 	process.exit(1);
 });
