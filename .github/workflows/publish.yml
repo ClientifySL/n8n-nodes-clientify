@@ -19,6 +19,10 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    # Publishing credentials are only released through this environment: it
+    # accepts `v*` tags only and needs jeancarlosalvarado's approval. In a public
+    # repo anyone with write access could otherwise read them from any branch.
+    environment: npm-publish
     permissions:
       contents: read
       # Required: this is what allows issuing the OIDC token that both
