@@ -257,7 +257,7 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 	const { ClientifyApi } = require('../dist/nodes/ClientifyApi/ClientifyApi.node.js');
 	const actionNode = new ClientifyApi();
 
-	const makeExecuteContext = ({ operation = 'GetCurrentUser', params = {}, result, continueOnFail = false }) => ({
+	const makeExecuteContext = ({ operation = 'GetCurrentUser', params = {}, result, continueOnFail = false, calls = [] }) => ({
 		getInputData: () => [{ json: {} }],
 		getNode: () => ({ name: 'Clientify', type: 'clientifyApi', typeVersion: 1 }),
 		continueOnFail: () => continueOnFail,
@@ -269,7 +269,8 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 			throw new Error(`parameter not set: ${name}`);
 		},
 		helpers: {
-			httpRequestWithAuthentication: async () => {
+			httpRequestWithAuthentication: async (credType, options) => {
+				calls.push(options);
 				if (result instanceof Error) throw result;
 				return result;
 			},
@@ -309,6 +310,23 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		const [items] = await actionNode.execute.call(ctx);
 		assert.strictEqual(items[0].json.success, false);
 		ok('action: with Continue On Fail the item holds the error and the flow continues');
+	}
+
+	for (const operation of ['ListContacts', 'ListCompanies']) {
+		const calls = [];
+		const ctx = makeExecuteContext({ operation, params: { search: 'jane@example.com', fields: '' }, result: { count: 1, results: [] }, calls });
+		await actionNode.execute.call(ctx);
+		assert.strictEqual(calls[0].qs.query, 'jane@example.com');
+		assert.ok(!('search' in calls[0].qs), 'search must not be sent, the API ignores it');
+		assert.ok(calls[0].qs.fields, 'the default fields must still be sent');
+		ok(`action: ${operation} sends the search field as query`);
+	}
+	{
+		const calls = [];
+		const ctx = makeExecuteContext({ operation: 'ListContacts', params: { search: '', fields: '' }, result: { count: 0, results: [] }, calls });
+		await actionNode.execute.call(ctx);
+		assert.ok(!('query' in calls[0].qs) && !('search' in calls[0].qs));
+		ok('action: ListContacts without search sends no query');
 	}
 
 	console.log(`\n${passed} tests passed`);

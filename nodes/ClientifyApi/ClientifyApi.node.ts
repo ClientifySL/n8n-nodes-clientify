@@ -35,6 +35,13 @@ function toNodeError(
   return new NodeApiError(this.getNode(), error as JsonObject);
 }
 
+/**
+ * List operations whose `search` field must be sent as `query`: the API
+ * filters these endpoints by `query` and silently ignores `search`. The n8n
+ * field keeps its `search` name so existing workflows keep working.
+ */
+const SEARCH_AS_QUERY_OPERATIONS = new Set(["ListContacts", "ListCompanies"]);
+
 export class ClientifyApi implements INodeType {
   description: INodeTypeDescription = {
     displayName: "Clientify",
@@ -166,6 +173,10 @@ export class ClientifyApi implements INodeType {
         const qs = isQueryMethod
           ? ({ ...(def.fixedQuery || {}), ...rest } as IDataObject)
           : undefined;
+        if (qs && SEARCH_AS_QUERY_OPERATIONS.has(operation) && "search" in qs) {
+          qs.query = qs.search;
+          delete qs.search;
+        }
         const body =
           !isQueryMethod && Object.keys(rest).length > 0
             ? (rest as IDataObject)
