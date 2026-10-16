@@ -358,7 +358,7 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		['UpdateTask', { taskId: 5 }, '/tasks/5/'],
 	]) {
 		const call = await run(operation, { ...params, body: '{"name": "Acme", "title": "CEO"}' });
-		assert.strictEqual(call.method, 'PUT');
+		assert.strictEqual(call.method, 'PATCH');
 		assert.ok(call.url.endsWith(path));
 		assert.deepStrictEqual(call.body, { name: 'Acme', title: 'CEO' });
 		ok(`action: ${operation} sends the JSON body fields`);

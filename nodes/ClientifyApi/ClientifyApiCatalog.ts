@@ -69,7 +69,9 @@ function patchDefinitions(
   }
 
   // The update operations only have the record ID, so there was nothing to
-  // update. They take the fields to change as a JSON body.
+  // update. They take the fields to change as a JSON body, sent with PATCH:
+  // only the partial update validates custom fields and applies the marketing
+  // contacts limit when `marketing_status` changes.
   const updateExamples: Record<string, string> = {
     UpdateContact: '{"first_name": "Jane", "title": "CEO"}',
     UpdateCompany: '{"name": "Acme", "description": "Key account"}',
@@ -77,6 +79,7 @@ function patchDefinitions(
   };
   for (const [operation, example] of Object.entries(updateExamples)) {
     const def = defs[operation];
+    def.method = "PATCH";
     def.fieldNames.push("body");
     def.requiredFieldNames.push("body");
     def.inspectorInputs.body = {
