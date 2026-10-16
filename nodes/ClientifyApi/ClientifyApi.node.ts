@@ -35,6 +35,40 @@ function toNodeError(
   return new NodeApiError(this.getNode(), error as JsonObject);
 }
 
+/**
+ * Reads a JSON field that arrives as text from the editor or as an object
+ * from an expression, and checks it is an object with at least one key.
+ */
+function parseJsonObject(
+  this: IExecuteFunctions,
+  value: unknown,
+  fieldName: string
+): IDataObject {
+  let parsed = value;
+  if (typeof value === "string") {
+    try {
+      parsed = JSON.parse(value);
+    } catch {
+      throw new NodeOperationError(
+        this.getNode(),
+        `${fieldName} is not valid JSON`
+      );
+    }
+  }
+  if (
+    !parsed ||
+    typeof parsed !== "object" ||
+    Array.isArray(parsed) ||
+    Object.keys(parsed).length === 0
+  ) {
+    throw new NodeOperationError(
+      this.getNode(),
+      `${fieldName} must be a JSON object with at least one field`
+    );
+  }
+  return parsed as IDataObject;
+}
+
 export class ClientifyApi implements INodeType {
   description: INodeTypeDescription = {
     displayName: "Clientify",
@@ -160,12 +194,26 @@ export class ClientifyApi implements INodeType {
         }
 
         const url = renderPathTemplate(def.pathTemplate, input);
-        const rest = omitKeys(input, def.pathParamNames) as IDataObject;
+        let rest = omitKeys(input, def.pathParamNames) as IDataObject;
+        if (def.jsonBodyField && def.jsonBodyField in rest) {
+          const { [def.jsonBodyField]: json, ...others } = rest;
+          rest = {
+            ...others,
+            ...parseJsonObject.call(this, json, def.jsonBodyField),
+          };
+        }
 
         const isQueryMethod = def.method === "GET" || def.method === "DELETE";
         const qs = isQueryMethod
           ? ({ ...(def.fixedQuery || {}), ...rest } as IDataObject)
           : undefined;
+        if (qs && def.queryParamRenames) {
+          for (const [from, to] of Object.entries(def.queryParamRenames)) {
+            if (!(from in qs)) continue;
+            qs[to] = qs[from];
+            delete qs[from];
+          }
+        }
         const body =
           !isQueryMethod && Object.keys(rest).length > 0
             ? (rest as IDataObject)

@@ -2,8 +2,99 @@ import { INodeProperties } from "n8n-workflow";
 
 import {
   AppmixerInspectorInput,
-  operationDefinitions,
+  ClientifyOperationDefinition,
+  operationDefinitions as generatedDefinitions,
 } from "./operations.generated";
+
+type InspectorInput = Omit<AppmixerInspectorInput, "type"> & {
+  type?: AppmixerInspectorInput["type"] | "json";
+};
+
+export type OperationDefinition = Omit<
+  ClientifyOperationDefinition,
+  "inspectorInputs"
+> & {
+  inspectorInputs: Record<string, InspectorInput>;
+  /** Query params renamed on the way out: n8n field name -> API param name. */
+  queryParamRenames?: Record<string, string>;
+  /** Field holding a JSON object whose keys are sent as the request body. */
+  jsonBodyField?: string;
+};
+
+/**
+ * Fixes over the generated catalog. It mirrors the AppMixer connector, which
+ * does not always match what API v2 expects; each patch was checked against
+ * the API.
+ */
+function patchDefinitions(
+  generated: Record<string, ClientifyOperationDefinition>
+): Record<string, OperationDefinition> {
+  const defs: Record<string, OperationDefinition> = JSON.parse(
+    JSON.stringify(generated)
+  );
+
+  // The list endpoints filter by `query` and sort by `order_by`; they silently
+  // ignore `search` and `ordering`. The n8n fields keep their names so existing
+  // workflows keep working.
+  const listQueryParamRenames = { search: "query", ordering: "order_by" };
+  defs.ListContacts.queryParamRenames = listQueryParamRenames;
+  defs.ListCompanies.queryParamRenames = listQueryParamRenames;
+
+  // These endpoints answer 400 without `fields`, and the operations have no
+  // field to set it.
+  const tagFields = "id,name,color";
+  const taskFields = generated.ListTasks.fieldDefaults.fields;
+  defs.ListAllContactTags.fixedQuery = { fields: tagFields };
+  defs.ListAllCompanyTags.fixedQuery = { fields: tagFields };
+  defs.ListContactTasks.fixedQuery = { fields: taskFields };
+  defs.ListCompanyTasks.fixedQuery = { fields: taskFields };
+
+  // Every API path ends with a slash; without it the API answers with a redirect.
+  for (const def of Object.values(defs)) {
+    if (!def.pathTemplate.endsWith("/")) def.pathTemplate += "/";
+  }
+
+  // Add Contact Call has no call fields; it takes the same ones as Add Company Call.
+  const companyCall = generated.AddCompanyCall;
+  const contactCall = defs.AddContactCall;
+  for (const fieldName of companyCall.fieldNames) {
+    if (companyCall.pathParamNames.includes(fieldName)) continue;
+    contactCall.fieldNames.push(fieldName);
+    contactCall.inspectorInputs[fieldName] = {
+      ...companyCall.inspectorInputs[fieldName],
+    };
+    if (companyCall.requiredFieldNames.includes(fieldName)) {
+      contactCall.requiredFieldNames.push(fieldName);
+    }
+  }
+
+  // The update operations only have the record ID, so there was nothing to
+  // update. They take the fields to change as a JSON body, sent with PATCH:
+  // only the partial update validates custom fields and applies the marketing
+  // contacts limit when `marketing_status` changes.
+  const updateExamples: Record<string, string> = {
+    UpdateContact: '{"first_name": "Jane", "title": "CEO"}',
+    UpdateCompany: '{"name": "Acme", "description": "Key account"}',
+    UpdateTask: '{"name": "Call back", "description": "Ask about the renewal"}',
+  };
+  for (const [operation, example] of Object.entries(updateExamples)) {
+    const def = defs[operation];
+    def.method = "PATCH";
+    def.fieldNames.push("body");
+    def.requiredFieldNames.push("body");
+    def.inspectorInputs.body = {
+      index: def.fieldNames.length,
+      label: "Body (JSON)",
+      tooltip: `Fields to update, as a JSON object. Example: ${example}`,
+      type: "json",
+    };
+    def.jsonBodyField = "body";
+  }
+
+  return defs;
+}
+
+const operationDefinitions = patchDefinitions(generatedDefinitions);
 
 type ClientifyResource =
   | "auto"
@@ -15,8 +106,9 @@ type ClientifyResource =
 
 function mapInspectorTypeToN8nType(
   type: string | undefined
-): "string" | "number" | "boolean" {
+): "string" | "number" | "boolean" | "json" {
   if (type === "number") return "number";
+  if (type === "json") return "json";
   if (type === "toggle") return "boolean";
   return "string";
 }
@@ -91,7 +183,7 @@ export const operationFields: INodeProperties[] = (() => {
 
   for (const def of Object.values(operationDefinitions)) {
     const resource = getResourceForOperation(def.operation);
-    const inspectorInputs: Record<string, AppmixerInspectorInput> =
+    const inspectorInputs: Record<string, InspectorInput> =
       def.inspectorInputs || {};
     const sortedFieldEntries = Object.entries(inspectorInputs).sort((a, b) => {
       const ai = a[1]?.index ?? 9999;

@@ -257,7 +257,7 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 	const { ClientifyApi } = require('../dist/nodes/ClientifyApi/ClientifyApi.node.js');
 	const actionNode = new ClientifyApi();
 
-	const makeExecuteContext = ({ operation = 'GetCurrentUser', params = {}, result, continueOnFail = false }) => ({
+	const makeExecuteContext = ({ operation = 'GetCurrentUser', params = {}, result, continueOnFail = false, calls = [] }) => ({
 		getInputData: () => [{ json: {} }],
 		getNode: () => ({ name: 'Clientify', type: 'clientifyApi', typeVersion: 1 }),
 		continueOnFail: () => continueOnFail,
@@ -269,7 +269,8 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 			throw new Error(`parameter not set: ${name}`);
 		},
 		helpers: {
-			httpRequestWithAuthentication: async () => {
+			httpRequestWithAuthentication: async (credType, options) => {
+				calls.push(options);
 				if (result instanceof Error) throw result;
 				return result;
 			},
@@ -310,6 +311,68 @@ const ok = (name) => { console.log(`  ok  ${name}`); passed++; };
 		assert.strictEqual(items[0].json.success, false);
 		ok('action: with Continue On Fail the item holds the error and the flow continues');
 	}
+
+	const run = async (operation, params, result = { count: 0, results: [] }) => {
+		const calls = [];
+		await actionNode.execute.call(makeExecuteContext({ operation, params, result, calls }));
+		return calls[0];
+	};
+
+	for (const operation of ['ListContacts', 'ListCompanies']) {
+		const call = await run(operation, { search: 'jane@example.com', ordering: '-created', fields: '' });
+		assert.strictEqual(call.qs.query, 'jane@example.com');
+		assert.strictEqual(call.qs.order_by, '-created');
+		assert.ok(!('search' in call.qs) && !('ordering' in call.qs), 'the API ignores search and ordering');
+		assert.ok(call.qs.fields, 'the default fields must still be sent');
+		ok(`action: ${operation} sends search as query and ordering as order_by`);
+	}
+	{
+		const call = await run('ListContacts', { search: '', ordering: '', fields: '' });
+		assert.ok(!('query' in call.qs) && !('order_by' in call.qs));
+		ok('action: ListContacts without search or ordering sends neither');
+	}
+	for (const operation of ['ListAllContactTags', 'ListAllCompanyTags']) {
+		const call = await run(operation, {});
+		assert.strictEqual(call.qs.fields, 'id,name,color');
+		ok(`action: ${operation} sends the fields the API requires`);
+	}
+	for (const [operation, params] of [['ListContactTasks', { contactId: 5 }], ['ListCompanyTasks', { companyId: 5 }]]) {
+		const call = await run(operation, params);
+		assert.ok(call.qs.fields.split(',').includes('due_date'));
+		ok(`action: ${operation} sends the task fields the API requires`);
+	}
+	{
+		const call = await run('ListContactWallentries', { contactId: 5 });
+		assert.ok(call.url.endsWith('/contacts/5/wallentries/'));
+		ok('action: ListContactWallentries path ends with a slash');
+	}
+	{
+		const params = { contactId: 5, type: 'outbound', comment: 'Talked about the renewal', outcome: 'answered', call_date: '2026-10-16', call_time: '10:00' };
+		const call = await run('AddContactCall', params);
+		assert.deepStrictEqual(call.body, { type: 'outbound', comment: 'Talked about the renewal', outcome: 'answered', call_date: '2026-10-16', call_time: '10:00' });
+		ok('action: AddContactCall sends the call fields');
+	}
+	for (const [operation, params, path] of [
+		['UpdateContact', { contactId: 5 }, '/contacts/5/'],
+		['UpdateCompany', { companyId: 5 }, '/companies/5/'],
+		['UpdateTask', { taskId: 5 }, '/tasks/5/'],
+	]) {
+		const call = await run(operation, { ...params, body: '{"name": "Acme", "title": "CEO"}' });
+		assert.strictEqual(call.method, 'PATCH');
+		assert.ok(call.url.endsWith(path));
+		assert.deepStrictEqual(call.body, { name: 'Acme', title: 'CEO' });
+		ok(`action: ${operation} sends the JSON body fields`);
+	}
+	{
+		const call = await run('UpdateContact', { contactId: 5, body: { first_name: 'Jane' } });
+		assert.deepStrictEqual(call.body, { first_name: 'Jane' });
+		ok('action: UpdateContact accepts the body as an object from an expression');
+	}
+	for (const body of ['{not json', '{}', '[1]']) {
+		const ctx = makeExecuteContext({ operation: 'UpdateContact', params: { contactId: 5, body } });
+		await assert.rejects(() => actionNode.execute.call(ctx), (err) => err instanceof NodeOperationError);
+	}
+	ok('action: UpdateContact rejects invalid, empty or non-object JSON');
 
 	console.log(`\n${passed} tests passed`);
 })().catch((err) => {

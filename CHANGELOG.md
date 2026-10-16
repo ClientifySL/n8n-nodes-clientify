@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Fixed
+- **List Contacts** and **List Companies** now send the **Search** field as the `query` parameter. The API filters these endpoints by `query` and ignores `search`, so a search returned the full, unfiltered list. The n8n field is still called `search`, so existing workflows keep working.
+- **List Contacts** and **List Companies** now send the **Ordering** field as `order_by`, the parameter the API sorts by. `ordering` was ignored. The n8n field keeps its name.
+- **List All Contact Tags**, **List All Company Tags**, **List Contact Tasks** and **List Company Tasks** always failed with a 400 because the API requires the `fields` parameter. They now send it.
+- **List Contact Wallentries** called its path without the trailing slash and got a redirect. Every path now ends with a slash.
+- **Update Contact**, **Update Company** and **Update Task** only had the record ID, so they had nothing to update. They now take a required **Body (JSON)** field with the fields to change, and are sent with `PATCH` instead of `PUT`: only the partial update validates custom fields and applies the marketing contacts limit when `marketing_status` changes.
+- **Add Contact Call** had no call fields and sent an empty call. It now takes the same fields as **Add Company Call**: type, comment, outcome, call date and call time.
+
 ## [0.3.2] - 2026-10-06
 
 ### Fixed
